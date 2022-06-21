@@ -14,6 +14,7 @@
           </set>
         </option>
         <option name="preferScala2" value="false" />
+        <option name="sbtVersion" value="1.6.2" />
         <option name="useSbtShellForBuild" value="true" />
         <option name="useSbtShellForImport" value="true" />
       </SbtProjectSettings>
