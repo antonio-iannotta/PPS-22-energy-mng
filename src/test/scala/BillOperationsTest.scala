@@ -1,9 +1,4 @@
-import org.scalatest.*
+import org.scalatest.funsuite.AnyFunSuite
 
-object BillOperationsTest extends App:
-
-  val userID = "Antonio-1"
-  val usageType = "water"
-  val location = "Cesena"
-  val locationType = "City"
-
+class BillOperationsTest extends AnyFunSuite:
+  println("Hello")
