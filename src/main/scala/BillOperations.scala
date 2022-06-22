@@ -12,6 +12,7 @@ object BillOperations:
     UserBill("237","DemetrioAndriani","company","heat",324.56,96.8,
       7,2022,"Milano","Lombardia"),
   )
+  
 
   def getIndividualUsage(userID: String, usageType: String): String =
     var result = ""
