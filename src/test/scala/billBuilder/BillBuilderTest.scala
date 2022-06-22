@@ -1,3 +1,6 @@
+package billBuilder
+
+import billBuilder.BillBuilder
 import org.scalatest.funsuite.AnyFunSuite
 
 class BillBuilderTest extends AnyFunSuite:

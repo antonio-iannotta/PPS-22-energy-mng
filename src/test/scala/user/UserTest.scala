@@ -1,8 +1,8 @@
-package User
+package user
 
 import org.scalatest.funsuite.AnyFunSuite
 
-class UserTest_CheckValues extends AnyFunSuite {
+class UserTest extends AnyFunSuite {
 
   val UserClassTest_1 = new User("codiceFiscale", "regione", "città", "privato")
 
