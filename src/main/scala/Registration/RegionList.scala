@@ -1,5 +1,6 @@
 package Registration
 
+
 object RegionList:
   val AbruzzoCities = List(
     "Acciano",

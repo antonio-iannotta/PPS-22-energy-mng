@@ -1,6 +1,8 @@
 import java.math.BigInteger
 import java.security.MessageDigest
 
+
+
 object MD5:
   def md5HashPassword(usPassword: String): String =
     val md = MessageDigest.getInstance("MD5")

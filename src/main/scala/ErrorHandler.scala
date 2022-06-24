@@ -1,5 +1,6 @@
 object ErrorHandler:
 
+  
   def registrationHandler(errorCode: String): String =
     errorCode match
       case "REGISTRATION_USERID_1" => "USERID_1"
@@ -12,4 +13,4 @@ object ErrorHandler:
       case "REGISTRATION_REGION_1" => "REGION_1"
       case "REGISTRATION_REGION_2" => "REGION_2"
       case "REGISTRATION_CITY_1" => "CITY_1"
-      case _ => "OK"
+      case _ => "OK"  

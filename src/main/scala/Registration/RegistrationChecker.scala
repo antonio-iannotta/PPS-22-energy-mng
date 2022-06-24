@@ -30,15 +30,13 @@ class RegistrationChecker(private val userID: String, private val password: Stri
 
   def checkFields(userID: String, password: String, userType: Int, region: String, city: String):
 
+
   val userCheck = registrationHandler(checkUserID(userID))
   val passwordCheck = registrationHandler(checkPassword(password))
   val userTypeCheck = registrationHandler(checkUserType(userType))
   val regionCheck = registrationHandler(checkRegion(region))
   val cityCheck = registrationHandler(checkCity(city, region))
   val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, regionCheck, cityCheck)
-
-
-
 
   private def checkUserID(userID: String): String =
     userID match

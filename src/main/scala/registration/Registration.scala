@@ -7999,6 +7999,7 @@ object Registration:
       case false =>
         verificationMessage = "error!"
 
+
     verificationMessage
 
   def passwordHash(password: String): String =
