@@ -215,13 +215,22 @@ object BillOperations:
     val cityOrRegionBills = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion)
     usageOrCost match
       case "usage" =>
-        for i <- Range(1,12) do
-          val monthlyUsageSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getUsage())
-          monthlyUsageOrCost(i) = monthlyUsageSum
+        for i <- Range(1,13) do
+          val monthlyUsageSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getUsage()) /
+            cityOrRegionBills.filter(bill => bill.getMonth() == i).size
+          if (!monthlyUsageSum.isNaN) then
+            monthlyUsageOrCost(i) = monthlyUsageSum
+          else
+            monthlyUsageOrCost(i) = 0.0
+
       case "cost" =>
-        for i <- Range(1,12) do
-          val monthlyCostSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getCost())
-          monthlyUsageOrCost(i) = monthlyCostSum
+        for i <- Range(1,13) do
+          val monthlyCostSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getCost()) /
+            cityOrRegionBills.filter(bill => bill.getMonth() == i).size
+          if (!monthlyCostSum.isNaN) then
+            monthlyUsageOrCost(i) = monthlyCostSum
+          else
+            monthlyUsageOrCost(i) = 0.0
 
     monthlyUsageOrCost
 
