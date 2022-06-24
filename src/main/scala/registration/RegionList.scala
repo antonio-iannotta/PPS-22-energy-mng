@@ -1,4 +1,4 @@
-package Registration
+package registration
 
 
 object RegionList:

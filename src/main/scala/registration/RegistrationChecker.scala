@@ -1,4 +1,4 @@
-package Registration
+package registration
 
 import com.sun.tools.classfile.Module_attribute.ProvidesEntry
 import sun.security.util.Password
