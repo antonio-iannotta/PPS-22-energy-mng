@@ -1,6 +1,6 @@
-package Login
+package login
 
-import User.User
+import user.User
 
 object Login {
 

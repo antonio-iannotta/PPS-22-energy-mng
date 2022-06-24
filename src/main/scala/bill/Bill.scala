@@ -1,4 +1,6 @@
-class UserBill(private val billID: String, private val userID: String, private val userType: String,
+package bill
+
+class Bill(private val billID: String, private val userID: String, private val userType: String,
            private val usageType: String, private val usage: Double, private val cost: Double,
            private val month: Int, private val year: Int, private val city: String, private val region: String):
 

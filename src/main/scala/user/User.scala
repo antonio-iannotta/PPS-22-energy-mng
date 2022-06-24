@@ -1,4 +1,4 @@
-package User
+package user
 
 class User (val userID: String,val region: String,val city: String,val userType: String){
 

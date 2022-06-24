@@ -1,7 +1,10 @@
-import org.scalatest.funsuite.AnyFunSuite
+package bill
 
-class UserBillTest extends AnyFunSuite:
-  val testBill = UserBill("234","AntonioIannotta","private","water",234.65,89.6,
+import org.scalatest.funsuite.AnyFunSuite
+import bill.Bill
+
+class BillTest extends AnyFunSuite:
+  val testBill = Bill("234","AntonioIannotta","private","water",234.65,89.6,
     2,2022,"Cesena","Emilia-Romagna")
 
   test("BillID must be equals to 234") {
