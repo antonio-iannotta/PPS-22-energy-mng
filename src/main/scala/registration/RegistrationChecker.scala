@@ -1,12 +1,14 @@
 package registration
 
+import registration.ErrorCodeHandler
 import com.sun.tools.classfile.Module_attribute.ProvidesEntry
+import registration.Regions
 import sun.security.util.Password
-import scala.collection.immutable.Map
+import scala.collection.mutable.LinkedHashMap
 
 class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
 
-  val regionCityMap: Map[String, List[String]] = Map()
+  val regionCityMap: LinkedHashMap[String, List[String]] = LinkedHashMap()
   regionCityMap("Abruzzo") = AbruzzoCities
   regionCityMap("Basilicata") = BasilicataCities
   regionCityMap("Calabria") = CalabriaCities
@@ -28,15 +30,17 @@ class RegistrationChecker(private val userID: String, private val password: Stri
   regionCityMap("VAC") = VACities
   regionCityMap("Veneto") = VenetoCities
 
-  def checkFields(userID: String, password: String, userType: Int, region: String, city: String):
+  def checkFields(userID: String, password: String, userType: Int, region: String, city: String) =
 
+    val userCheck = ErrorCodeHandler.registrationHandler(checkUserID(userID))
+    val passwordCheck = ErrorCodeHandler.registrationHandler(checkPassword(password))
+    val userTypeCheck = ErrorCodeHandler.registrationHandler(checkUserType(userType))
+    val regionCheck = ErrorCodeHandler.registrationHandler(checkRegion(region))
+    val cityCheck = ErrorCodeHandler.registrationHandler(checkCity(city, region))
+    val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, regionCheck, cityCheck).filter(str => str != "OK")
 
-  val userCheck = registrationHandler(checkUserID(userID))
-  val passwordCheck = registrationHandler(checkPassword(password))
-  val userTypeCheck = registrationHandler(checkUserType(userType))
-  val regionCheck = registrationHandler(checkRegion(region))
-  val cityCheck = registrationHandler(checkCity(city, region))
-  val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, regionCheck, cityCheck)
+    if checkResponseList.isEmpty then "OK"
+    else checkResponseList.head
 
   private def checkUserID(userID: String): String =
     userID match

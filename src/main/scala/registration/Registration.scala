@@ -5,7 +5,7 @@ import java.security.MessageDigest
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
-    ""
+    val RegistrationChecker = RegistrationChecker()
 
   def passwordHash(password: String): String =
     val md = MessageDigest.getInstance("MD5")

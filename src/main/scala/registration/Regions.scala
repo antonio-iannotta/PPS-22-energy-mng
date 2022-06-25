@@ -1,7 +1,7 @@
 package registration
 
+object Regions:
 
-object RegionList:
   val AbruzzoCities = List(
     "Acciano",
     "Aielli",
@@ -7965,3 +7965,4 @@ object RegionList:
     "Villanova Marchesana",
     "Porto Viro"
   )
+
