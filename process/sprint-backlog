@@ -1,1 +1,22 @@
+Settimana 20/06/2022 - 24/06/2022
+Durante questa si è impostato l'intero ambiente di sviluppo, in particolare scalaTest e sono stati impostati gli ambienti per la continuous integration come GitHub.
+Sempre durante questa settimana è avvenuta una prima suddivisione del lavoro da effettuare per quanto riguarda classi e componenti da implementare di modo che si potesse
+procedere in maniera comunque coordinata.
+Obiettivi prefissati all'inizio dello sprint:
+    Settaggio ambiente
+    Settaggio GitHub
+    Mantenere aggiornata la relazione
+    Iniziare implementazione classe Bill, object BillOperations, Dashboard e relativi test
+    Iniziare implementazione classe User e relativi test
+    Iniziare implementazione object Registration e relativi test
+    Iniziare implementazione BillBuilder e relativi test
+    
+Obiettivi raggiunti alla fine di questo sprint (20 ore)
+    Settaggio ambiente
+    Settaggio GitHub
+    Implementazione classe Bill terminata
+    Implementazione object BillOperations Terminata
+    Implementazione BillBuilder terminata
 
+Durante lo sprint review si è discusso di quali potranno essere le soluzioni tecnologiche da adottare per aggiornare i componenti già implementati integrandoli con il database
+e con la libreria Scala.rx. Si è discusso inoltre di quali saranno i compiti, non terminati questa settimana, da dover necessariamente terminare nella prossima.
