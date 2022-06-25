@@ -1,7 +1,5 @@
 package registration
 
-//import com.sun.tools.classfile.Module_attribute.ProvidesEntry
-import sun.security.util.Password
 import scala.collection.mutable.LinkedHashMap
 
 class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
@@ -28,14 +26,13 @@ class RegistrationChecker(private val userID: String, private val password: Stri
   regionCityMap("VAC") = Regions.VACities
   regionCityMap("Veneto") = Regions.VenetoCities
 
-  def checkFields(userID: String, password: String, userType: Int, region: String, city: String) =
+  def checkFields(userID: String, password: String, userType: Int, region: String, city: String): String =
 
     val userCheck = ErrorCodeHandler.registrationHandler(checkUserID(userID))
     val passwordCheck = ErrorCodeHandler.registrationHandler(checkPassword(password))
     val userTypeCheck = ErrorCodeHandler.registrationHandler(checkUserType(userType))
-    val regionCheck = ErrorCodeHandler.registrationHandler(checkRegion(region))
-    val cityCheck = ErrorCodeHandler.registrationHandler(checkCity(city, region))
-    val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, regionCheck, cityCheck).filter(str => str != "OK")
+    val cityCheck = ErrorCodeHandler.registrationHandler(checkCityRegionMatch(city, region))
+    val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, cityCheck).filter(str => str != "OK")
 
     if checkResponseList.isEmpty then "OK"
     else checkResponseList.head
@@ -58,12 +55,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     if 0 to 1 contains userType then "OK"
     else "REGISTRATION_USERTYPE_1"
 
-  private def checkRegion(region: String): String =
-    region match
-      case region if region == "" => "REGISTRATION_REGION_1"
-      case region if region.length > 25 => "REGISTRATION_REGION_2"
-      case _ => "OK"
 
-  private def checkCity(city: String, region: String): String =
+  private def checkCityRegionMatch(city: String, region: String): String =
     if regionCityMap(region).contains(city) then "OK"
     else "REGISTRATION_CITY_1"
