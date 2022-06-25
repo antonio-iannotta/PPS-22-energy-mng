@@ -1,3 +1,5 @@
+package registration
+
 import java.math.BigInteger
 import java.security.MessageDigest
 
@@ -9,5 +11,3 @@ object MD5:
     val hashedPassword = bigInt.toString(16).trim
 
     hashedPassword
-
-
