@@ -1,5 +1,6 @@
 package registration
 
+import registration.MD5.md5HashPassword
 import java.math.BigInteger
 import java.security.MessageDigest
 import registration.RegistrationChecker
@@ -14,10 +15,5 @@ object Registration:
       "OK"//connessione db da fare
     else checkerResponse
 
-  def passwordHash(password: String): String =
-    val md = MessageDigest.getInstance("MD5")
-    val digest: Array[Byte] = md.digest(password.getBytes)
-    val bigInt = new BigInteger(1, digest)
-    val hashedPassword = bigInt.toString(16).trim
 
-    hashedPassword
+
