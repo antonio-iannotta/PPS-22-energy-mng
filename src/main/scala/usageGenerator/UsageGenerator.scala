@@ -4,7 +4,7 @@ import io.circe.syntax
 import io.circe.syntax.*
 import mongoDriver.MongoDB
 import org.bson.json.JsonReader
-import org.mongodb.scala.{Document, MongoClient, MongoCollection, Observer}
+import org.mongodb.scala.{Document, FindObservable, MongoClient, MongoCollection, Observer}
 import user.User
 
 import scala.util.Random
@@ -50,12 +50,12 @@ object UsageGenerator extends App:
 
 
     //LAVORARE QUI, RIUSCIRE A LEGGERE DATI DA FILE
-    val observable = usersCollection.find()
-    observable.subscribe ( new Observer[Document] {
+    val observable = usersCollection.find().printHeadResult()
+    /*observable.subscribe( new Observer[Document] {
       def onNext(result: Document): Unit = println(result)
       def onError(e: Throwable): Unit = println("Failed" + e.getMessage)
       def onComplete(): Unit = println("Completed")
-    })
+    })*/
 
     val userList: List[User] =
       List(User("1","lombardia","milano","private"),
