@@ -51,7 +51,8 @@ object UsageGenerator extends App:
 
 
     //LAVORARE QUI, RIUSCIRE A LEGGERE DATI DA FILE
-    val observable = usersCollection.find().printHeadResult()
+    val values = usersCollection.find().printResults()
+    println(values)
     /*observable.subscribe( new Observer[Document] {
       def onNext(result: Document): Unit = println(result)
       def onError(e: Throwable): Unit = println("Failed" + e.getMessage)
