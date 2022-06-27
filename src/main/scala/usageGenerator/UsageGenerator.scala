@@ -6,6 +6,7 @@ import mongoDriver.MongoDB
 import org.bson.json.JsonReader
 import org.mongodb.scala.{Document, FindObservable, MongoClient, MongoCollection, Observer}
 import user.User
+import usageGenerator.Helpers._
 
 import scala.util.Random
 
