@@ -8,7 +8,6 @@ ThisBuild / scalaVersion := "3.1.2"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.12"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.12" % "test"
-libraryDependencies += "org.mongodb.scala" % "mongo-scala-driver_2.11" % "4.6.1"
 libraryDependencies += "io.circe" % "circe-literal_3" % "0.14.2"
 
 

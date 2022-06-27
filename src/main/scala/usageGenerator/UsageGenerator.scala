@@ -1,6 +1,6 @@
 package usageGenerator
 
-import org.mongodb.scala._
+
 import io.circe.syntax.*
 import user.User
 import scala.util.Random
@@ -28,13 +28,12 @@ object UsageGenerator:
 
 
   private def composeUsageString(user: User, usageType: String): String =
-    /*val userUsage = "userID: " + user.getUserID() + "\nuserType: " + user.getUserType()
+    val userUsage = "userID: " + user.getUserID() + "\nuserType: " + user.getUserType()
                     + "\ncity: " + user.getCity() + "\nregion: " + user.getRegion()
                     + "\nusageType: " + usageType +"\nusage: " + (Random.nextDouble()/100)
                     + "\ncost: " + (Random.nextDouble()/100)
 
-    userUsage*/
-    val mongoClient: MongoClient = MongoClient("mongodb://localhost:27017")
+    userUsage
 
   private def retrieveUsers(): List[User] =
     val userList: List[User] =
