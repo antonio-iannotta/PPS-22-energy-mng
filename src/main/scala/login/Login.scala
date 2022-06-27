@@ -2,12 +2,13 @@ package login
 
 import user.User
 
-object Login {
+object Login:
+  def singIN(userID: String, password: String): String =
+    var checkerResponse: String = ""
+    val loginChecker = LoginChecker(userID, password)
 
-  val x = List(new User("1","lazio","roma","privato"))
 
-  def singIn(userID:String, password:String): User = {
-    return new User("1","lazio","roma","privato")
-  }
-}
-
+    checkerResponse = loginChecker.checkFields(userID, password)
+    if checkerResponse == "OK" then
+      "OK"//connessione db da fare
+    else checkerResponse
