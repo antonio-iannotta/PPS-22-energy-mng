@@ -1,15 +1,24 @@
 package usageGenerator
 
-
+import io.circe.syntax
 import io.circe.syntax.*
+import mongoDriver.MongoDB
+import org.bson.json.JsonReader
+import org.mongodb.scala.{Document, MongoClient, MongoCollection}
 import user.User
+
 import scala.util.Random
 
-object UsageGenerator:
+object UsageGenerator extends App:
 
   def generation(): Unit =
     var month = 1
     var year = 1970
+    val client: MongoClient = MongoDB.mongoDBConnection("mongodb://localhost:27017")
+    val database = client.getDatabase("energymanagement")
+    val usagesCollection = database.getCollection("usages")
+
+    usagesCollection.find()
 
     while true do
       val userListFromDatabase: List[User] = retrieveUsers()
@@ -17,8 +26,7 @@ object UsageGenerator:
       for user <- userListFromDatabase do
         for usageType <- usages do
           val userUsage = composeUsageString(user,usageType)
-          userUsage.asJson //trasforma una stringa in json
-          //invia dati db
+          userUsage.asJson
 
       month += 1
       if (month == 13) then
@@ -36,6 +44,20 @@ object UsageGenerator:
     userUsage
 
   private def retrieveUsers(): List[User] =
+    val client: MongoClient = MongoDB.mongoDBConnection("mongodb://localhost:27017")
+    val database = client.getDatabase("energymanagement")
+    val usersCollection = database.getCollection("users")
+
+
+
+    //LAVORARE QUI, RIUSCIRE A LEGGERE DATI DA FILE
+    /*val observable = usersCollection.find()
+    observable.subscribe ( new Observer[Document] {
+      def onNext(result: Document): Unit = println(result)
+      def onError(e: Throwable): Unit = println("Failed" + e.getMessage)
+      def onComplete(): Unit = println("Completed")
+    })*/
+
     val userList: List[User] =
       List(User("1","lombardia","milano","private"),
         User("2","lombardia","bergamo","company"),
@@ -44,5 +66,7 @@ object UsageGenerator:
 
     userList
 
+
+  retrieveUsers()
 
 
