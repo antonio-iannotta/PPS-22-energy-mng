@@ -1,23 +1,14 @@
 package user
 
-class User (val userID: String,val region: String,val city: String,val userType: String){
+class User (val userID: String,val region: String,val city: String,val userType: String):
 
   /*------Metodi Getter----------*/
-  def getUserID(): String ={
-    return userID
-  }
-  def getRegion(): String ={
-    return region
-  }
-  def getUserType(): String ={
-    return userType
-  }
-  def getCity(): String ={
-    return city
-  }
+  def getUserID(): String = userID
+  def getRegion(): String = region
+  def getUserType(): String = userType
+  def getCity(): String = city
   /*----------------------------*/
 
   def getUsage(): Unit ={
 
   }
-}

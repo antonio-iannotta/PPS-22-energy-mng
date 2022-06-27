@@ -1,8 +1,9 @@
 package registration
 
 import scala.collection.mutable.LinkedHashMap
+import errorCodeHandler.ErrorCodeHandler
 
-class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
+class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String) extends ErrorCodeHandler:
 
   val regionCityMap: LinkedHashMap[String, List[String]] = LinkedHashMap()
   regionCityMap("Abruzzo") = Regions.AbruzzoCities
@@ -39,14 +40,14 @@ class RegistrationChecker(private val userID: String, private val password: Stri
 
   private def checkUserID(userID: String): String =
     userID match
-      case id if id == "" => "REGISTRATION_USERID_1"
+      case id if id == "" => "USERID_IS_BLANK"
       case id if id.length > 20 => "REGISTRATION_USERID_2"
       case id if id.length < 6 => "REGISTRATION_USERID_3"
       case _ => "OK"
 
   private def checkPassword(password: String): String =
     password match
-      case pwd if pwd == "" => "REGISTRATION_PASSWORD_1"
+      case pwd if pwd == "" => "PASSWORD_IS_BLANK"
       case pwd if pwd.length > 20 => "REGISTRATION_PASSWORD_2"
       case pwd if pwd.length < 6 => "REGISTRATION_PASSWORD_3"
       case _ => "OK"
