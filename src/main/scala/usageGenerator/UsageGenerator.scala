@@ -9,7 +9,7 @@ import org.mongodb.scala.bson.BsonString
 import org.mongodb.scala.bson.collection.immutable.Document
 
 import user.User
-import usageGenerator.Helpers.*
+import mongoDriver.Helpers.*
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
@@ -71,7 +71,7 @@ object UsageGenerator extends App:
 
     userUsage
 
-  private def retrieveUsers(): ListBuffer[User] =
+  def retrieveUsers(): ListBuffer[User] =
     val usersCollection = MongoDB.mongoDBConnection().getCollection("users")
     val usersList: ListBuffer[User] = ListBuffer()
     val registeredUsers = usersCollection.find().results()
@@ -87,8 +87,8 @@ object UsageGenerator extends App:
     usersList
 
   private def createUser(users: ListBuffer[String]): User =
-    val userID: String = users(1)
-    //val password: String = users.lift(1).get
+    val userID: String = users(0)
+    val password: String = users(1)
     val region: String = users(2)
     val city: String = users(3)
     val userType: String = users(4)
