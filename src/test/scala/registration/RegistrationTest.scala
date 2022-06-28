@@ -1,5 +1,5 @@
 package registration
-
+import registration.Registration
 import org.scalatest.funsuite.AnyFunSuite
 
 class RegistrationTest extends AnyFunSuite:
