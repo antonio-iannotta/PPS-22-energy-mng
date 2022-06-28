@@ -9,6 +9,6 @@ class User (val userID: String,val region: String,val city: String,val userType:
   def getCity(): String = city
   /*----------------------------*/
 
-  def getUsage(): Unit ={
+  def printUser(): Unit =
+    println("UserID: " + userID + "\nRegion: " + region + "\nCity: " + city +"\nUserType: " + userType)
 
-  }

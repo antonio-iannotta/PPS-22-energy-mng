@@ -3,6 +3,6 @@ package mongoDriver
 import org.mongodb.scala._
 
 object MongoDB:
-  def mongoDBConnection(uri: String): MongoClient =
-    MongoClient(uri)
+  def mongoDBConnection(): MongoDatabase =
+    MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
