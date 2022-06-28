@@ -50,18 +50,15 @@ object UsageGenerator extends App:
     val usersCollection = database.getCollection("users")
 
 
-    //SCEGLIERE UNO DEI DUE MODI
-    /*val values = usersCollection.find().results()
-    println(values)*/
-
-    /*val observable = usersCollection.find()
-    val users = observable.subscribe(new Observer[Document] {
+    //LAVORARE QUI, RIUSCIRE A LEGGERE DATI DA FILE
+    val values = usersCollection.find().results()
+    println(values.getClass)
+    /*observable.subscribe( new Observer[Document] {
       def onNext(result: Document): Unit = println(result)
       def onError(e: Throwable): Unit = println("Failed" + e.getMessage)
       def onComplete(): Unit = println("Completed")
-    })
-    println(users.asJson)
-*/
+    })*/
+
     val userList: List[User] =
       List(User("1","lombardia","milano","private"),
         User("2","lombardia","bergamo","company"),

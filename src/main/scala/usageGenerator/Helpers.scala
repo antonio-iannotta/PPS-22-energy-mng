@@ -26,7 +26,7 @@ object Helpers:
     def results(initial: String = ""): String =
       var result = ""
       if (initial.length > 0) print(initial)
-      results().foreach(res => result += (converter(res)))
+      results().foreach(res => result += (converter(res)) + "\n")
       result
 
     def printHeadResult(initial: String = ""): Unit = println(s"${initial}${converter(headResult())}")

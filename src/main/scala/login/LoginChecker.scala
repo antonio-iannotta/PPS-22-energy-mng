@@ -18,10 +18,10 @@ class LoginChecker(userID: String, password: String) extends ErrorCodeHandler:
 
   private def checkUserID(userID: String): String =
     userID match
-      case login_unsuccessful if userID.isEmpty => "USERID_IS_BLANK"
+      case id if id.isBlank => "USERID_IS_BLANK"
       case _ => "OK"
 
   private def checkPassword(password: String): String =
     password match
-      case login_unsuccessful if password.isEmpty => "PASSWORD_IS_BLANK"
+      case userPassword if userPassword.isBlank => "PASSWORD_IS_BLANK"
       case _ => "OK"

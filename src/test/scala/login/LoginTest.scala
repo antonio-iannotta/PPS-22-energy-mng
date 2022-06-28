@@ -13,7 +13,7 @@ class LoginTest extends AnyFunSuite:
   }
 
   test("User is blank") {
-    assert(login.Login.singIN("","Password1") != "OK")
+    assert(login.Login.singIN(" ","Password1") != "OK")
   }
 
   test("Password is not blank") {
