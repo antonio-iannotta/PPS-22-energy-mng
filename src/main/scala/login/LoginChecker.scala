@@ -1,15 +1,13 @@
 package login
 
-import errorCodeHandler.ErrorCodeHandler
 import user.User
-
 import scala.collection.mutable.LinkedHashMap
 
-class LoginChecker(userID: String, password: String) extends ErrorCodeHandler:
+class LoginChecker(userID: String, password: String):
 
   def checkFields(userID: String, password: String): String =
-    val userCheck = errorCodeHandler(checkUserID(userID))
-    val passwordCheck = errorCodeHandler(checkPassword(password))
+    val userCheck = LoginErrorCodeHandler.errorCodeHandler(checkUserID(userID))
+    val passwordCheck = LoginErrorCodeHandler.errorCodeHandler(checkPassword(password))
 
     val checkResponseList = List(userCheck, passwordCheck).filter(str => str != "OK")
 
