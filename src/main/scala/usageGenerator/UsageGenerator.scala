@@ -39,7 +39,7 @@ object UsageGenerator:
 
   private def getActualMonthOrYear(monthOrYear: String): Int =
     var monthOrYearCounter = 0
-    val usagesCollection = mongoDBConnection().getCollection("usages")
+    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
 
     monthOrYear match
       case month if month.toString.equalsIgnoreCase("month") =>
