@@ -13,8 +13,7 @@ object Helpers:
 
   implicit class GenericObservable[C](val observable: Observable[C]) extends ImplicitObservable[C] :
     override val converter: (C) => String = (doc) => doc.toString
-
-
+  
   trait ImplicitObservable[C]:
 
     val observable: Observable[C]

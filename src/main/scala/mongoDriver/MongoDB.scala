@@ -1,6 +1,6 @@
 package mongoDriver
 
-import org.mongodb.scala.*
+import org.mongodb.scala._
 import org.mongodb.scala.bson.BsonString
 import user.User
 
@@ -37,9 +37,9 @@ object MongoDB:
   private def createUser(users: ListBuffer[String]): User =
     val userID: String = users(0)
     val password: String = users(1)
-    val region: String = users(2)
-    val city: String = users(3)
-    val userType: String = users(4)
+    val userType: String = users(2)
+    val region: String = users(3)
+    val city: String = users(4)
 
     User(userID,password,region,city,userType)
 

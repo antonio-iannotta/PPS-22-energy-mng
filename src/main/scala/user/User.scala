@@ -11,5 +11,5 @@ class User (val userID: String, val password: String, val region: String,val cit
   /*----------------------------*/
 
   def printUser(): Unit =
-    println("UserID: " + userID + "\nRegion: " + region + "\nCity: " + city +"\nUserType: " + userType)
+    println("UserID: " + getUserID() + "\nRegion: " + getRegion() + "\nCity: " + getCity() +"\nUserType: " + getUserType())
 

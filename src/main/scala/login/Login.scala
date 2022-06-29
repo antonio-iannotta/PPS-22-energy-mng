@@ -4,7 +4,7 @@ import mongoDriver.MongoDB._
 import registration.MD5
 import user.User
 
-object Login:
+object Login extends App:
   def signIN(userID: String, password: String): User =
     var user: User = null
     var checkerResponse: String = ""
@@ -17,3 +17,5 @@ object Login:
       user = userList.filter(user => user.getUserID() == userID && user.getPassword() == MD5.md5HashPassword(password)).head
 
     user
+
+  signIN("andreacato", "password").printUser()

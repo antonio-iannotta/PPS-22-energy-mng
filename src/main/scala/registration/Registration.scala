@@ -10,7 +10,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import registration.RegistrationChecker
 
-object Registration:
+object Registration extends App:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
     var checkerResponse: String = ""
     var registration = ""
@@ -26,11 +26,11 @@ object Registration:
         else
           userTypeString = "company"
 
-        val user = User(userID, password, userTypeString, region, city)
+        val user = User(userID, MD5.md5HashPassword(password), userTypeString, region, city)
         addUser(user)
     else
-        registration = "Registration failed"
+        registration = checkerResponse
 
     registration
 
-
+  println(signUP("carlo","password",0,"Lombardia","Milano"))
