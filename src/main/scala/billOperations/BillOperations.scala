@@ -205,7 +205,7 @@ object BillOperations:
       case "usage" =>
         for i <- Range(1,13) do
           val monthlyUsageSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getUsage()) /
-            cityOrRegionBills.filter(bill => bill.getMonth() == i).size
+            cityOrRegionBills.count(bill => bill.getMonth() == i)
           if (!monthlyUsageSum.isNaN) then
             monthlyUsageOrCost(i) = monthlyUsageSum
           else
