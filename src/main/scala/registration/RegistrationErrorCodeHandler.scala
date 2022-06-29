@@ -1,6 +1,8 @@
 package registration
 
-object RegistrationErrorCodeHandler:
+import `trait`.ErrorCodeHandler
+
+object RegistrationErrorCodeHandler extends ErrorCodeHandler:
   def errorCodeHandler(errorCode: String): String =
     errorCode match
       case "REGISTRATION_USERID_1" => "Il campo USERID inserito e' vuoto"

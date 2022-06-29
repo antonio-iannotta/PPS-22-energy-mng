@@ -1,6 +1,8 @@
 package login
 
-object LoginErrorCodeHandler:
+import `trait`.ErrorCodeHandler
+
+object LoginErrorCodeHandler extends ErrorCodeHandler:
   def errorCodeHandler(errorCode: String): String =
     errorCode match
       case "USERID_IS_BLANK" => "Il campo USERID inserito e' vuoto"
