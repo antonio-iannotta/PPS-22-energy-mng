@@ -15,7 +15,7 @@ import scala.collection.mutable.*
 import scala.language.postfixOps
 import scala.util.Random
 
-object UsageGenerator extends App:
+object UsageGenerator:
 
   def generation(): Unit =
     var month = getActualMonthOrYear("month")
@@ -94,8 +94,4 @@ object UsageGenerator extends App:
     val userType: String = users(4)
 
     User(userID,password,region,city,userType)
-
-
-  generation()
-
 
