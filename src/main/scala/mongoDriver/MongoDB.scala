@@ -10,6 +10,7 @@ import mongoDriver.Helpers.*
 import scala.collection.mutable
 
 object MongoDB:
+
   def mongoDBConnection(): MongoDatabase =
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
@@ -27,11 +28,11 @@ object MongoDB:
       usersList += createUser(userFields)
 
     usersList
-    
+
   def addUser(user: User): String =
     val document = Document(composeUser(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
-    
+
 
   private def createUser(users: ListBuffer[String]): User =
     val userID: String = users(0)
@@ -41,9 +42,9 @@ object MongoDB:
     val userType: String = users(4)
 
     User(userID,password,region,city,userType)
-    
-    
-    
+
+
+
   private def composeUser(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.getUserID())
@@ -51,8 +52,8 @@ object MongoDB:
     userMap("region") = BsonString.apply(user.getRegion())
     userMap("city") = BsonString.apply(user.getCity())
     userMap("userType") = BsonString.apply(user.getUserType())
-    
+
     userMap
-    
+
 
 

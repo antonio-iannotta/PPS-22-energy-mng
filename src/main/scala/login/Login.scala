@@ -1,8 +1,7 @@
 package login
 
-import mongoDriver.MongoDB
+import mongoDriver.MongoDB._
 import registration.MD5
-import usageGenerator.UsageGenerator.retrieveUsers
 import user.User
 
 object Login:
@@ -14,7 +13,7 @@ object Login:
     
     checkerResponse = loginChecker.checkFields(userID, password)
     if checkerResponse == "OK" then
-      val userList = retrieveUsers()
+      val userList = retrieveUsers("users")
       user = userList.filter(user => user.getUserID() == userID && user.getPassword() == MD5.md5HashPassword(password)).head
 
     user
