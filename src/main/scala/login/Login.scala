@@ -15,6 +15,6 @@ object Login:
     checkerResponse = loginChecker.checkFields(userID, password)
     if checkerResponse == "OK" then
       val userList = retrieveUsers()
-      user = userList.filter(user => user.getUserID() == userID && user.getPassword() && MD5.md5HashPassword(password))
+      user = userList.filter(user => user.getUserID() == userID && user.getPassword() == MD5.md5HashPassword(password)).head
       
     user

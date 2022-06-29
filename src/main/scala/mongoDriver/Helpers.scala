@@ -1,6 +1,6 @@
 package mongoDriver
 
-import org.mongodb.scala.{Document, Observable}
+import org.mongodb.scala.{Document, Observable, ObservableFuture}
 
 import java.util.concurrent.TimeUnit
 import scala.concurrent.Await

@@ -93,7 +93,7 @@ object UsageGenerator extends App:
     val city: String = users(3)
     val userType: String = users(4)
 
-    User(userID,region,city,userType)
+    User(userID,password,region,city,userType)
 
 
   generation()
