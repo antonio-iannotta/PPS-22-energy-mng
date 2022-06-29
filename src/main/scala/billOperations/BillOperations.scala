@@ -2,25 +2,13 @@ package billOperations
 
 import scala.collection.mutable.LinkedHashMap
 import bill.Bill
+import billBuilder.BillBuilder
+import collection.mutable.ListBuffer
 
 import scala.util.Random
 
 object BillOperations:
-  var list = List(
-    Bill("234", "AntonioIannotta", "private", "water", 234.65, 89.6,
-      2, 2022, "Cesena", "Emilia-Romagna"),
-
-    Bill("235", "AndreaCatani", "private", "water", 856.65, 290.6,
-      2, 2022, "Bologna", "Emilia-Romagna"),
-    Bill("236", "CarloDiRaddo", "private", "electric", 100.93, 120.0,
-      5, 2021, "Roma", "Lazio"),
-    Bill("237", "DemetrioAndriani", "company", "heat", 324.56, 96.8,
-      7, 2020, "Milano", "Lombardia"),
-    Bill("238","AntonioIannotta","private","water",102,68.9,2,2021,"Cesena","Emilia-Romagna")
-  )
-
-
-
+  val billList: ListBuffer[Bill] = BillBuilder.build()
   /*
   Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad uno specifico utente
   */
@@ -116,7 +104,7 @@ object BillOperations:
   Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento, filtrando per singolo utente, di modo da poter essere utilizzata nelle previsioni
   */
   private def individualMapInitialization(map: LinkedHashMap[Int, Double], userID: String, usageType: String): Unit =
-    list.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType).foreach(bill => map(bill.getYear()) = 0.0)
+    billList.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType).foreach(bill => map(bill.getYear()) = 0.0)
 
   /*
   Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento filtrando per la tipologia di utente, la tipologia di consumo e la località geografica
@@ -124,10 +112,10 @@ object BillOperations:
   private def initializationMapByLocation(map: LinkedHashMap[Int, Double], userType: String, usageType: String, cityOrRegion: String, cityRegion: String): Unit =
     cityOrRegion match
       case "city" =>
-        list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getCity() == cityRegion)
+        billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getCity() == cityRegion)
           .foreach(bill => map(bill.getYear()) = 0.0)
       case "region" =>
-        list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getRegion() == cityRegion)
+        billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getRegion() == cityRegion)
           .foreach(bill => map(bill.getYear()) = 0.0)
 
 
@@ -139,14 +127,14 @@ object BillOperations:
       case "usage" =>
         map.keys.foreach(
           mapYear => map(mapYear) =
-            list.filter(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType).foldLeft(0.0)(_ + _.getUsage()) /
-              list.count(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType)
+            billList.filter(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType).foldLeft(0.0)(_ + _.getUsage()) /
+              billList.count(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType)
         )
       case "cost" =>
         map.keys.foreach(
           mapYear => map(mapYear) =
-            list.filter(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType).foldLeft(0.0)(_ + _.getUsage()) /
-              list.count(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType)
+            billList.filter(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType).foldLeft(0.0)(_ + _.getUsage()) /
+              billList.count(bill => bill.getUserID() == userID && bill.getYear() == mapYear && bill.getUsageType() == usageType)
         )
 
   /*
@@ -159,49 +147,49 @@ object BillOperations:
           case "usage" =>
             map.keys.foreach(
               mapYear => map(mapYear) =
-                list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion).foldLeft(0.0)(_ + _.getUsage()) /
-                  list.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion)
+                billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion).foldLeft(0.0)(_ + _.getUsage()) /
+                  billList.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion)
             )
           case "cost" =>
             map.keys.foreach(
               mapYear => map(mapYear) =
-                list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion).foldLeft(0.0)(_ + _.getCost()) /
-                  list.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion)
+                billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion).foldLeft(0.0)(_ + _.getCost()) /
+                  billList.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getCity() == cityRegion)
             )
       case "region" =>
         usageOrCost match
           case "usage" =>
             map.keys.foreach(
               mapYear => map(mapYear) =
-                list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion).foldLeft(0.0)(_ + _.getUsage()) /
-                  list.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion)
+                billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion).foldLeft(0.0)(_ + _.getUsage()) /
+                  billList.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion)
             )
           case "cost" =>
             map.keys.foreach(
               mapYear => map(mapYear) =
-                list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion).foldLeft(0.0)(_ + _.getCost()) /
-                  list.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion)
+                billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion).foldLeft(0.0)(_ + _.getCost()) /
+                  billList.count(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getYear() == mapYear && bill.getRegion() == cityRegion)
             )
 
 
   /*
   Questo metodo privato ritorna le bollette relative allo specifico utente per la specifica utenza
   */
-  private def getBillsByUserIDAndUsageType(userID: String, usageType: String): List[Bill] =
-    list.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType)
+  private def getBillsByUserIDAndUsageType(userID: String, usageType: String): ListBuffer[Bill] =
+    billList.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType)
 
 
 
   /*
   Questo metodo ritorna le bollette relative ad una specifica tipologia di utenti in una certa località geografica con riferimento ad una specifica utenza
   */
-  private def getBillsByCityOrRegion(userType: String, usageType: String, cityOrRegion: String, cityRegion: String): List[Bill] =
-    var bills: List[Bill] = List()
+  private def getBillsByCityOrRegion(userType: String, usageType: String, cityOrRegion: String, cityRegion: String): ListBuffer[Bill] =
+    var bills: ListBuffer[Bill] = ListBuffer()
     cityOrRegion match
       case "city" =>
-        bills = list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getCity() == cityRegion)
+        bills = billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getCity() == cityRegion)
       case "region" =>
-        bills = list.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getRegion() == cityRegion)
+        bills = billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getRegion() == cityRegion)
 
     bills
 
@@ -226,7 +214,7 @@ object BillOperations:
       case "cost" =>
         for i <- Range(1,13) do
           val monthlyCostSum = cityOrRegionBills.filter(bill => bill.getMonth() == i).foldLeft(0.0)(_ + _.getCost()) /
-            cityOrRegionBills.filter(bill => bill.getMonth() == i).size
+            cityOrRegionBills.count(bill => bill.getMonth() == i)
           if (!monthlyCostSum.isNaN) then
             monthlyUsageOrCost(i) = monthlyCostSum
           else

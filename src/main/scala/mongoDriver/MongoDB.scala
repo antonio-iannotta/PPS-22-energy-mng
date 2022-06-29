@@ -3,10 +3,12 @@ package mongoDriver
 import org.mongodb.scala._
 import org.mongodb.scala.bson.BsonString
 import user.User
+import bill.Bill
 
-import scala.collection.mutable._
+import scala.collection.mutable.*
 import mongoDriver.Helpers.*
 
+import java.time.{LocalDate, LocalDateTime}
 import scala.collection.mutable
 
 object MongoDB:
@@ -28,6 +30,38 @@ object MongoDB:
       usersList += createUser(userFields)
 
     usersList
+
+  def retrieveUsages(collectionName: String): ListBuffer[Bill] =
+    val usagesCollection = MongoDB.mongoDBConnection().getCollection(collectionName)
+    val billList: ListBuffer[Bill] = ListBuffer()
+    val storedUsages = usagesCollection.find().results()
+
+    for usage <- storedUsages do
+      var usageFields: ListBuffer[String] = ListBuffer()
+      for usageField <- usage do
+        if usageField._2.isInstanceOf[BsonString] then
+          usageFields += usageField._2.asString().getValue
+
+      billList += createBill(usageFields)
+
+    billList
+
+
+
+  private def createBill(usages: ListBuffer[String]): Bill =
+    val billID: String = LocalDateTime.now().toString
+    val userID: String = usages(0)
+    val userType: String = usages(1)
+    val city: String = usages(2)
+    val region: String = usages(3)
+    val usageType: String = usages(4)
+    val usage = usages(5).toDouble
+    val cost = usages(6).toDouble
+    val month = usages(7).toInt
+    val year = usages(8).toInt
+
+    Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
+
 
   def addUser(user: User): String =
     val document = Document(composeUser(user))
