@@ -8,13 +8,13 @@ import collection.mutable.ListBuffer
 import scala.util.Random
 
 object BillOperations:
-  val billList: ListBuffer[Bill] = BillBuilder.build()
   /*
   Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad uno specifico utente
   */
   def getIndividualCostOrUsage(userID: String, usageType: String, costOrUsage: String): String =
+    val billList: ListBuffer[Bill] = BillBuilder.build()
     var individualInformation = ""
-    val userIdBills = getBillsByUserIDAndUsageType(userID, usageType)
+    val userIdBills = getBillsByUserIDAndUsageType(userID, usageType, billList)
     for (bill <- userIdBills) do
       individualInformation += composeUsageOrCostInformation(bill, costOrUsage.toLowerCase())
 
@@ -24,21 +24,22 @@ object BillOperations:
   Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad una certa località geografica
   */
   def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String): String =
-    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost).toString()
+    val billList: ListBuffer[Bill] = BillBuilder.build()
+    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList).toString()
 
   /*
   Il seguente metodo effettua le previsioni per un singolo utente con riferimento ad un certo anno e con riferimento ad una certa utenza
   */
   def makeIndividualPrediction(userID: String, usageType: String, year: Int): String =
-    var result = ""
+    val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
     val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
 
-    individualMapInitialization(annualUsage, userID, usageType)
-    individualMapInitialization(annualCost, userID, usageType)
+    individualMapInitialization(annualUsage, userID, usageType, billList)
+    individualMapInitialization(annualCost, userID, usageType, billList)
 
-    fillIndividualUsageCostMap(annualUsage, "usage", userID, usageType)
-    fillIndividualUsageCostMap(annualCost, "cost", userID, usageType)
+    fillIndividualUsageCostMap(annualUsage, "usage", userID, usageType, billList)
+    fillIndividualUsageCostMap(annualCost, "cost", userID, usageType, billList)
 
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
@@ -52,16 +53,15 @@ object BillOperations:
   Il seguente metodo effettua le previsioni relativamente ad una certa tipologia di consumi per un certo anno per una specifica località geografica
   */
   def makePredictionByLocation(userType: String, usageType: String, year: Int, cityOrRegion: String, cityRegion: String): String =
-
-    var result = ""
+    val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
     val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
 
-    initializationMapByLocation(annualUsage, userType, usageType, cityOrRegion, cityRegion)
-    initializationMapByLocation(annualCost, userType, usageType, cityOrRegion, cityRegion)
+    initializationMapByLocation(annualUsage, userType, usageType, cityOrRegion, cityRegion, billList)
+    initializationMapByLocation(annualCost, userType, usageType, cityOrRegion, cityRegion, billList)
 
-    fillUsageCostMapByLocation(annualUsage,usageType,"usage",userType, cityOrRegion, cityRegion)
-    fillUsageCostMapByLocation(annualCost, usageType, "cost", userType, cityOrRegion, cityRegion)
+    fillUsageCostMapByLocation(annualUsage,usageType,"usage",userType, cityOrRegion, cityRegion, billList)
+    fillUsageCostMapByLocation(annualCost, usageType, "cost", userType, cityOrRegion, cityRegion, billList)
 
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
@@ -103,13 +103,13 @@ object BillOperations:
   /*
   Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento, filtrando per singolo utente, di modo da poter essere utilizzata nelle previsioni
   */
-  private def individualMapInitialization(map: LinkedHashMap[Int, Double], userID: String, usageType: String): Unit =
+  private def individualMapInitialization(map: LinkedHashMap[Int, Double], userID: String, usageType: String, billList: ListBuffer[Bill]): Unit =
     billList.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType).foreach(bill => map(bill.getYear()) = 0.0)
 
   /*
   Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento filtrando per la tipologia di utente, la tipologia di consumo e la località geografica
   */
-  private def initializationMapByLocation(map: LinkedHashMap[Int, Double], userType: String, usageType: String, cityOrRegion: String, cityRegion: String): Unit =
+  private def initializationMapByLocation(map: LinkedHashMap[Int, Double], userType: String, usageType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): Unit =
     cityOrRegion match
       case "city" =>
         billList.filter(bill => bill.getUserType() == userType && bill.getUsageType() == usageType && bill.getCity() == cityRegion)
@@ -122,7 +122,7 @@ object BillOperations:
   /*
   Il seguente metodo riempie la mappa anno-consumi/costi relativa ai costi e ai consumi individuali annuali con la media dei consumi/costi per ogni anno
   */
-  private def fillIndividualUsageCostMap(map: LinkedHashMap[Int, Double], usageOrCost: String, userID: String, usageType: String): Unit =
+  private def fillIndividualUsageCostMap(map: LinkedHashMap[Int, Double], usageOrCost: String, userID: String, usageType: String, billList: ListBuffer[Bill]): Unit =
     usageOrCost match
       case "usage" =>
         map.keys.foreach(
@@ -140,7 +140,7 @@ object BillOperations:
   /*
   Il seguente metodo riempie la mappa anno-consumi/costi relativa ai costi e consumi per una specifica utenza per una specifica località geografica con la media dei consumi/costi per ogni anno
   */
-  private def fillUsageCostMapByLocation(map: LinkedHashMap[Int, Double], usageType: String, usageOrCost: String, userType: String, cityOrRegion: String, cityRegion: String): Unit =
+  private def fillUsageCostMapByLocation(map: LinkedHashMap[Int, Double], usageType: String, usageOrCost: String, userType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): Unit =
     cityOrRegion match
       case "city" =>
         usageOrCost match
@@ -175,7 +175,7 @@ object BillOperations:
   /*
   Questo metodo privato ritorna le bollette relative allo specifico utente per la specifica utenza
   */
-  private def getBillsByUserIDAndUsageType(userID: String, usageType: String): ListBuffer[Bill] =
+  private def getBillsByUserIDAndUsageType(userID: String, usageType: String, billList: ListBuffer[Bill]): ListBuffer[Bill] =
     billList.filter(bill => bill.getUserID() == userID && bill.getUsageType() == usageType)
 
 
@@ -183,7 +183,7 @@ object BillOperations:
   /*
   Questo metodo ritorna le bollette relative ad una specifica tipologia di utenti in una certa località geografica con riferimento ad una specifica utenza
   */
-  private def getBillsByCityOrRegion(userType: String, usageType: String, cityOrRegion: String, cityRegion: String): ListBuffer[Bill] =
+  private def getBillsByCityOrRegion(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): ListBuffer[Bill] =
     var bills: ListBuffer[Bill] = ListBuffer()
     cityOrRegion match
       case "city" =>
@@ -198,9 +198,9 @@ object BillOperations:
   /*
   Questo metodo opera un raggruppamento per mesi riportando una mappa anno-consumi/costi in cui i consumi/costi sono la somma di tutti i valori relativi ad una certa località geografica
   */
-  private def monthlyUsageOrCost(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, usageOrCost: String): LinkedHashMap[Int, Double] =
+  private def monthlyUsageOrCost(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, usageOrCost: String, billList: ListBuffer[Bill]): LinkedHashMap[Int, Double] =
     val monthlyUsageOrCost: LinkedHashMap[Int, Double] = LinkedHashMap()
-    val cityOrRegionBills = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion)
+    val cityOrRegionBills = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
     usageOrCost match
       case "usage" =>
         for i <- Range(1,13) do
