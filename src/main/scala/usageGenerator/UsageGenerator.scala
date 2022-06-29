@@ -2,14 +2,14 @@ package usageGenerator
 
 import io.circe.syntax
 import io.circe.syntax.*
-import mongoDriver.MongoDB._
+import mongoDriver.MongoDB
 import org.bson.json.JsonReader
 import org.mongodb.scala.{FindObservable, MongoClient, MongoCollection, Observer}
 import org.mongodb.scala.bson.BsonString
 import org.mongodb.scala.bson.collection.immutable.Document
-
 import user.User
-import mongoDriver.Helpers._
+import mongoDriver.Helpers.*
+import mongoDriver.MongoDB.retrieveUsers
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
@@ -20,7 +20,7 @@ object UsageGenerator:
   def generation(): Unit =
     var month = getActualMonthOrYear("month")
     var year = getActualMonthOrYear("year")
-    val usagesCollection = mongoDBConnection().getCollection("usages")
+    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
 
     while true do
       val userListFromDatabase: ListBuffer[User] = retrieveUsers("users")
