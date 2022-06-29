@@ -2,14 +2,14 @@ package usageGenerator
 
 import io.circe.syntax
 import io.circe.syntax.*
-import mongoDriver.MongoDB
+import mongoDriver.MongoDB._
 import org.bson.json.JsonReader
 import org.mongodb.scala.{FindObservable, MongoClient, MongoCollection, Observer}
 import org.mongodb.scala.bson.BsonString
 import org.mongodb.scala.bson.collection.immutable.Document
 
 import user.User
-import mongoDriver.Helpers.*
+import mongoDriver.Helpers._
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
@@ -20,10 +20,10 @@ object UsageGenerator:
   def generation(): Unit =
     var month = getActualMonthOrYear("month")
     var year = getActualMonthOrYear("year")
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
+    val usagesCollection = mongoDBConnection().getCollection("usages")
 
     while true do
-      val userListFromDatabase: ListBuffer[User] = retrieveUsers()
+      val userListFromDatabase: ListBuffer[User] = retrieveUsers("users")
       val usageTypes: List[String] = List("water", "heat", "electricity")
       for user <- userListFromDatabase do
         for usageType <- usageTypes do
@@ -39,7 +39,7 @@ object UsageGenerator:
 
   private def getActualMonthOrYear(monthOrYear: String): Int =
     var monthOrYearCounter = 0
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
+    val usagesCollection = mongoDBConnection().getCollection("usages")
 
     monthOrYear match
       case month if month.toString.equalsIgnoreCase("month") =>
@@ -70,28 +70,4 @@ object UsageGenerator:
     userUsage("year") = BsonString.apply(year.toString)
 
     userUsage
-
-  def retrieveUsers(): ListBuffer[User] =
-    val usersCollection = MongoDB.mongoDBConnection().getCollection("users")
-    val usersList: ListBuffer[User] = ListBuffer()
-    val registeredUsers = usersCollection.find().results()
-
-    for user <- registeredUsers do
-      var userFields: ListBuffer[String] = ListBuffer()
-      for userField <- user do
-        if userField._2.isInstanceOf[BsonString] then
-          userFields += userField._2.asString().getValue
-
-      usersList += createUser(userFields)
-
-    usersList
-
-  private def createUser(users: ListBuffer[String]): User =
-    val userID: String = users(0)
-    val password: String = users(1)
-    val region: String = users(2)
-    val city: String = users(3)
-    val userType: String = users(4)
-
-    User(userID,password,region,city,userType)
 

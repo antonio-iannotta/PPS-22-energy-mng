@@ -1,6 +1,6 @@
 package registration
 
-import mongoDriver.MongoDB
+import mongoDriver.MongoDB._
 import mongoDriver.Helpers._
 import usageGenerator.UsageGenerator._
 import registration.MD5.md5HashPassword
@@ -17,9 +17,10 @@ object Registration:
 
     checkerResponse = registrationChecker.checkFields(userID, password, userType, region, city)
     if checkerResponse == "OK" then
-      val users = retrieveUsers()
-      if users.filter(user => user.getUserID() == userID).size == 0 then
-        registration = "Registration succeeded"
+      val users = retrieveUsers("users")
+      if !users.exists(user => user.getUserID() == userID) then
+        val user = User(userID, password, userType, region, city)
+        addUser(user)
     else
         registration = "Registration failed"
 
