@@ -9,17 +9,21 @@ class LoginTest extends AnyFunSuite:
   val userMap: LinkedHashMap[String, String] = LinkedHashMap("User1" -> "Password1", "User2" -> "Password2")
 
   test("User1 is not blank") {
-    assert(Login.singIN("User1","Password1") == "OK")
+    val user = Login.signIN("User1","Password1")
+    assert(user.getUserID() == "User1" && user.getPassword() == "Password1")
   }
 
   test("User is blank") {
-    assert(Login.singIN(" ","Password1") != "OK")
+    val user = Login.signIN(" ","Password1")
+    assert(user.getUserID() == "")
   }
 
   test("Password is not blank") {
-    assert(Login.singIN("UserMock","Password1") == "OK")
+    val user = Login.signIN("User1","Password1")
+    assert(user.getPassword() == "Password1")
   }
 
   test("Password is blank"){
-    assert(Login.singIN("UserMock","") != "OK")
+    val user = Login.signIN("User1","")
+    assert(user.getPassword() == "")
   }
