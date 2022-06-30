@@ -23,7 +23,7 @@ object UsageGenerator:
     val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
 
     while true do
-      val userListFromDatabase: ListBuffer[User] = retrieveUsers("users")
+      val userListFromDatabase: ListBuffer[User] = retrieveUsers()
       val usageTypes: List[String] = List("water", "heat", "electricity")
       for user <- userListFromDatabase do
         for usageType <- usageTypes do

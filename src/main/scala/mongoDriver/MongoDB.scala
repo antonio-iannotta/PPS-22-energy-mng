@@ -17,8 +17,8 @@ object MongoDB:
   def mongoDBConnection(): MongoDatabase =
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
-  def retrieveUsers(collectionName: String): ListBuffer[User] =
-    val usersCollection = MongoDB.mongoDBConnection().getCollection(collectionName)
+  def retrieveUsers(): ListBuffer[User] =
+    val usersCollection = MongoDB.mongoDBConnection().getCollection("users")
     val usersList: ListBuffer[User] = ListBuffer()
     val registeredUsers = usersCollection.find().results()
 
@@ -32,8 +32,8 @@ object MongoDB:
 
     usersList
 
-  def retrieveUsages(collectionName: String): ListBuffer[Bill] =
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection(collectionName)
+  def retrieveUsages(): ListBuffer[Bill] =
+    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
     val billList: ListBuffer[Bill] = ListBuffer()
     val storedUsages = usagesCollection.find().results()
 

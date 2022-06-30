@@ -6,5 +6,5 @@ import mongoDriver.MongoDB
 
 object BillBuilder:
   def build(): ListBuffer[Bill] =
-    MongoDB.retrieveUsages("usages")
+    MongoDB.retrieveUsages()
     

@@ -1,5 +1,8 @@
 package registration
 
+import errorCodeHandler.RegistrationErrorCodeHandler
+import mongoDriver.MongoDB.retrieveUsers
+
 import scala.collection.mutable.LinkedHashMap
 
 class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
@@ -42,6 +45,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
       case id if id == "" => "REGISTRATION_USERID_1"
       case id if id.length > 20 => "REGISTRATION_USERID_2"
       case id if id.length < 6 => "REGISTRATION_USERID_3"
+      case id if checkDuplicatedUserID(id) => "REGISTRATION_USERID_4"
       case _ => "OK"
 
   private def checkPassword(password: String): String =
@@ -59,3 +63,8 @@ class RegistrationChecker(private val userID: String, private val password: Stri
   private def checkCityRegionMatch(city: String, region: String): String =
     if regionCityMap(region.toLowerCase.capitalize).contains(city.toLowerCase.capitalize) then "OK"
     else "REGISTRATION_CITY_1"
+  
+  private def checkDuplicatedUserID(userID: String): Boolean =
+    val users = retrieveUsers()
+    users.exists(user => user.getUserID() == userID)
+      
