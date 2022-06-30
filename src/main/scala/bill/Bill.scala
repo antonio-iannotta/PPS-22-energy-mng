@@ -1,36 +1,26 @@
 package bill
 
-class Bill(private val billID: String, private val userID: String, private val userType: String,
-           private val usageType: String, private val usage: Double, private val cost: Double,
-           private val month: Int, private val year: Int, private val city: String, private val region: String):
+class Bill(private val _billID: String, private val _userID: String, private val _userType: String,
+           private val _usageType: String, private val _usage: Double, private val _cost: Double,
+           private val _month: Int, private val _year: Int, private val _city: String, private val _region: String):
 
-  def getUserID(): String =
-    userID
+  def getUserID: String = _userID
 
-  def getRegion(): String =
-    region
+  def getRegion: String = _region
 
-  def getUserType(): String =
-    userType
+  def getUserType: String = _userType
 
-  def getBillID(): String =
-    billID
+  def getBillID: String = _billID
 
-  def getCity(): String =
-    city
+  def getCity: String = _city
 
-  def getUsageType(): String =
-    usageType
+  def getUsageType: String = _usageType
 
-  def getUsage(): Double =
-    usage
+  def getUsage: Double = _usage
 
-  def getCost(): Double =
-    cost
+  def getCost: Double = _cost
 
-  def getMonth(): Int =
-    month
+  def getMonth: Int = _month
 
-  def getYear(): Int =
-    year
+  def getYear: Int = _year
 
