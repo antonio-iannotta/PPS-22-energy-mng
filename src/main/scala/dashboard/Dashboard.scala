@@ -1,5 +1,8 @@
 package dashboard
 
-case class Dashboard():
-  def view(): Unit =
-    println("User here")
+import user.User
+
+case class Dashboard(private val user: User):
+  
+  def view(choise: String): Unit =
+    println("ciao")

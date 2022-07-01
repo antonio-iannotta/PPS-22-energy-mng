@@ -19,18 +19,17 @@ object Registration extends App:
 
     checkerResponse = registrationChecker.checkFields(userID, password, userType, region, city)
     if checkerResponse == "OK" then
-      val users = retrieveUsers("users")
-      if !users.exists(user => user.getUserID() == userID) then
-        if userType == 0 then
-          userTypeString = "private"
-        else
-          userTypeString = "company"
+      //val users = retrieveUsers("users")
+      //if !users.exists(user => user.getUserID() == userID) then
+      userType match
+        case 0 => userTypeString = "private"
+        case _ => userTypeString = "company"
 
-        val user = User(userID, MD5.md5HashPassword(password), userTypeString, region, city)
-        addUser(user)
+      addUser(User(userID, MD5.md5HashPassword(password), userTypeString, region, city))
+      registration = "L'utente è stato inserito correttamente"
     else
-        registration = checkerResponse
+      registration = checkerResponse
 
     registration
 
-  println(signUP("carlo","password",0,"Lombardia","Milano"))
+  println(signUP("andreacato","password",0,"Lombardia","Milano"))

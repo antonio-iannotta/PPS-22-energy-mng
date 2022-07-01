@@ -4,9 +4,10 @@ import org.mongodb.scala._
 import org.mongodb.scala.bson.BsonString
 import user.User
 import bill.Bill
+import collection.mutable._
 
-import scala.collection.mutable.*
-import mongoDriver.Helpers.*
+import scala.collection.mutable._
+import mongoDriver.Helpers._
 
 import java.time.{LocalDate, LocalDateTime}
 import scala.collection.mutable
@@ -16,8 +17,8 @@ object MongoDB:
   def mongoDBConnection(): MongoDatabase =
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
-  def retrieveUsers(collectionName: String): ListBuffer[User] =
-    val usersCollection = MongoDB.mongoDBConnection().getCollection(collectionName)
+  def retrieveUsers(): ListBuffer[User] =
+    val usersCollection = MongoDB.mongoDBConnection().getCollection("users")
     val usersList: ListBuffer[User] = ListBuffer()
     val registeredUsers = usersCollection.find().results()
 
@@ -31,8 +32,8 @@ object MongoDB:
 
     usersList
 
-  def retrieveUsages(collectionName: String): ListBuffer[Bill] =
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection(collectionName)
+  def retrieveUsages(): ListBuffer[Bill] =
+    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
     val billList: ListBuffer[Bill] = ListBuffer()
     val storedUsages = usagesCollection.find().results()
 
