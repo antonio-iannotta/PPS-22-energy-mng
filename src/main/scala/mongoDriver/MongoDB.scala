@@ -82,11 +82,11 @@ object MongoDB:
 
   private def composeUser(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
-    userMap("userID") = BsonString.apply(user.getUserID())
-    userMap("password") = BsonString.apply(user.getPassword())
-    userMap("region") = BsonString.apply(user.getRegion())
-    userMap("city") = BsonString.apply(user.getCity())
-    userMap("userType") = BsonString.apply(user.getUserType())
+    userMap("userID") = BsonString.apply(user.getUserID)
+    userMap("password") = BsonString.apply(user.getPassword)
+    userMap("region") = BsonString.apply(user.getRegion)
+    userMap("city") = BsonString.apply(user.getCity)
+    userMap("userType") = BsonString.apply(user.getUserType)
 
     userMap
 
