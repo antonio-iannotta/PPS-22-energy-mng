@@ -30,7 +30,7 @@ object BillOperations:
   /*
   Il seguente metodo effettua le previsioni per un singolo utente con riferimento ad un certo anno e con riferimento ad una certa utenza
   */
-  def makeIndividualPrediction(userID: String, usageType: String, yearToPredict: Int): String =
+  def makeIndividualPrediction(userID: String, usageType: String, year: Int): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
     val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
@@ -47,7 +47,7 @@ object BillOperations:
     var percentageUsageVariation = percentageVariation(annualUsage)
     var percentageCostVariation = percentageVariation(annualCost)
 
-    predictionResult(yearToPredict,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
+    predictionResult(year,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
 
   /*
   Il seguente metodo effettua le previsioni relativamente ad una certa tipologia di consumi per un certo anno per una specifica località geografica
@@ -89,6 +89,7 @@ object BillOperations:
         usageVariation = usageVariation + Random.nextDouble()/100
         result = s"Year: ${year}\nPredicted usage variation: ${usageVariation}\nPredicted cost variation: ${costVariation}"
     result
+
 
 
   /*
@@ -205,10 +206,10 @@ object BillOperations:
         for i <- Range(1,13) do
           val monthlyUsageSum = cityOrRegionBills.filter(bill => bill.getMonth == i).foldLeft(0.0)(_ + _.getUsage) /
             cityOrRegionBills.count(bill => bill.getMonth == i)
-          if (monthlyUsageSum.isNaN) then
-            monthlyUsageOrCost(i) = 0.0
-          else
+          if (!monthlyUsageSum.isNaN) then
             monthlyUsageOrCost(i) = monthlyUsageSum
+          else
+            monthlyUsageOrCost(i) = 0.0
 
       case "cost" =>
         for i <- Range(1,13) do
@@ -225,12 +226,9 @@ object BillOperations:
   /*
   Questo metodo privato ritorna semplicemente i risultati dell'analisi su consumi/costi per una certa bolletta
   */
-  private def composeUsageOrCostInformation(bill: Bill, costOrUsage: String): String =
-    var result = ""
-    costOrUsage match
+  private def composeUsageOrCostInformation(bill: Bill, requestedInformation: String): String =
+    requestedInformation match
       case "cost" =>
-        result = "cost: " + bill.getCost + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
+         "cost: " + bill.getCost + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
       case "usage" =>
-        result = "usage: " + bill.getUsage + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
-
-    result
+          "usage: " + bill.getUsage + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
