@@ -1,3 +1,5 @@
+package user
+
 import billOperations.BillOperations
 
 class User (private val _userID: String, private val _password: String, private val _region: String, private val _city: String, private val _userType: String):
