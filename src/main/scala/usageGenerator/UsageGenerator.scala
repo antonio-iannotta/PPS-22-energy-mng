@@ -59,10 +59,10 @@ object UsageGenerator:
   private def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
 
     val userUsage: LinkedHashMap[String, BsonString] = LinkedHashMap()
-    userUsage("userID") = BsonString.apply(user.getUserID())
-    userUsage("userType") = BsonString.apply(user.getUserType())
-    userUsage("city") = BsonString.apply(user.getCity())
-    userUsage("region") = BsonString.apply(user.getRegion())
+    userUsage("userID") = BsonString.apply(user.getUserID)
+    userUsage("userType") = BsonString.apply(user.getUserType)
+    userUsage("city") = BsonString.apply(user.getCity)
+    userUsage("region") = BsonString.apply(user.getRegion)
     userUsage("usageType") = BsonString.apply(usageType)
     userUsage("usage") = BsonString.apply((Random.nextDouble()/100).toString)
     userUsage("cost") = BsonString.apply((Random.nextDouble()/100).toString)
@@ -70,4 +70,3 @@ object UsageGenerator:
     userUsage("year") = BsonString.apply(year.toString)
 
     userUsage
-
