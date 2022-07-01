@@ -1,8 +1,8 @@
 package main
 
-import login.Login
-import registration.Registration
-import user.User
+import login._
+import registration._
+import user._
 
 object Main extends App:
   println("Salve, cosa vuoi fare? 1)Registration o 2)Login")
@@ -38,5 +38,7 @@ object Main extends App:
     val user = Login.signIN(userID, password)
 
     user match
-      case user if user.isEmpty => Option[user].empty println("errore!")
-      case _ => Option[user]
+      case user if user.isEmpty =>
+        println("errore!")
+        None
+      case _ => Some(user)
