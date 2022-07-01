@@ -227,11 +227,8 @@ object BillOperations:
   Questo metodo privato ritorna semplicemente i risultati dell'analisi su consumi/costi per una certa bolletta
   */
   private def composeUsageOrCostInformation(bill: Bill, requestedInformation: String): String =
-    var result = ""
     requestedInformation match
       case "cost" =>
-        result = "cost: " + bill.getCost + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
+         "cost: " + bill.getCost + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
       case "usage" =>
-        result = "usage: " + bill.getUsage + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
-
-    result
+          "usage: " + bill.getUsage + "\nmonth: " + bill.getMonth + "\nyear: " + bill.getYear+"\n"
