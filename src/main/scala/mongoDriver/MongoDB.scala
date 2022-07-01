@@ -46,9 +46,7 @@ object MongoDB:
       billList += createBill(usageFields)
 
     billList
-
-
-
+  
   private def createBill(usages: ListBuffer[String]): Bill =
     val billID: String = LocalDateTime.now().toString
     val userID: String = usages(0)
@@ -62,12 +60,10 @@ object MongoDB:
     val year = usages(8).toInt
 
     Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
-
-
+  
   def addUser(user: User): String =
     val document = Document(composeUser(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
-
 
   private def createUser(users: ListBuffer[String]): User =
     val userID: String = users(0)
@@ -77,9 +73,7 @@ object MongoDB:
     val city: String = users(4)
 
     User(userID,password,region,city,userType)
-
-
-
+  
   private def composeUser(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.getUserID)
