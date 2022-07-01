@@ -13,12 +13,8 @@ object BillOperations:
   */
   def getIndividualCostOrUsage(userID: String, usageType: String, costOrUsage: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    var individualInformation = ""
-    val userIdBills = getBillsByUserIDAndUsageType(userID, usageType, billList)
-    for (bill <- userIdBills) do
-      individualInformation += composeUsageOrCostInformation(bill, costOrUsage.toLowerCase())
-
-    individualInformation
+    getBillsByUserIDAndUsageType(userID, usageType, billList)
+      .foldLeft[String]("")(_ + composeUsageOrCostInformation(_ , costOrUsage.toLowerCase))
 
   /*
   Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad una certa località geografica
