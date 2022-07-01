@@ -7,7 +7,7 @@ case class Dashboard(private val user: User):
   
   def view(choise: String): Unit =
 
-    val exit = true
+    var exit = true
 
     while(exit)
     println("Selezionare voce desiderata:")
@@ -22,28 +22,28 @@ case class Dashboard(private val user: User):
     println("9) previsione regione")
     println("10) exit")
 
-    val selection = scala.io.StdIn.readInt()
+    var selection = scala.io.StdIn.readInt()
 
     selection match
-      case 1 => user.getCost(user.getUserType)
-      case 2 => user.getUsage(user.getUserType)
-      case 3 => CityCostChoiceHandler.choiceHandler(user)
-      case 4 => CityUsageChoiceHandler.choiceHandler(user)
-      case 5 => RegionCostChoiceHandler.choiceHandler(user)
-      case 6 => RegionUsageChoiceHandler.choiceHandler(user)
+              case 1 => user.getCost(user.getUserType)
+              case 2 => user.getUsage(user.getUserType)
+              case 3 => CityCostChoiceHandler.choiceHandler(user)
+              case 4 => CityUsageChoiceHandler.choiceHandler(user)
+              case 5 => RegionCostChoiceHandler.choiceHandler(user)
+              case 6 => RegionUsageChoiceHandler.choiceHandler(user)
 
-      case 7 => println("Inserire l'anno d'interesse")
-                val year = scala.io.StdIn.readInt()
-                user.makeIndividualPrediction(user.getUserType,year)
+              case 7 => println("Inserire l'anno d'interesse")
+                        var year = scala.io.StdIn.readInt()
+                        user.makeIndividualPrediction(user.getUserType,year)
 
-      case 8 => println("Inserire l'anno d'interesse")
-                val year = scala.io.StdIn.readInt()
-                user.makePredictionByCity(user.getUserType,year,user.getCity)
+              case 8 => println("Inserire l'anno d'interesse")
+                        var year = scala.io.StdIn.readInt()
+                        user.makePredictionByCity(user.getUserType,year,user.getCity)
 
-      case 9 => println("Inserire l'anno d'interesse")
-                val year = scala.io.StdIn.readInt()
-                user.makePredictionByRegion(user.getUsageByRegion(user.getRegion,year,user.getRegion))
+              case 9 => println("Inserire l'anno d'interesse")
+                        var year = scala.io.StdIn.readInt()
+                        user.makePredictionByRegion(user.getUsageByRegion(user.getRegion,year,user.getRegion))
 
-      case 10 => exit = false
+              case 10 => exit = false
 
-      case _ => println("Scelta non valida!")
+              case _ => println("Scelta non valida!")
