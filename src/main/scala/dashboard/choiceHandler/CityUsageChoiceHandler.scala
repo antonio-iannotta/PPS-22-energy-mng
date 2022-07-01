@@ -10,10 +10,10 @@ object CityUsageChoiceHandler extends ChoiceHandler:
         scelta match
                case 1 => println("Inserire l'anno d'interesse")
                          var year = scala.io.StdIn.readInt()
-                         user.getUsageByCity(user.getCity,user.getUserType)
+                         user.getUsageByCity(user.getUserType)
 
                 case 2 => println("Inserire città")
-                          val city = scala.io.StdIn.readLine()
+                          val citySelected = scala.io.StdIn.readLine()
                           println("Inserire l'anno d'interesse")
                           var year = scala.io.StdIn.readInt()
-                          user.getUsageByCity(city,user.getUserType)
+                          user.getUsageByCity(city = citySelected,user.getUserType)

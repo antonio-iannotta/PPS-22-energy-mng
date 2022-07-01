@@ -10,10 +10,10 @@ object RegionUsageChoiceHandler extends ChoiceHandler:
         scelta match
                case 1 => println("Inserire l'anno d'interesse")
                          var year = scala.io.StdIn.readInt()
-                         user.getUsageByRegion(user.getRegion,user.getUserType)
+                         user.getUsageByRegion(user.getUserType)
 
                case 2 => println("Inserire la regione")
-                         val regione = scala.io.StdIn.readLine()
+                         val regioneSelected = scala.io.StdIn.readLine()
                          println("Inserire l'anno d'interesse")
                          var year = scala.io.StdIn.readInt()
-                         user.getUsageByRegion(regione,user.getUserType)
+                         user.getUsageByRegion(regioneSelected,user.getUserType)
