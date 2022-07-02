@@ -62,8 +62,8 @@ object BillOperations:
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
 
-    var percentageUsageVariation = annualUsage.values.foldLeft[Double](0.0)(_ + _) / annualUsage.keys.size
-    var percentageCostVariation = annualCost.values.foldLeft[Double](0.0)(_ + _) / annualCost.keys.size
+    val percentageUsageVariation = annualUsage.values.foldLeft[Double](0.0)(_ + _) / annualUsage.keys.size
+    val percentageCostVariation = annualCost.values.foldLeft[Double](0.0)(_ + _) / annualCost.keys.size
 
     predictionResult(year,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
 
@@ -72,21 +72,13 @@ object BillOperations:
   /*
   Il seguente metodo privato ritorna il risultato della previsione richiesta
   */
+  //DA RIGUARDARE
   private def predictionResult(year: Int, map: LinkedHashMap[Int, Double], percentageUsageVariation: Double, percentageCostVariation: Double, usageType: String): String =
-    var result = ""
-    var costVariation = percentageCostVariation
-    var usageVariation = percentageUsageVariation
-    val lengthYearPrediction = year - map.keys.head
-    if (lengthYearPrediction <= map.keys.size) then
-      result = "Your usage and cost for " + usageType + " is not supposed to change for " + year
-    else
-      for i <- Range(0,lengthYearPrediction - map.keys.size) do
-        costVariation = costVariation + Random.nextDouble()/100
-        usageVariation = usageVariation + Random.nextDouble()/100
-        result = s"Year: ${year}\nPredicted usage variation: ${usageVariation}\nPredicted cost variation: ${costVariation}"
-    result
-
-
+    year - map.keys.size match
+      case duration if duration <= map.keys.size =>
+        "Your usage and cost for " + usageType + " is not supposed to change for " + year
+      case duration if duration > map.keys.size =>
+        s"Year: ${year}\nPredicted usage variation: ${percentageUsageVariation + Random.nextDouble()}\nPredicted cost variation: ${percentageCostVariation + Random.nextDouble()}"
 
   /*
   Il seguente metodo privato ritorna la variazione percentuale di costi o consumi su base annuale.
@@ -175,19 +167,15 @@ object BillOperations:
     billList.filter(bill => bill.getUserID == userID && bill.getUsageType == usageType)
 
 
-
   /*
   Questo metodo ritorna le bollette relative ad una specifica tipologia di utenti in una certa località geografica con riferimento ad una specifica utenza
   */
   private def getBillsByCityOrRegion(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): ListBuffer[Bill] =
-    var bills: ListBuffer[Bill] = ListBuffer()
     cityOrRegion match
       case "city" =>
-        bills = billList.filter(bill => bill.getUserType == userType && bill.getUsageType == usageType && bill.getCity == cityRegion)
+        billList.filter(bill => bill.getUserType == userType && bill.getUsageType == usageType && bill.getCity == cityRegion)
       case "region" =>
-        bills = billList.filter(bill => bill.getUserType == userType && bill.getUsageType == usageType && bill.getRegion == cityRegion)
-
-    bills
+        billList.filter(bill => bill.getUserType == userType && bill.getUsageType == usageType && bill.getRegion == cityRegion)
 
 
 
@@ -196,25 +184,26 @@ object BillOperations:
   */
   private def monthlyUsageOrCost(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, usageOrCost: String, billList: ListBuffer[Bill]): LinkedHashMap[Int, Double] =
     val monthlyUsageOrCost: LinkedHashMap[Int, Double] = LinkedHashMap()
-    val cityOrRegionBills = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
     usageOrCost match
       case "usage" =>
         for i <- Range(1,13) do
-          val monthlyUsageSum = cityOrRegionBills.filter(bill => bill.getMonth == i).foldLeft(0.0)(_ + _.getUsage) /
-            cityOrRegionBills.count(bill => bill.getMonth == i)
-          if (!monthlyUsageSum.isNaN) then
-            monthlyUsageOrCost(i) = monthlyUsageSum
-          else
-            monthlyUsageOrCost(i) = 0.0
+          val monthlyUsageSum = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+            .filter(bill => bill.getMonth == i).foldLeft(0.0)(_ + _.getUsage) /
+            getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+              .count(bill => bill.getMonth == i)
+          monthlyUsageSum match
+            case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
+            case _ => monthlyUsageOrCost(i) = monthlyUsageSum
 
       case "cost" =>
         for i <- Range(1,13) do
-          val monthlyCostSum = cityOrRegionBills.filter(bill => bill.getMonth == i).foldLeft(0.0)(_ + _.getCost) /
-            cityOrRegionBills.count(bill => bill.getMonth == i)
-          if (!monthlyCostSum.isNaN) then
-            monthlyUsageOrCost(i) = monthlyCostSum
-          else
-            monthlyUsageOrCost(i) = 0.0
+          val monthlyUsageSum = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+            .filter(bill => bill.getMonth == i).foldLeft(0.0)(_ + _.getCost) /
+            getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+              .count(bill => bill.getMonth == i)
+          monthlyUsageSum match
+            case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
+            case _ => monthlyUsageOrCost(i) = monthlyUsageSum
 
     monthlyUsageOrCost
 
