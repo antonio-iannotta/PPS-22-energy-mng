@@ -1,5 +1,5 @@
 Settimana 20/06/2022 - 24/06/2022
-Durante questa si è impostato l'intero ambiente di sviluppo, in particolare scalaTest e sono stati impostati gli ambienti per la continuous integration come GitHub.
+Durante questo sprint si è impostato l'intero ambiente di sviluppo, in particolare scalaTest e sono stati impostati gli ambienti per la continuous integration come GitHub.
 Sempre durante questa settimana è avvenuta una prima suddivisione del lavoro da effettuare per quanto riguarda classi e componenti da implementare di modo che si potesse
 procedere in maniera comunque coordinata.
 Obiettivi prefissati all'inizio dello sprint:
@@ -20,3 +20,19 @@ Obiettivi raggiunti alla fine di questo sprint (20 ore)
 
 Durante lo sprint review si è discusso di quali potranno essere le soluzioni tecnologiche da adottare per aggiornare i componenti già implementati integrandoli con il database
 e con la libreria Scala.rx. Si è discusso inoltre di quali saranno i compiti, non terminati questa settimana, da dover necessariamente terminare nella prossima.
+
+Settimana 27/06/2022 - 01/07/2022
+Durante questa settimana si è proceduto allo sviluppo delle parti che non erano state ancora realizzate o decise durante il primo sprint.
+Obiettivi prefissati all'inizio di questo sprint:
+    Realizzazione dell'interazione con il DB
+    Completamento della prima versione del sistema verificando che il sistema fosse collegato in maniera ciclica
+    Realizzazione e definizione del componente Registration
+    Realizzazione e definizione del componente Login
+
+Obiettivi raggiunti alla fine di questo sprint (20 ore):
+    Realizzazione interazione con il DB di tutte le componenti
+    Realizzazione e definizione del componente Login 
+    Realizzazione e definizione del componente Rewgistration
+   
+Durante lo sprint review si è discusso dell'impiego delle tecnologie presentate nella settimana precedente, con l'obiettivo di studiare in maniera più approfondita l'applicabilità
+della liberia scala.rx
