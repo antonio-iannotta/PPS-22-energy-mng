@@ -21,7 +21,7 @@ object Main extends App:
         case 2 =>
           callLogin()
     catch
-      case  : NumberFormatException => println("Input non valido.")
+      case _ : NumberFormatException => println("Input non valido.")
 
   def callRegistration(): String =
     println("Registrazione: inserire userID, password, userType, region e city")
