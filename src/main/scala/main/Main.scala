@@ -16,7 +16,7 @@ object Main extends App:
           val responseMessage = callRegistration()
           responseMessage match
             case "OK" => println("Registrazione avvenuta con successo!")
-            case  => println(responseMessage)
+            case _ => println(responseMessage)
 
         case 2 =>
           callLogin()
@@ -50,4 +50,4 @@ object Main extends App:
       case user if user.isEmpty =>
         println("errore!")
         None
-      case  => user
+      case _ => user
