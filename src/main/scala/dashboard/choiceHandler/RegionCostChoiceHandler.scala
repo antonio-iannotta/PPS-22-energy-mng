@@ -9,10 +9,10 @@ object RegionCostChoiceHandler extends ChoiceHandler:
           scelta match
                  case 1 => println("Inserire il consumo d'interesse")
                            var usage = scala.io.StdIn.readLine()
-                           user.getCostByRegion(usage)
+                           user.getCostByRegion(usageType = usage)
 
                  case 2 => println("Inserire la regione")
                            val regioneSelected = scala.io.StdIn.readLine()
                            println("Inserire il consumo d'interesse")
                            var usage = scala.io.StdIn.readLine()
-                           user.getCostByRegion(regione = regioneSelected,usage)
+                           user.getCostByRegion(regione = regioneSelected,usageType = usage)
