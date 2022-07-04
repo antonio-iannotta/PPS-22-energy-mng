@@ -1,8 +1,6 @@
 package registration
 
-import mongoDriver.MongoDB._
-import mongoDriver.Helpers._
-import mongoDriver.MongoDB._
+import mongoDriver.{MongoDB, Helpers}
 import registration.MD5.md5HashPassword
 import user.User
 
