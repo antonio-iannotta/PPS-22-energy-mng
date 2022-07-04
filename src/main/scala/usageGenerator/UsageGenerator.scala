@@ -1,5 +1,5 @@
-import mongoDriver.Helpers._
-import mongoDriver.MongoDB._
+import mongoDriver.Helpers.*
+import mongoDriver.MongoDB
 import user.User
 import org.mongodb.scala.bson.BsonString
 
@@ -16,7 +16,7 @@ object UsageGenerator:
     val usageTypes: List[String] = List("water", "heat", "electricity")
 
     while true do
-      retrieveUsers().foreach(user => usageTypes.foreach(
+      MongoDB.retrieveUsers().foreach(user => usageTypes.foreach(
         usageType => usagesCollection.insertOne(Document(composeUsageMap(user,usageType,month,year))).results()
       ))
 
