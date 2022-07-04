@@ -15,5 +15,5 @@ object RegionUsageChoiceHandler extends ChoiceHandler:
                case 2 => println("Inserire la regione")
                          val regioneSelected = scala.io.StdIn.readLine()
                          println("Inserire il consumo d'interesse")
-                         var year = scala.io.StdIn.readLine()
+                         var usage = scala.io.StdIn.readLine()
                          user.getUsageByRegion(regioneSelected,usageType = usage)

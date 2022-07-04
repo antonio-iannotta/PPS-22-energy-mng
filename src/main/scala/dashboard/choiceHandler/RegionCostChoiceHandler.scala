@@ -15,4 +15,4 @@ object RegionCostChoiceHandler extends ChoiceHandler:
                            val regioneSelected = scala.io.StdIn.readLine()
                            println("Inserire il consumo d'interesse")
                            var usage = scala.io.StdIn.readLine()
-                           user.getCostByRegion(regione = regioneSelected,usageType = usage)
+                           user.getCostByRegion(region = regioneSelected,usageType = usage)
