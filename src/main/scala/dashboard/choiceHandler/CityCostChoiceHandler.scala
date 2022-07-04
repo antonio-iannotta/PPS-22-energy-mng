@@ -9,7 +9,7 @@ object CityCostChoiceHandler extends ChoiceHandler:
         scelta match
                case 1 => println("Inserire il consumo d'interesse")
                          var usage = scala.io.StdIn.readLine()
-                         user.getCostByCity(usage)
+                         user.getCostByCity(usageType = usage)
 
                case 2 => println("Inserire città")
                          val citySelected = scala.io.StdIn.readLine()
