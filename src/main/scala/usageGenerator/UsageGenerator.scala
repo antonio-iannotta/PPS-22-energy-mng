@@ -27,7 +27,7 @@ object UsageGenerator:
         case _ =>
           month += 1
 
-      Thread.sleep(100000)
+      Thread.sleep(10000)
 
   private def getActualMonthOrYear(monthOrYear: String): Int =
     val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
