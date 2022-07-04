@@ -41,4 +41,4 @@ object Main extends App:
       case user if user.isEmpty =>
         println("errore!")
         None
-      case _ => Some(user)
+      case _ => user
