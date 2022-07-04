@@ -10,20 +10,20 @@ class LoginTest extends AnyFunSuite:
 
   test("User1 is not blank") {
     val user = Login.signIN("User1","Password1")
-    assert(user.get.getUserID == "User1" && user.get.getPassword == "Password1")
+    assert(user.get.userID == "User1" && user.get.getPassword == "Password1")
   }
 
   test("User is blank") {
     val user = Login.signIN(" ","Password1")
-    assert(user.get.getUserID == "")
+    assert(user.get.userID == "")
   }
 
   test("Password is not blank") {
     val user = Login.signIN("User1","Password1")
-    assert(user.get.getPassword == "Password1")
+    assert(user.get.password == "Password1")
   }
 
   test("Password is blank"){
     val user = Login.signIN("User1","")
-    assert(user.get.getPassword == "")
+    assert(user.get.password == "")
   }
