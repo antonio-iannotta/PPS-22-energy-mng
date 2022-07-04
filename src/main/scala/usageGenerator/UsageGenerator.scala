@@ -1,5 +1,7 @@
 import mongoDriver.Helpers.*
-import mongoDriver.MongoDB.retrieveUsers
+import mongoDriver.MongoDB
+import user.User
+import org.mongodb.scala.bson.{BsonString, Document}
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
@@ -14,7 +16,7 @@ object UsageGenerator:
     val usageTypes: List[String] = List("water", "heat", "electricity")
 
     while true do
-      retrieveUsers().foreach(user => usageTypes.foreach(
+      MongoDB.retrieveUsers().foreach(user => usageTypes.foreach(
         usageType => usagesCollection.insertOne(Document(composeUsageMap(user,usageType,month,year))).results()
       ))
 
@@ -44,10 +46,10 @@ object UsageGenerator:
   private def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
     val userUsage: LinkedHashMap[String, BsonString] = LinkedHashMap()
 
-    userUsage("userID") = BsonString.apply(user.getUserID)
-    userUsage("userType") = BsonString.apply(user.getUserType)
-    userUsage("city") = BsonString.apply(user.getCity)
-    userUsage("region") = BsonString.apply(user.getRegion)
+    userUsage("userID") = BsonString.apply(user.userID)
+    userUsage("userType") = BsonString.apply(user.userType)
+    userUsage("city") = BsonString.apply(user.city)
+    userUsage("region") = BsonString.apply(user.region)
     userUsage("usageType") = BsonString.apply(usageType)
     userUsage("usage") = BsonString.apply((Random.nextDouble()/100).toString)
     userUsage("cost") = BsonString.apply((Random.nextDouble()/100).toString)
