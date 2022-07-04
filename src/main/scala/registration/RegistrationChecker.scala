@@ -37,9 +37,10 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     val cityCheck = RegistrationErrorCodeHandler.errorCodeHandler(checkCityRegionMatch(city, region))
     val checkResponseList = List(userCheck, passwordCheck, userTypeCheck, cityCheck).filter(str => str != "OK")
 
-    if checkResponseList.isEmpty then "OK"
-    else checkResponseList.head
-
+    checkResponseList match
+      case response if response.isEmpty => "OK"
+      case _ => checkResponseList.head
+ 
   private def checkUserID(userID: String): String =
     userID match
       case id if id == "" => "REGISTRATION_USERID_1"
