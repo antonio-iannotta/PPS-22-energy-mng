@@ -5,17 +5,26 @@ import user.User
 import registration.Registration
 
 object Main extends App:
-  println("Salve, cosa vuoi fare? 1)Registration o 2)Login")
-  var selection = scala.io.StdIn.readInt()
 
-  selection match
-    case 1 => callRegistration()
-    case 2 => callLogin()
-    case _ => println("Operazione non valida")
+  var selection = 0
+  while !(1 to 2 contains selection) do
+    println("Salve, che operazione vuoi effettuare? Digita: \n 1) Registrazione \n 2) Login")
+    try
+      selection = scala.io.StdIn.readInt()
+      selection match
+        case 1 =>
+          val responseMessage = callRegistration()
+          responseMessage match
+            case "OK" => println("Registrazione avvenuta con successo!")
+            case  => println(responseMessage)
 
+        case 2 =>
+          callLogin()
+    catch
+      case  : NumberFormatException => println("Input non valido.")
 
   def callRegistration(): String =
-    println("Inserire userID, password, userType, region e city")
+    println("Registrazione: inserire userID, password, userType, region e city")
     println("userID: ")
     val userID = scala.io.StdIn.readLine()
     println("password: ")
@@ -25,12 +34,12 @@ object Main extends App:
     println("region: ")
     val region = scala.io.StdIn.readLine()
     println("city: ")
-    val city =scala.io.StdIn.readLine()
+    val city = scala.io.StdIn.readLine()
 
-    Registration.signUP(userID, password, user_type, region, city)
+    Registration.signUP(userID, password, usertype, region, city)
 
   def callLogin(): Option[User] =
-    println("Inserire userID, password")
+    println("Login: inserire userID, password")
     println("userID: ")
     val userID = scala.io.StdIn.readLine()
     println("password: ")
@@ -41,4 +50,4 @@ object Main extends App:
       case user if user.isEmpty =>
         println("errore!")
         None
-      case _ => user
+      case  => user
