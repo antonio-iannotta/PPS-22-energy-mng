@@ -11,22 +11,22 @@ class BillBuilderTest extends AnyFunSuite:
   }
 
   test("At least one element in list has city == 'Cesena'") {
-    assert(billListTest.exists(bill => bill.getCity == "Cesena"))
+    assert(billListTest.exists(bill => bill.city == "Cesena"))
   }
 
   test("At least one element in list has usageType == 'acqua'") {
-    assert(!billListTest.exists(bill => bill.getUsageType != "acqua" &&
-      bill.getUsageType != "luce" &&
-      bill.getUsageType != "gas"))
+    assert(!billListTest.exists(bill => bill.usageType != "acqua" &&
+      bill.usageType != "luce" &&
+      bill.usageType != "gas"))
   }
 
   test("Element has as userType 'private' or 'company' only") {
-    assert(!billListTest.exists(bill => bill.getUserType != "private" &&
-      bill.getUserType != "company"))
+    assert(!billListTest.exists(bill => bill.userType != "private" &&
+      bill.userType != "company"))
   }
 
   test("At least one element in list has usage > 0") {
-    assert(!billListTest.filter(bill => bill.getUsage > 0).isEmpty)
+    assert(!billListTest.filter(bill => bill.usage > 0).isEmpty)
   }
 
   test("List is not empty") {
@@ -34,41 +34,41 @@ class BillBuilderTest extends AnyFunSuite:
   }
 
   test("First billID is String") {
-    assert(!billListTest.filter(bill => bill.getBillID.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.billID.isInstanceOf[String]).isEmpty)
   }
 
   test("First userID is String") {
-    assert(!billListTest.filter(bill => bill.getUserID.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.userID.isInstanceOf[String]).isEmpty)
   }
 
   test("First userType is String") {
-    assert(!billListTest.filter(bill => bill.getUserType.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.userType.isInstanceOf[String]).isEmpty)
   }
 
   test("First usageType is String") {
-    assert(!billListTest.filter(bill => bill.getUsageType.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.usageType.isInstanceOf[String]).isEmpty)
   }
 
   test("First usage is Double") {
-    assert(!billListTest.filter(bill => bill.getUsage.isInstanceOf[Double]).isEmpty)
+    assert(!billListTest.filter(bill => bill.usage.isInstanceOf[Double]).isEmpty)
   }
 
   test("First cost is Double") {
-    assert(!billListTest.filter(bill => bill.getCost.isInstanceOf[Double]).isEmpty)
+    assert(!billListTest.filter(bill => bill.cost.isInstanceOf[Double]).isEmpty)
   }
 
   test("First month is Int") {
-    assert(!billListTest.filter(bill => bill.getMonth.isInstanceOf[Int]).isEmpty)
+    assert(!billListTest.filter(bill => bill.month.isInstanceOf[Int]).isEmpty)
   }
 
   test("First year is Int") {
-    assert(!billListTest.filter(bill => bill.getYear.isInstanceOf[Int]).isEmpty)
+    assert(!billListTest.filter(bill => bill.year.isInstanceOf[Int]).isEmpty)
   }
 
   test("First city is String") {
-    assert(!billListTest.filter(bill => bill.getCity.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.city.isInstanceOf[String]).isEmpty)
   }
 
   test("First region is String") {
-    assert(!billListTest.filter(bill => bill.getRegion.isInstanceOf[String]).isEmpty)
+    assert(!billListTest.filter(bill => bill.region.isInstanceOf[String]).isEmpty)
   }
