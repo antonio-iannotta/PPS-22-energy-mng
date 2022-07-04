@@ -10,14 +10,14 @@ import registration.{MD5, RegistrationChecker}
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
-    RegistrationChecker(userID, password, userType, region, city).checkFields(userID, password, userType, region, city) match
+    val responseMessage = RegistrationChecker(userID, password, userType, region, city).checkFields(userID, password, userType, region, city)
+    responseMessage match
       case "OK" =>
         userType match
           case 0 =>
             MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city,  "private"))
           case 1 =>
             MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city, "company"))
-
+        responseMessage
       case _ =>
-        RegistrationChecker(userID, password, userType, region, city).checkFields(userID, password, userType, region, city)
-
+        responseMessage
