@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id="root [file:/C:/Users/anton/IdeaProjects/PPS-22-energy-mng/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_18">
+<module external.linked.project.id="root [file:/home/carlo/IdeaProjects/PPS-22-energy-mng/]" external.linked.project.path="$MODULE_DIR$/../.." external.root.project.path="$MODULE_DIR$/../.." external.system.id="SBT" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_X">
     <output url="file://$MODULE_DIR$/../../target/scala-3.1.2/classes" />
     <output-test url="file://$MODULE_DIR$/../../target/scala-3.1.2/test-classes" />
     <exclude-output />

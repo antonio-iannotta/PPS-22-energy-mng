@@ -8,12 +8,12 @@ object CityUsageChoiceHandler extends ChoiceHandler:
     println("2) Città a scelta")
     val scelta = scala.io.StdIn.readInt()
         scelta match
-               case 1 => println("Inserire l'anno d'interesse")
-                         var year = scala.io.StdIn.readInt()
-                         user.getUsageByCity(user.userType)
+               case 1 => println("Inserire il consumo d'interesse")
+                         var usage = scala.io.StdIn.readInt()
+                         user.getUsageByCity(usage)
 
                 case 2 => println("Inserire città")
                           val citySelected = scala.io.StdIn.readLine()
-                          println("Inserire l'anno d'interesse")
-                          var year = scala.io.StdIn.readInt()
-                          user.getUsageByCity(city = citySelected,user.userType)
+                          println("Inserire il consumo d'interesse")
+                          var usage = scala.io.StdIn.readInt()
+                          user.getUsageByCity(city = citySelected,usage)
