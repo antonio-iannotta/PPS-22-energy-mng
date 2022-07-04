@@ -20,3 +20,4 @@ object  Registration:
 
       case _ =>
         RegistrationChecker(userID,password, userType, region, city).checkFields(userID, password, userType, region, city)
+
