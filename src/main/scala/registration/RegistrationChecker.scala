@@ -40,7 +40,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     checkResponseList match
       case response if response.isEmpty => "OK"
       case _ => checkResponseList.head
- 
+
   private def checkUserID(userID: String): String =
     userID match
       case id if id == "" => "REGISTRATION_USERID_1"
@@ -67,4 +67,4 @@ class RegistrationChecker(private val userID: String, private val password: Stri
 
   private def checkDuplicatedUserID(userID: String): Boolean =
     val users = retrieveUsers()
-    users.exists(user => user.getUserID == userID)
+    users.exists(user => user.userID == userID)

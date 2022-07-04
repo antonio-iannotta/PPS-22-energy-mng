@@ -1,6 +1,6 @@
-import mongoDriver.MongoDB._
-import mongoDriver.Helpers._
-import usageGenerator.UsageGenerator._
+import mongoDriver.MongoDB.*
+import mongoDriver.Helpers.*
+import mongoDriver.MongoDB
 import registration.MD5.md5HashPassword
 import user.User
 
@@ -14,9 +14,9 @@ object  Registration:
       case "OK" =>
         userType match
           case 0 =>
-            addUser(User(userID, MD5.md5HashPassword(password), "private", region, city))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "private", region, city))
           case 1 =>
-            addUser(User(userID, MD5.md5HashPassword(password), "company", region, city))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "company", region, city))
 
       case _ =>
         RegistrationChecker(userID,password, userType, region, city).checkFields(userID, password, userType, region, city)
