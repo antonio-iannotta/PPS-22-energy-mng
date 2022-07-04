@@ -1,7 +1,7 @@
 import mongoDriver.Helpers.*
 import mongoDriver.MongoDB
 import user.User
-import org.mongodb.scala.bson.BsonString
+import org.mongodb.scala.bson.{BsonString, Document}
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
