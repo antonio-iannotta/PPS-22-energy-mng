@@ -14,9 +14,9 @@ object Registration:
       case "OK" =>
         userType match
           case 0 =>
-            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "private", region, city))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city,  "private"))
           case 1 =>
-            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "company", region, city))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city, "company"))
 
       case _ =>
         RegistrationChecker(userID, password, userType, region, city).checkFields(userID, password, userType, region, city)
