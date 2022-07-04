@@ -57,3 +57,4 @@ object UsageGenerator:
     userUsage("year") = BsonString.apply(year.toString)
 
     userUsage
+    
