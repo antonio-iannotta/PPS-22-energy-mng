@@ -21,7 +21,7 @@ object MongoDB:
     var userList: ListBuffer[User] = ListBuffer()
     MongoDB.mongoDBConnection().getCollection("users")
       .find().results()
-      .foreach(user => userList += createUser(user.foldLeft[ListBuffer[String]](ListBuffer())(_ += _._2.asString().getValue)))
+      .foreach(user => userList += createUser(user.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
     userList
 
   def retrieveUsages(): ListBuffer[Bill] =
@@ -29,20 +29,20 @@ object MongoDB:
     var billList: ListBuffer[Bill] = ListBuffer()
     MongoDB.mongoDBConnection().getCollection("usages")
       .find().results()
-      .foreach(usage => billList += createBill(usage.foldLeft[ListBuffer[String]](ListBuffer())(_ += _._2.asString().getValue)))
+      .foreach(usage => billList += createBill(usage.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
     billList
 
-  private def createBill(usages: ListBuffer[String]): Bill =
+  private def createBill(usages: ListBuffer[Any]): Bill =
     val billID: String = LocalDateTime.now().toString
-    val userID: String = usages(0)
-    val userType: String = usages(1)
-    val city: String = usages(2)
-    val region: String = usages(3)
-    val usageType: String = usages(4)
-    val usage = usages(5).toDouble
-    val cost = usages(6).toDouble
-    val month = usages(7).toInt
-    val year = usages(8).toInt
+    val userID: String = usages(1).asInstanceOf[BsonString].asString().getValue
+    val userType: String = usages(2).asInstanceOf[BsonString].asString().getValue
+    val city: String = usages(3).asInstanceOf[BsonString].asString().getValue
+    val region: String = usages(4).asInstanceOf[BsonString].asString().getValue
+    val usageType: String = usages(5).asInstanceOf[BsonString].asString().getValue
+    val usage = usages(6).asInstanceOf[BsonString].asString().getValue.toDouble
+    val cost = usages(7).asInstanceOf[BsonString].asString().getValue.toDouble
+    val month = usages(8).asInstanceOf[BsonString].asString().getValue.toInt
+    val year = usages(9).asInstanceOf[BsonString].asString().getValue.toInt
 
     Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
 
@@ -50,21 +50,22 @@ object MongoDB:
     val document = Document(composeUser(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
 
-  private def createUser(users: ListBuffer[String]): User =
-    val userID: String = users(0)
-    val password: String = users(1)
-    val userType: String = users(2)
-    val region: String = users(3)
-    val city: String = users(4)
+  private def createUser(users: ListBuffer[Any]): User =
 
-    User(userID,password,region,city,userType)
+    val userID: String = users(1).asInstanceOf[BsonString].asString().getValue
+    val password: String = users(2).asInstanceOf[BsonString].asString().getValue
+    val userType: String = users(3).asInstanceOf[BsonString].asString().getValue
+    val region: String = users(4).asInstanceOf[BsonString].asString().getValue
+    val city: String = users(5).asInstanceOf[BsonString].asString().getValue
+
+    User(userID,password,userType,region,city)
 
   private def composeUser(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.userID)
     userMap("password") = BsonString.apply(user.password)
+    userMap("userType") = BsonString.apply(user.userType)
     userMap("region") = BsonString.apply(user.region)
     userMap("city") = BsonString.apply(user.city)
-    userMap("userType") = BsonString.apply(user.userType)
 
     userMap
