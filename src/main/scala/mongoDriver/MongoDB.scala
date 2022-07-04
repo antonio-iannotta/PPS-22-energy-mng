@@ -18,36 +18,19 @@ object MongoDB:
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
   def retrieveUsers(): ListBuffer[User] =
-    val usersCollection = MongoDB.mongoDBConnection().getCollection("users")
-    val usersList: ListBuffer[User] = ListBuffer()
-    val registeredUsers = usersCollection.find().results()
-
-    for user <- registeredUsers do
-      var userFields: ListBuffer[String] = ListBuffer()
-      for userField <- user do
-        if userField._2.isInstanceOf[BsonString] then
-          userFields += userField._2.asString().getValue
-
-      usersList += createUser(userFields)
-
-    usersList
+    var userList: ListBuffer[User] = ListBuffer()
+    MongoDB.mongoDBConnection().getCollection("users")
+      .find().results()
+      .foreach(user => userList += createUser(user.foldLeft[ListBuffer[String]](ListBuffer())(_ += _._2.asString().getValue)))
+    userList
 
   def retrieveUsages(): ListBuffer[Bill] =
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
-    val billList: ListBuffer[Bill] = ListBuffer()
-    val storedUsages = usagesCollection.find().results()
 
-    for usage <- storedUsages do
-      var usageFields: ListBuffer[String] = ListBuffer()
-      for usageField <- usage do
-        if usageField._2.isInstanceOf[BsonString] then
-          usageFields += usageField._2.asString().getValue
-
-      billList += createBill(usageFields)
-
+    var billList: ListBuffer[Bill] = ListBuffer()
+    MongoDB.mongoDBConnection().getCollection("usages")
+      .find().results()
+      .foreach(usage => billList += createBill(usage.foldLeft[ListBuffer[String]](ListBuffer())(_ += _._2.asString().getValue)))
     billList
-
-
 
   private def createBill(usages: ListBuffer[String]): Bill =
     val billID: String = LocalDateTime.now().toString
@@ -63,11 +46,9 @@ object MongoDB:
 
     Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
 
-
   def addUser(user: User): String =
     val document = Document(composeUser(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
-
 
   private def createUser(users: ListBuffer[String]): User =
     val userID: String = users(0)
@@ -78,8 +59,6 @@ object MongoDB:
 
     User(userID,password,region,city,userType)
 
-
-
   private def composeUser(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.getUserID)
@@ -89,6 +68,3 @@ object MongoDB:
     userMap("userType") = BsonString.apply(user.getUserType)
 
     userMap
-
-
-
