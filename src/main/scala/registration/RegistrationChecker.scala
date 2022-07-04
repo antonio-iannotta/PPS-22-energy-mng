@@ -65,6 +65,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     if regionCityMap(region.toLowerCase.capitalize).contains(city.toLowerCase.capitalize) then "OK"
     else "REGISTRATION_CITY_1"
 
+  
   private def checkDuplicatedUserID(userID: String): Boolean =
     val users = retrieveUsers()
     users.exists(user => user.userID == userID)
