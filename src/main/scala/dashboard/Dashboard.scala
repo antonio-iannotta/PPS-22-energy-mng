@@ -5,7 +5,7 @@ import user.User
 
 case class Dashboard(private val user: User):
   
-  def view(choise: String): Unit =
+  def view(choice: String): Unit =
 
     var exit = true
 
@@ -25,8 +25,8 @@ case class Dashboard(private val user: User):
     var selection = scala.io.StdIn.readInt()
 
     selection match
-              case 1 => user.getCost(user.getUserType)
-              case 2 => user.getUsage(user.getUserType)
+              case 1 => user.getCost(user.userType)
+              case 2 => user.getUsage(user.userType)
               case 3 => CityCostChoiceHandler.choiceHandler(user)
               case 4 => CityUsageChoiceHandler.choiceHandler(user)
               case 5 => RegionCostChoiceHandler.choiceHandler(user)
@@ -34,15 +34,15 @@ case class Dashboard(private val user: User):
 
               case 7 => println("Inserire l'anno d'interesse")
                         var year = scala.io.StdIn.readInt()
-                        user.makeIndividualPrediction(user.getUserType,year)
+                        user.makeIndividualPrediction(user.userType,year)
 
               case 8 => println("Inserire l'anno d'interesse")
                         var year = scala.io.StdIn.readInt()
-                        user.makePredictionByCity(user.getUserType,year)
+                        user.makePredictionByCity(user.userType,year)
 
               case 9 => println("Inserire l'anno d'interesse")
                         var year = scala.io.StdIn.readInt()
-                        user.makePredictionByRegion(user.getUserType,year)
+                        user.makePredictionByRegion(user.userType,year)
 
               case 10 => exit = false
 
