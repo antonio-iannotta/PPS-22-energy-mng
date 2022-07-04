@@ -1,12 +1,12 @@
-import mongoDriver.MongoDB.*
-import mongoDriver.Helpers.*
-import mongoDriver.MongoDB
+package registration
+
+import mongoDriver.{MongoDB, Helpers}
 import registration.MD5.md5HashPassword
 import user.User
 
 import java.math.BigInteger
 import java.security.MessageDigest
-import registration.RegistrationChecker
+import registration.{MD5, RegistrationChecker}
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
