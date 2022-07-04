@@ -1,8 +1,8 @@
 package main
 
-import login._
-import registration._
-import user._
+import login.Login
+import user.User
+import registration.Registration
 
 object Main extends App:
   println("Salve, cosa vuoi fare? 1)Registration o 2)Login")
