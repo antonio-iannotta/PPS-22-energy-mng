@@ -6,7 +6,7 @@ import user.User
 
 import java.math.BigInteger
 import java.security.MessageDigest
-import registration.RegistrationChecker
+import registration.{MD5, RegistrationChecker}
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
