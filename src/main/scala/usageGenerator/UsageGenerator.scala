@@ -1,5 +1,7 @@
-import mongoDriver.Helpers.*
-import mongoDriver.MongoDB.retrieveUsers
+import mongoDriver.Helpers._
+import mongoDriver.MongoDB._
+import user.User
+import org.mongodb.scala.bson.BsonString
 
 import scala.collection.mutable.*
 import scala.language.postfixOps
