@@ -1,6 +1,6 @@
 package dashboard
 
-import dashboard.choiceHandler.{CityChoiceHandler, CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler}
+import dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler}
 import user.User
 
 case class Dashboard(private val user: User):
