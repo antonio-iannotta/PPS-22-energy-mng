@@ -38,11 +38,11 @@ case class Dashboard(private val user: User):
 
               case 8 => println("Inserire l'anno d'interesse")
                         var year = scala.io.StdIn.readInt()
-                        user.makePredictionByCity(user.getUserType,year,user.getCity)
+                        user.makePredictionByCity(user.getUserType,year)
 
               case 9 => println("Inserire l'anno d'interesse")
                         var year = scala.io.StdIn.readInt()
-                        user.makePredictionByRegion(user.getUsageByRegion(user.getRegion,year,user.getRegion))
+                        user.makePredictionByRegion(user.getUserType,year)
 
               case 10 => exit = false
 
