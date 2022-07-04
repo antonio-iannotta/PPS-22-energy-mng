@@ -30,13 +30,13 @@ object Main extends App:
     println("password: ")
     val password = scala.io.StdIn.readLine()
     println("user type: ")
-    val user_type = scala.io.StdIn.readInt()
+    val userType = scala.io.StdIn.readInt()
     println("region: ")
     val region = scala.io.StdIn.readLine()
     println("city: ")
     val city = scala.io.StdIn.readLine()
 
-    Registration.signUP(userID, password, usertype, region, city)
+    Registration.signUP(userID, password, userType, region, city)
 
   def callLogin(): Option[User] =
     println("Login: inserire userID, password")
