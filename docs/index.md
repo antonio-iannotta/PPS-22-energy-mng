@@ -119,7 +119,7 @@ Operazioni centrali del sistema sono le seguenti:
 
 Di seguito è riportata l'architettura generale del sistema:
 
-![general-architecture](https://user-images.githubusercontent.com/91571686/177209217-8496d2dc-7d80-49aa-b9a3-3b382b6f0d40.png)
+![general-architecture](https://user-images.githubusercontent.com/91571686/177325417-30e7719a-b354-4d47-972b-f718562a8be4.svg)
 
 - **Registrazione**: la registrazione riceve in input i dati dell’utente quando questo vuole registrarsi al sistema. Esegue una serie di controlli di validità sui dati forniti in input come specificato nei requisiti 3.1.22 e in caso di successo registra l’utente al sistema memorizzando i dati all’interno del database degli utenti.
 - **Login**: Il login riceve in input lo UserID e la password ed esegue i controlli sul database degli utenti per verificare se lo specifico userID è presente. Nel caso in cui questo sia presente allora verifica la password e nel caso di corrispondenza consente all’utente di accedere al sistema.
