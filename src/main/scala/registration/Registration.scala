@@ -15,9 +15,9 @@ object Registration:
       case "OK" =>
         userType match
           case 0 =>
-            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city,  "private"))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "private", region.toLowerCase(), city.toLowerCase()))
           case 1 =>
-            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), region, city, "company"))
+            MongoDB.addUser(User(userID, MD5.md5HashPassword(password), "company", region.toLowerCase(), city.toLowerCase()))
         responseMessage
       case _ =>
         responseMessage
