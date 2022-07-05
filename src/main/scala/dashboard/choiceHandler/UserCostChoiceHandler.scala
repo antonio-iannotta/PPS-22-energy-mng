@@ -11,6 +11,6 @@ object UserCostChoiceHandler extends ChoiceHandler {
     
         scelta match
                case 1 => user.getCost("electricity")
-               case 2 => user.getCost("gas")
+               case 2 => user.getCost("heat")
                case 3 => user.getCost("water")
 }
