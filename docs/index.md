@@ -119,7 +119,8 @@ Operazioni centrali del sistema sono le seguenti:
 
 Di seguito è riportata l'architettura generale del sistema:
 
-![general-architecture](https://user-images.githubusercontent.com/91571686/177325584-d55e3311-7f1b-4a43-a18f-4985f3de2bf2.png)
+![general-architecture](https://user-images.githubusercontent.com/91571686/177432101-7400a2cb-9801-4ca7-ae93-4e8740dd25a1.png)
+
 
 
 - **Registrazione**: la registrazione riceve in input i dati dell’utente quando questo vuole registrarsi al sistema. Esegue una serie di controlli di validità sui dati forniti in input come specificato nei requisiti 3.1.22 e in caso di successo registra l’utente al sistema memorizzando i dati all’interno del database degli utenti.
