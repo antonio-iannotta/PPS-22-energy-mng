@@ -51,10 +51,9 @@ object UsageGenerator:
     userUsage("city") = BsonString.apply(user.city)
     userUsage("region") = BsonString.apply(user.region)
     userUsage("usageType") = BsonString.apply(usageType)
-    userUsage("usage") = BsonString.apply((Random.nextDouble()/100).toString)
-    userUsage("cost") = BsonString.apply((Random.nextDouble()/100).toString)
+    userUsage("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
+    userUsage("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
     userUsage("month") = BsonString.apply(month.toString)
     userUsage("year") = BsonString.apply(year.toString)
 
     userUsage
-    

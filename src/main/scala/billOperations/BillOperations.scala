@@ -19,9 +19,9 @@ object BillOperations:
   /*
   Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad una certa località geografica
   */
-  def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String): String =
+  def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String): LinkedHashMap[Int, Double] =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList).toString()
+    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList)
 
   /*
   Il seguente metodo effettua le previsioni per un singolo utente con riferimento ad un certo anno e con riferimento ad una certa utenza

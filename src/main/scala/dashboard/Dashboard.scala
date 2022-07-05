@@ -25,9 +25,11 @@ case class Dashboard(private val user: User):
       var selection = scala.io.StdIn.readInt()
 
       selection match
-                case 1 => UserCostChoiceHandler.choiceHandler(user)
-                case 2 => UserUsageChoiceHandler.choiceHandler(user)
-                case 3 => CityCostChoiceHandler.choiceHandler(user)
+                case 1 => println(UserCostChoiceHandler.choiceHandler(user))
+                case 2 => println(UserUsageChoiceHandler.choiceHandler(user))
+                case 3 =>
+                  val linkedHashMap = CityCostChoiceHandler.choiceHandler(user)
+                  //si lavora linked... e si torna una print decente
                 case 4 => CityUsageChoiceHandler.choiceHandler(user)
                 case 5 => RegionCostChoiceHandler.choiceHandler(user)
                 case 6 => RegionUsageChoiceHandler.choiceHandler(user)

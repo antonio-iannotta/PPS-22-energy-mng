@@ -3,7 +3,7 @@ package dashboard.choiceHandler
 import user.User
 
 object UserUsageChoiceHandler extends ChoiceHandler {
-  override def choiceHandler(user: User): Unit =
+  override def choiceHandler(user: User): String =
     println("1) per visualizzare consumi luce")
     println("2) per visualizzare consumi gas")
     println("3) per visualizzare consumi acqua")

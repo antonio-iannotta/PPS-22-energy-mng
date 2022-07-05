@@ -1,8 +1,11 @@
 package dashboard.choiceHandler
 import user.User
 
+import java.util
+import scala.collection.mutable._
+
 object CityCostChoiceHandler extends ChoiceHandler:
-  override def choiceHandler(user: User): Unit =
+  override def choiceHandler(user: User): LinkedHashMap[Int, Double]=
     println("1) Città di default")
     println("2) Città a scelta")
     val scelta = scala.io.StdIn.readInt()

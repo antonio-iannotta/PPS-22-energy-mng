@@ -1,19 +1,20 @@
 package dashboard.choiceHandler
 
 import user.User
+import scala.collection.mutable._
 
 object RegionUsageChoiceHandler extends ChoiceHandler:
-  override def choiceHandler(user: User): Unit =
+  override def choiceHandler(user: User): LinkedHashMap[Int, Double] =
     println("1) Regione di default")
     println("2) Regione a scelta")
     val scelta = scala.io.StdIn.readInt()
-        scelta match
-               case 1 => println("Inserire il consumo d'interesse")
-                         var usage = scala.io.StdIn.readLine()
-                         user.getUsageByRegion(usageType = usage)
+    scelta match
+      case 1 => println("Inserire il consumo d'interesse")
+        var usage = scala.io.StdIn.readLine()
+        user.getUsageByRegion(usageType = usage)
 
-               case 2 => println("Inserire la regione")
-                         var regioneSelected = scala.io.StdIn.readLine()
-                         println("Inserire il consumo d'interesse")
-                         var usage = scala.io.StdIn.readLine()
-                         user.getUsageByRegion(regioneSelected,usageType = usage)
+      case 2 => println("Inserire la regione")
+        var regioneSelected = scala.io.StdIn.readLine()
+        println("Inserire il consumo d'interesse")
+        var usage = scala.io.StdIn.readLine()
+        user.getUsageByRegion(regioneSelected, usageType = usage)
