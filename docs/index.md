@@ -140,10 +140,10 @@ Energy Management è un’applicazione con un forte flusso informativo, in cui �
 
 La scelta di questo pattern è stata dettata dalla possibilità fornita dallo stesso di poter posizionare le varie componenti precedentemente elencate in un livello specifico.
 
-- **Data layer**: in questo livello troviamo il database degli utenti, il database dei consumi, il componente relativo alla registrazione, quello relativo al login e quello relativo al generatore dei consumi.
+- **Data layer**: in questo livello troviamo il database degli utenti, il database dei consumi, il componente relativo alla registrazione,il componente relativo alla gestione degli errori della registrazione e del login, il componente relativo al login  e quello relativo al generatore dei consumi.
 - **Business logic layer**: in questo livello troviamo il componente dedito alla costruzione delle bollette
 - **Application logic layer**: in questo layer è posizionato il componente predisposto alle operazioni sulle bollette.
-- **Presentation layer**:  in questo livello è posizionato il componente Dashboard che consente l’interazione con l’utente per le specifiche operazioni.
+- **Presentation layer**:  in questo livello è posizionato il componente Dashboard ed il componente Main che consente l’interazione con l’utente per le specifiche operazioni.
 
 ## Design di dettaglio
 
