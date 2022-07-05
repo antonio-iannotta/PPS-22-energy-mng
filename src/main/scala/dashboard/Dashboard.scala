@@ -10,17 +10,17 @@ case class Dashboard(private val user: User):
     var exit = true
 
     while(exit)
-    println("Selezionare voce desiderata:")
-    println("1) visualizza costi utente")
-    println("2) visualizza utilizzi utente")
-    println("3) visualizza costi città")
-    println("4) visualizza utilizzi città")
-    println("5) visualizza costi regione")
-    println("6) visualizza utilizzi regione")
-    println("7) previsione individuale")
-    println("8) previsione città")
-    println("9) previsione regione")
-    println("10) exit")
+          println("Selezionare voce desiderata:")
+          println("1) visualizza costi utente")
+          println("2) visualizza utilizzi utente")
+          println("3) visualizza costi città")
+          println("4) visualizza utilizzi città")
+          println("5) visualizza costi regione")
+          println("6) visualizza utilizzi regione")
+          println("7) previsione individuale")
+          println("8) previsione città")
+          println("9) previsione regione")
+          println("10) exit")
 
     var selection = scala.io.StdIn.readInt()
 
