@@ -25,8 +25,8 @@ case class Dashboard(private val user: User):
       var selection = scala.io.StdIn.readInt()
 
       selection match
-                case 1 => UserCostChoiceHandler(user)
-                case 2 => UserUsageChoiceHandler(user)
+                case 1 => UserCostChoiceHandler.choiceHandler(user)
+                case 2 => UserUsageChoiceHandler.choiceHandler(user)
                 case 3 => CityCostChoiceHandler.choiceHandler(user)
                 case 4 => CityUsageChoiceHandler.choiceHandler(user)
                 case 5 => RegionCostChoiceHandler.choiceHandler(user)
