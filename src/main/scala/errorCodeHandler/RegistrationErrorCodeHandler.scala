@@ -13,4 +13,5 @@ object RegistrationErrorCodeHandler extends ErrorCodeHandler :
       case "REGISTRATION_USERTYPE_1" => "Il campo USERTYPE inserito non è privato o azienda"
       case "REGISTRATION_REGION_1" => "Il campo REGION inserito e' vuoto"
       case "REGISTRATION_CITY_1" => "Il campo CITY non presente nella regione"
-      case _ => "OK"
+      case "REGISTRATION_CITY2" => "Il campo REGION non presente tra le regioni possibili"
+      case  => "OK"

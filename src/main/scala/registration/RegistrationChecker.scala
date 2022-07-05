@@ -29,7 +29,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
   regionCityMap("VAC") = Regions.VACities
   regionCityMap("Veneto") = Regions.VenetoCities
 
-  def checkFields(userID: String, password: String, userType: Int, region: String, city: String): String =
+  def checkFields(): String =
 
     val userCheck = RegistrationErrorCodeHandler.errorCodeHandler(checkUserID(userID))
     val passwordCheck = RegistrationErrorCodeHandler.errorCodeHandler(checkPassword(password))
@@ -62,10 +62,13 @@ class RegistrationChecker(private val userID: String, private val password: Stri
 
 
   private def checkCityRegionMatch(city: String, region: String): String =
-    if regionCityMap(region.toLowerCase.capitalize).contains(city.toLowerCase.capitalize) then "OK"
-    else "REGISTRATION_CITY_1"
+    try
+      if regionCityMap(region.toLowerCase.capitalize).contains(city.toLowerCase.capitalize) then "OK"
+      else "REGISTRATION_CITY_1"
+    catch
+      case _ : NoSuchElementException => "REGISTRATION_CITY_2"
 
-  
+
   private def checkDuplicatedUserID(userID: String): Boolean =
     val users = retrieveUsers()
     users.exists(user => user.userID == userID)

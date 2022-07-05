@@ -10,7 +10,7 @@ import registration.{MD5, RegistrationChecker}
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
-    val responseMessage = RegistrationChecker(userID, password, userType, region, city).checkFields(userID, password, userType, region, city)
+    val responseMessage = RegistrationChecker(userID, password, userType, region, city).checkFields()
     responseMessage match
       case "OK" =>
         userType match
