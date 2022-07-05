@@ -11,6 +11,6 @@ object UserUsageChoiceHandler extends ChoiceHandler {
 
     scelta match
       case 1 => user.getUsage("electricity")
-      case 2 => user.getUsage("gas")
+      case 2 => user.getUsage("heat")
       case 3 => user.getUsage("water")
 }
