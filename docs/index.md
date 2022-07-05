@@ -293,9 +293,9 @@ Implementazione dei seguenti componenti:
 - **object** ErrorCodeHandler
 - **object** MD5
 - **object** Main
-- class RegistrationChecker
-- class RegistrationTest
-- class PasswordTest
+- **class** RegistrationChecker
+- **class** RegistrationTest
+- **class** PasswordTest
 
 ### Registration
 Il componente Registration è stato implementato come un object in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
