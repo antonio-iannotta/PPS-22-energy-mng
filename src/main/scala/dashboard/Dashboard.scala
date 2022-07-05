@@ -5,7 +5,7 @@ import user.User
 
 case class Dashboard(private val user: User):
   
-  def view: Unit =
+  def view(): Unit =
 
     var exit = true
 

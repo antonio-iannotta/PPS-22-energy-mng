@@ -1,5 +1,6 @@
 package main
 
+import dashboard.Dashboard
 import login.Login
 import user.User
 import registration.Registration
@@ -19,7 +20,8 @@ object Main extends App:
             case _ => println(responseMessage)
 
         case 2 =>
-          callLogin()
+          val user = callLogin()
+          Dashboard(user.get).view()
     catch
       case  _: NumberFormatException => println("Input non valido.")
 
