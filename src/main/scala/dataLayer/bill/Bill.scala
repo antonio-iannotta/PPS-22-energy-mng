@@ -1,4 +1,4 @@
-package bill
+package dataLayer.bill
 
 class Bill(private val _billID: String, private val _userID: String, private val _userType: String,
            private val _usageType: String, private val _usage: Double, private val _cost: Double,

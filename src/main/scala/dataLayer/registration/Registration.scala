@@ -1,4 +1,4 @@
-package registration
+package dataLayer.registration
 
 import mongoDriver.{MongoDB, Helpers}
 import registration.MD5.md5HashPassword

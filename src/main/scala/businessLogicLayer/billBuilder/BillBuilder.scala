@@ -1,4 +1,4 @@
-package billBuilder
+package businessLogicLayer.billBuilder
 
 import scala.collection.mutable.ListBuffer
 import bill.Bill

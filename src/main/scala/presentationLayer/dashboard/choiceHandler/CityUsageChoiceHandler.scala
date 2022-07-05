@@ -1,4 +1,4 @@
-package dashboard.choiceHandler
+package presentationLayer.dashboard.choiceHandler
 
 import user.User
 import scala.collection.mutable._

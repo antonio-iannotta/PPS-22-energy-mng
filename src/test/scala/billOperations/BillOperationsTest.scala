@@ -1,4 +1,4 @@
-package billOperations
+package applicationLogicLayer.billOperations
 
 import org.scalatest.funsuite.AnyFunSuite
 
@@ -19,6 +19,10 @@ class BillOperationsTest extends AnyFunSuite:
     val result = BillOperations.getUsageOrCostByLocation("private","water","Emilia-Romagna","region", "usage")
     assert(!result.isEmpty)
     println(result)
+  }
+  
+  test("Usage for a certain location is not present!") {
+    assert(BillOperations.getUsageOrCostByLocation("private","water","Lombardia","region", "usage").isEmpty)
   }
 
   test("Usage and cost are not supposed to change!") {

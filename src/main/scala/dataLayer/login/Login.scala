@@ -1,4 +1,4 @@
-package login
+package dataLayer.login
 
 import mongoDriver.MongoDB._
 import registration.MD5

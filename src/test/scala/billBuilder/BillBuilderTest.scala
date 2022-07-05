@@ -1,4 +1,4 @@
-package billBuilder
+package businessLogicLayer.billBuilder
 
 import billBuilder.BillBuilder
 import org.scalatest.funsuite.AnyFunSuite

@@ -1,4 +1,4 @@
-package mongoDriver
+package dataLayer.mongoDriver
 
 import org.mongodb.scala.{Document, Observable, ObservableFuture}
 

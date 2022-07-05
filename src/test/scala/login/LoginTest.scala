@@ -1,4 +1,4 @@
-package login
+package dataLayer.login
 
 import org.scalatest.funsuite.AnyFunSuite
 

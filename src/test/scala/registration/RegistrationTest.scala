@@ -1,4 +1,4 @@
-package registration
+package dataLayer.registration
 import registration.Registration
 import org.scalatest.funsuite.AnyFunSuite
 

@@ -1,16 +1,12 @@
-package mongoDriver
+package dataLayer.mongoDriver
 
-import org.mongodb.scala._
+import org.mongodb.scala.*
 import org.mongodb.scala.bson.BsonString
-import user.User
-import bill.Bill
-import collection.mutable._
 
-import scala.collection.mutable._
-import mongoDriver.Helpers._
-
+import collection.mutable.{LinkedHashMap, *}
 import java.time.{LocalDate, LocalDateTime}
 import scala.collection.mutable
+import scala.util.Random
 
 object MongoDB:
 
@@ -45,11 +41,13 @@ object MongoDB:
     val year = usages(9).asInstanceOf[BsonString].asString().getValue.toInt
 
     Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
+    
 
   def addUser(user: User): String =
-    val document = Document(composeUser(user))
+    val document = Document(composeUserMap(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
 
+  
   private def createUser(users: ListBuffer[Any]): User =
 
     val userID: String = users(1).asInstanceOf[BsonString].asString().getValue
@@ -60,7 +58,8 @@ object MongoDB:
 
     User(userID,password,userType,region,city)
 
-  private def composeUser(user: User): LinkedHashMap[String, BsonString] =
+  
+  private def composeUserMap(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.userID)
     userMap("password") = BsonString.apply(user.password)
@@ -69,3 +68,18 @@ object MongoDB:
     userMap("city") = BsonString.apply(user.city)
 
     userMap
+
+  def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
+    val usageMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
+
+    userUsage("userID") = BsonString.apply(user.userID)
+    userUsage("userType") = BsonString.apply(user.userType)
+    userUsage("city") = BsonString.apply(user.city)
+    userUsage("region") = BsonString.apply(user.region)
+    userUsage("usageType") = BsonString.apply(usageType)
+    userUsage("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
+    userUsage("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
+    userUsage("month") = BsonString.apply(month.toString)
+    userUsage("year") = BsonString.apply(year.toString)
+
+    usageMap

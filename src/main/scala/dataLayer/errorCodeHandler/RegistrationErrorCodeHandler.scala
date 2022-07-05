@@ -1,4 +1,4 @@
-package errorCodeHandler
+package dataLayer.errorCodeHandler 
 
 object RegistrationErrorCodeHandler extends ErrorCodeHandler :
   def errorCodeHandler(errorCode: String): String =

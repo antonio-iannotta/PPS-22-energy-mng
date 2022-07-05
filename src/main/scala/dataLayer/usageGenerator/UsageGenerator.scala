@@ -1,6 +1,6 @@
-import mongoDriver.Helpers.*
-import mongoDriver.MongoDB
-import user.User
+package dataLayer.usageGenerator
+
+import dataLayer.mongoDriver.MongoDB
 import org.mongodb.scala.bson.{BsonString, Document}
 
 import scala.collection.mutable.*
@@ -17,7 +17,7 @@ object UsageGenerator:
 
     while true do
       MongoDB.retrieveUsers().foreach(user => usageTypes.foreach(
-        usageType => usagesCollection.insertOne(Document(composeUsageMap(user,usageType,month,year))).results()
+        usageType => usagesCollection.insertOne(Document(MongoDB.composeUsageMap(user,usageType,month,year))).results()
       ))
 
       month match
@@ -43,17 +43,4 @@ object UsageGenerator:
           case 0 => 1970
           case _ => usagesCollection.find().results().last("year").asString().getValue.toInt
 
-  private def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
-    val userUsage: LinkedHashMap[String, BsonString] = LinkedHashMap()
-
-    userUsage("userID") = BsonString.apply(user.userID)
-    userUsage("userType") = BsonString.apply(user.userType)
-    userUsage("city") = BsonString.apply(user.city)
-    userUsage("region") = BsonString.apply(user.region)
-    userUsage("usageType") = BsonString.apply(usageType)
-    userUsage("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
-    userUsage("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
-    userUsage("month") = BsonString.apply(month.toString)
-    userUsage("year") = BsonString.apply(year.toString)
-
-    userUsage
+  

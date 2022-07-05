@@ -1,4 +1,4 @@
-package dashboard
+package presentationLayer.dashboard
 
 import org.scalatest.funsuite.AnyFunSuite
 

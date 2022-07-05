@@ -1,4 +1,4 @@
-package registration
+package dataLayer.registration
 
 import errorCodeHandler.RegistrationErrorCodeHandler
 import mongoDriver.MongoDB.retrieveUsers

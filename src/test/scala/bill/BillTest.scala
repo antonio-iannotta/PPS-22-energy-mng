@@ -1,4 +1,4 @@
-package bill
+package dataLayer.bill
 
 import org.scalatest.funsuite.AnyFunSuite
 import bill.Bill

@@ -1,4 +1,4 @@
-package registration
+package dataLayer.registration
 
 import java.math.BigInteger
 import java.security.MessageDigest

@@ -1,4 +1,4 @@
-package registration
+package dataLayer.registration
 
 object Regions:
 

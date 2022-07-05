@@ -1,4 +1,4 @@
-package dashboard
+package presentationLayer.dashboard
 
 import dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler, UserCostChoiceHandler, UserUsageChoiceHandler}
 import user.User

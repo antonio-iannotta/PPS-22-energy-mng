@@ -1,4 +1,4 @@
-package user
+package dataLayer.user
 
 import org.scalatest.funsuite.AnyFunSuite
 
