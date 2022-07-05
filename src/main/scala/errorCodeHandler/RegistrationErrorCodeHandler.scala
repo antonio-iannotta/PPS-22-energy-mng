@@ -14,4 +14,4 @@ object RegistrationErrorCodeHandler extends ErrorCodeHandler :
       case "REGISTRATION_REGION_1" => "Il campo REGION inserito e' vuoto"
       case "REGISTRATION_CITY_1" => "Il campo CITY non presente nella regione"
       case "REGISTRATION_CITY2" => "Il campo REGION non presente tra le regioni possibili"
-      case  => "OK"
+      case _ => "OK"
