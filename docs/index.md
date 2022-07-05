@@ -297,12 +297,12 @@ Implementazione dei seguenti componenti:
 - **class** RegistrationTest
 - **class** PasswordTest
 
-### Registration
+#### Registration
 Il componente Registration è stato implementato come un object in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
 - signUp(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il RegistrationChecker,  permette di svolgere l’operazione di registrazione generando una connessione al database;
 - passwordHash(): questo metodo svolge la funzione di hash della password che lo user vuole utilizzare.
 
-### RegistrationChecker
+#### RegistrationChecker
 l componente RegistrationChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi della registrazione. E’ presente una mappa key/value (LinkedHashMap) utilizzata per associare ad ogni città la sua relativa regione.
 
 I metodi che espone sono:
@@ -312,18 +312,18 @@ I metodi che espone sono:
 - checkUserType(): ritorna una stringa identifica se l’utente è private(0) oppure company(1) e restituisce il messaggio di validazione;
 - checkCityRegionMatch(): ritorna una stringa che verifica il corretto collegamento tra la città e la sua relativa regione e restituisce il messaggio di validazione
 
-### ErrorCodeHandler
+#### ErrorCodeHandler
 Il componente ErrorCodeHandler è stato implementato come un object, il cui compito è quello di  associare ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio, per rendere una più chiara individuazione dell’errore. Qualora non ci dovessero essere errori, l’ ErrorCodeHandler presenterà un messaggio di corretta validazione del campo.
 
-### Regions
+#### Regions
 Il componente Regions è stato implementato come un object,  il cui obbiettivo è quello di associare ad ogni città italiana la relativa regione.
 
-### MD5
+#### MD5
 Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato scelto di utilizzare un **object** per incapsularne il comportamento. Il metodo esposto dal componente MD5 è:
 
 - md5HashPassword(): questo metodo ha come valore in input una stringa, cioè la password, e restituisce come valore una stringa, vale a dire l’hash code della password.
 
-### Main
+#### Main
 Il componente Main è stato implementato come un **object**. Al suo interno si avranno i seguenti metodi:
 - callRegistration(): metodo che si occupa di dover chiamare la Registration,
 - callLogin(): metodo che si occupa di dover chiamare il Login.
