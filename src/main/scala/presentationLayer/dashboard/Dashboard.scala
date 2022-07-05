@@ -10,7 +10,7 @@ case class Dashboard(private val user: User):
     var exit = true
 
     while(exit)
-      println("Benvenuto " + user.userID + "! Seleziona l'operazione desiderata:")
+      println("\nBenvenuto " + user.userID + "! Seleziona l'operazione desiderata:")
       println("1) Visualizza costi utente")
       println("2) Visualizza utilizzi utente")
       println("3) Visualizza costi città")
