@@ -287,6 +287,48 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 ### Andrea Catani
 
 ### Demetrio Andriani
+Implementazione dei seguenti componenti:
+- **object** Registration
+- **object** Regions
+- **object** ErrorCodeHandler
+- **object** MD5
+- **object** Main
+- class RegistrationChecker
+- class RegistrationTest
+- class PasswordTest
+
+### Registration
+Il componente Registration è stato implementato come un object in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
+- signUp(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il RegistrationChecker,  permette di svolgere l’operazione di registrazione generando una connessione al database;
+- passwordHash(): questo metodo svolge la funzione di hash della password che lo user vuole utilizzare.
+
+### RegistrationChecker
+l componente RegistrationChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi della registrazione. E’ presente una mappa key/value (LinkedHashMap) utilizzata per associare ad ogni città la sua relativa regione.
+
+I metodi che espone sono:
+- checkFields(): ritorna una stringa che identifica tutti i possibili errori presenti nei campi di registrazione, caso contrario restituisce un messaggio di corretta validazione di tutti i campi;
+- checkUserID(): ritorna una stringa che identifica tutti i possibili errori relativi al campo dello userID(blank, minore di 6 caratteri, superiore a 20 caratteri), caso contrario restituisce un messaggio di corretta validazione;
+- checkPassword():  ritorna una stringa che identifica tutti i possibili errori relativi al campo della password (blank, minore di 6 caratteri, superiore a 20 caratteri), caso contrario restituisce il messaggio di validazione;
+- checkUserType(): ritorna una stringa identifica se l’utente è private(0) oppure company(1) e restituisce il messaggio di validazione;
+- checkCityRegionMatch(): ritorna una stringa che verifica il corretto collegamento tra la città e la sua relativa regione e restituisce il messaggio di validazione
+
+### ErrorCodeHandler
+Il componente ErrorCodeHandler è stato implementato come un object, il cui compito è quello di  associare ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio, per rendere una più chiara individuazione dell’errore. Qualora non ci dovessero essere errori, l’ ErrorCodeHandler presenterà un messaggio di corretta validazione del campo.
+
+### Regions
+Il componente Regions è stato implementato come un object,  in cui obbiettivo è quello di associare ad ogni città italiana la relativa regione.
+
+### MD5
+Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato scelto di utilizzare un **object** per incapsularne il comportamento. Il metodo esposto dal componente MD5 è:
+
+- md5HashPassword(): questo metodo ha come valore in input una stringa, cioè la password, e restituisce come valore una stringa, vale a dire l’hash code della password.
+
+### Main
+Il componente Main è stato implementato come un object. Al suo interno si avranno i seguenti metodi:
+- callRegistration(): metodo che si occupa di dover chiamare la Registration,
+- callLogin(): metodo che si occupa di dover chiamare il Login.
+
+
 
 ### Carlo Di Raddo
 
