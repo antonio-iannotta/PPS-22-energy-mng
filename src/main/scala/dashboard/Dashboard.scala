@@ -1,6 +1,6 @@
 package dashboard
 
-import dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler}
+import dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler, UserCostChoiceHandler, UserUsageChoiceHandler}
 import user.User
 
 case class Dashboard(private val user: User):
@@ -25,8 +25,8 @@ case class Dashboard(private val user: User):
       var selection = scala.io.StdIn.readInt()
 
       selection match
-                case 1 => user.getCost(user.userType)
-                case 2 => user.getUsage(user.userType)
+                case 1 => UserCostChoiceHandler(user)
+                case 2 => UserUsageChoiceHandler(user)
                 case 3 => CityCostChoiceHandler.choiceHandler(user)
                 case 4 => CityUsageChoiceHandler.choiceHandler(user)
                 case 5 => RegionCostChoiceHandler.choiceHandler(user)
