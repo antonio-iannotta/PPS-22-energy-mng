@@ -12,9 +12,8 @@ class LoginChecker(userID: String, password: String):
     val passwordCheck = LoginErrorCodeHandler.errorCodeHandler(checkPassword(password))
     val checkResponseList = List(userCheck, passwordCheck).filter(str => str != "OK")
 
-    checkResponseList match
-      case response if response.isEmpty => "0K"
-      case _ => checkResponseList.head
+    if checkResponseList.isEmpty then "OK"
+    else checkResponseList.head
 
 
   private def checkUserID(userID: String): String =
