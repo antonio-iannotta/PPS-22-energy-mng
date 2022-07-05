@@ -316,7 +316,7 @@ I metodi che espone sono:
 Il componente ErrorCodeHandler è stato implementato come un object, il cui compito è quello di  associare ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio, per rendere una più chiara individuazione dell’errore. Qualora non ci dovessero essere errori, l’ ErrorCodeHandler presenterà un messaggio di corretta validazione del campo.
 
 ### Regions
-Il componente Regions è stato implementato come un object,  in cui obbiettivo è quello di associare ad ogni città italiana la relativa regione.
+Il componente Regions è stato implementato come un object,  il cui obbiettivo è quello di associare ad ogni città italiana la relativa regione.
 
 ### MD5
 Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato scelto di utilizzare un **object** per incapsularne il comportamento. Il metodo esposto dal componente MD5 è:
