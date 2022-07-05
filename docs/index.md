@@ -324,7 +324,7 @@ Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato s
 - md5HashPassword(): questo metodo ha come valore in input una stringa, cioè la password, e restituisce come valore una stringa, vale a dire l’hash code della password.
 
 ### Main
-Il componente Main è stato implementato come un object. Al suo interno si avranno i seguenti metodi:
+Il componente Main è stato implementato come un **object**. Al suo interno si avranno i seguenti metodi:
 - callRegistration(): metodo che si occupa di dover chiamare la Registration,
 - callLogin(): metodo che si occupa di dover chiamare il Login.
 
