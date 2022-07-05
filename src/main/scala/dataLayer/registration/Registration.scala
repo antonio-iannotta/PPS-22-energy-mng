@@ -1,8 +1,8 @@
 package dataLayer.registration
 
-import mongoDriver.{MongoDB, Helpers}
-import registration.MD5.md5HashPassword
-import user.User
+import dataLayer.mongoDriver.{MongoDB, Helpers}
+import dataLayer.registration.MD5.md5HashPassword
+import dataLayer.user.User
 
 import java.math.BigInteger
 import java.security.MessageDigest

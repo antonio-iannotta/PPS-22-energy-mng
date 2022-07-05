@@ -1,6 +1,6 @@
 package businessLogicLayer.billBuilder
 
-import billBuilder.BillBuilder
+import businessLogicLayer.billBuilder.BillBuilder
 import org.scalatest.funsuite.AnyFunSuite
 
 class BillBuilderTest extends AnyFunSuite:

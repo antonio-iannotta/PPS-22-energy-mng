@@ -1,10 +1,9 @@
 package applicationLogicLayer.billOperations
 
 import scala.collection.mutable.LinkedHashMap
-import bill.Bill
-import billBuilder.BillBuilder
+import dataLayer.bill.Bill
+import businessLogicLayer.billBuilder.BillBuilder
 import collection.mutable.ListBuffer
-
 import scala.util.Random
 
 object BillOperations:

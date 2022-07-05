@@ -1,6 +1,6 @@
 package presentationLayer.dashboard.choiceHandler
 
-import user.User
+import dataLayer.user.User
 
 trait ChoiceHandler:
   def choiceHandler(user:User) : Any

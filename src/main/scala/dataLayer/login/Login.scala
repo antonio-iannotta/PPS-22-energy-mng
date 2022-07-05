@@ -1,8 +1,8 @@
 package dataLayer.login
 
-import mongoDriver.MongoDB._
-import registration.MD5
-import user.User
+import dataLayer.mongoDriver.MongoDB._
+import dataLayer.registration.MD5
+import dataLayer.user.User
 
 object Login:
   def signIN(userID: String, password: String): Option[User] =

@@ -1,6 +1,6 @@
 package dataLayer.registration
 
-import registration.MD5.md5HashPassword
+import dataLayer.registration.MD5.md5HashPassword
 import sun.security.provider.MD5
 import org.scalatest.funsuite.AnyFunSuite
 

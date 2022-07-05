@@ -1,6 +1,6 @@
 package presentationLayer.dashboard.choiceHandler
 
-import user.User
+import dataLayer.user.User
 
 object UserCostChoiceHandler extends ChoiceHandler {
   override def choiceHandler(user: User): String =

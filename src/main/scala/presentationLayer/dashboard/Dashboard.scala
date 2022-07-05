@@ -1,7 +1,7 @@
 package presentationLayer.dashboard
 
-import dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler, UserCostChoiceHandler, UserUsageChoiceHandler}
-import user.User
+import presentationLayer.dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler, UserCostChoiceHandler, UserUsageChoiceHandler}
+import dataLayer.user.User
 
 case class Dashboard(private val user: User):
 

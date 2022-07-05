@@ -2,7 +2,6 @@ package dataLayer.usageGenerator
 
 import dataLayer.mongoDriver.MongoDB
 import org.mongodb.scala.bson.{BsonString, Document}
-
 import scala.collection.mutable.*
 import scala.language.postfixOps
 import scala.util.Random

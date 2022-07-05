@@ -1,9 +1,9 @@
 package presentationLayer.main
 
-import dashboard.Dashboard
-import login.Login
-import user.User
-import registration.Registration
+import presentationLayer.dashboard.Dashboard
+import dataLayer.login.Login
+import dataLayer.user.User
+import dataLayer.registration.Registration
 
 object Main extends App :
 

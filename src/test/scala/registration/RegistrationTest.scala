@@ -1,5 +1,6 @@
 package dataLayer.registration
-import registration.Registration
+
+import dataLayer.registration.Registration
 import org.scalatest.funsuite.AnyFunSuite
 
 class RegistrationTest extends AnyFunSuite:

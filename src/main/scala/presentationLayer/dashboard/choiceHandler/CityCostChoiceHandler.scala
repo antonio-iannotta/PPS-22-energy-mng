@@ -1,6 +1,6 @@
 package presentationLayer.dashboard.choiceHandler
-import user.User
 
+import dataLayer.user.User
 import java.util
 import scala.collection.mutable._
 

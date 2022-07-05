@@ -1,6 +1,6 @@
 package dataLayer.user
 
-import billOperations.BillOperations
+import applicationLogicLayer.billOperations.BillOperations
 
 import scala.collection.mutable._
 

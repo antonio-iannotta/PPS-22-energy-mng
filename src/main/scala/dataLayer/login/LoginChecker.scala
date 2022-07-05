@@ -1,7 +1,7 @@
 package dataLayer.login
 
-import errorCodeHandler.LoginErrorCodeHandler
-import user.User
+import dataLayer.errorCodeHandler.LoginErrorCodeHandler
+import dataLayer.user.User
 
 import scala.collection.mutable.LinkedHashMap
 
