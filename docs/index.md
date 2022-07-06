@@ -299,7 +299,7 @@ Implementazione dei seguenti componenti:
 - **class** PasswordTest
 
 #### Registration
-Il componente Registration è stato implementato come un object in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
+Il componente Registration è stato implementato come un **object** in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
 - signUp(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il RegistrationChecker,  permette di svolgere l’operazione di registrazione generando una connessione al database;
 - passwordHash(): questo metodo svolge la funzione di hash della password che lo user vuole utilizzare.
 
