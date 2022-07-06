@@ -3,10 +3,13 @@ package dataLayer.mongoDriver
 import org.mongodb.scala.*
 import org.mongodb.scala.bson.BsonString
 
-import collection.mutable.{LinkedHashMap, *}
+
 import java.time.{LocalDate, LocalDateTime}
-import scala.collection.mutable
+import dataLayer.bill.{Bill}
+import dataLayer.user.{User}
+import scala.collection.mutable.{LinkedHashMap, ListBuffer}
 import scala.util.Random
+import dataLayer.mongoDriver.Helpers._
 
 object MongoDB:
 
@@ -72,14 +75,14 @@ object MongoDB:
   def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
     val usageMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
 
-    userUsage("userID") = BsonString.apply(user.userID)
-    userUsage("userType") = BsonString.apply(user.userType)
-    userUsage("city") = BsonString.apply(user.city)
-    userUsage("region") = BsonString.apply(user.region)
-    userUsage("usageType") = BsonString.apply(usageType)
-    userUsage("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
-    userUsage("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
-    userUsage("month") = BsonString.apply(month.toString)
-    userUsage("year") = BsonString.apply(year.toString)
+    usageMap("userID") = BsonString.apply(user.userID)
+    usageMap("userType") = BsonString.apply(user.userType)
+    usageMap("city") = BsonString.apply(user.city)
+    usageMap("region") = BsonString.apply(user.region)
+    usageMap("usageType") = BsonString.apply(usageType)
+    usageMap("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
+    usageMap("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
+    usageMap("month") = BsonString.apply(month.toString)
+    usageMap("year") = BsonString.apply(year.toString)
 
     usageMap
