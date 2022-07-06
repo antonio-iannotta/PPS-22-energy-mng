@@ -34,7 +34,7 @@ class UtilsTest extends AnyFunSuite:
   for month <- Range(1,13) do
     for year <- Range(2000,2005) do
       for usageType <- List("water", "heat", "electricity") do
-        billListTest += Bill(LocalDateTime.now().toString, "antonio", "private", usageType, Random.between(100.0, 500.0), Random.between(100.0, 500.0), month, year, "latina", "lazio")
+        billListTest += Bill(LocalDateTime.now().toString, "andrea", "private", usageType, Random.between(100.0, 500.0), Random.between(100.0, 500.0), month, year, "latina", "lazio")
 
 
 
@@ -148,8 +148,89 @@ class UtilsTest extends AnyFunSuite:
     assert(testMap.values.head.isNaN)
   }
 
+  test("fillUsageCostMapByLocation success scenario") {
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "private", "electricity", "city", "milano", billListTest)
+    fillUsageCostMapByLocation(testMap, "electricity", "usage", "private", "city", "milano", billListTest)
+    assert(!testMap.isEmpty)
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "private", "electricity", "region", "lazio", billListTest)
+    fillUsageCostMapByLocation(testMap, "electricity", "cost", "private", "region", "lazio", billListTest)
+    assert(!testMap.isEmpty)
+  }
 
+  test("fillUsageCostMapByLocation fail scenario") {
+    //Caso in cui il tipo di utente è una azienda. Questo test fallirà dal momento in cui non c'è nessuna bolletta relativa ad un'azienda.
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "company", "electricity", "city", "milano", billListTest)
+    fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "city", "milano", billListTest)
+    assert(testMap.isEmpty)
 
+    //Caso in cui il tipo di utenza inserita non esiste
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "company", "gas", "city", "milano", billListTest)
+    fillUsageCostMapByLocation(testMap, "gas", "usage", "company", "city", "milano", billListTest)
+    assert(testMap.isEmpty)
 
+    //Caso in cui non c'è alcuna bolletta relativa ad una specifica città
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "company", "electricity", "city", "bologna", billListTest)
+    fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "city", "bologna", billListTest)
+    assert(testMap.isEmpty)
+
+    //Caso in cui non c'è alcuna bolletta relativa ad una certa regione
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "company", "electricity", "region", "veneto", billListTest)
+    fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "region", "veneto", billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("getBillsByUserIDAndUsageType success scenario") {
+    assert(getBillsByUserIDAndUsageType("antonio", "electricity", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("antonio", "heat", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("antonio", "water", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("andrea", "electricity", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("andrea", "water", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("andrea", "heat", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("carlo", "water", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("carlo", "heat", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("carlo", "electricity", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("demetrio", "water", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("demetrio", "heat", billListTest).nonEmpty)
+    assert(getBillsByUserIDAndUsageType("demetrio", "electricity", billListTest).nonEmpty)
+  }
+
+  test("getBillsByUserIDAndUsageType fail scenario") {
+    //Caso in cui lo UserID sia errato
+    assert(getBillsByUserIDAndUsageType("antonio1", "water", billListTest).isEmpty)
+    //Caso in cui il tipo di utenza non sia corretto
+    assert(getBillsByUserIDAndUsageType("antonio", "gas", billListTest).isEmpty)
+  }
+
+  test("getBillsByCityOrRegion success scenario") {
+    //Caso in cui la città inserita sia presente nella lista delle bollette
+    assert(getBillsByCityOrRegion("private", "electricity", "city", "milano", billListTest).nonEmpty)
+    // Caso in cui la regione inserita sia presente nella lista delle bollette
+    assert(getBillsByCityOrRegion("private", "electricity", "region", "lombardia", billListTest).nonEmpty)
+  }
+
+  test("getBillsByCityOrRegion fail scenario") {
+    //Caso in cui la città non sia presente nella lista delle bollette
+    assert(getBillsByCityOrRegion("private", "electricity", "city", "bologna", billListTest).isEmpty)
+    //Caso in cui la regione non sia presente nella lista delle bollette
+    assert(getBillsByCityOrRegion("private", "electricity", "region", "liguria", billListTest).isEmpty)
+    //Caso in cui la tipologia di utente inserita non sia corretta
+    assert(getBillsByCityOrRegion("azienda", "electricity", "city", "milano", billListTest).isEmpty)
+    //Caso in cui la tipologia di utenza inserita non sia una tra quelle valide
+    assert(getBillsByCityOrRegion("private", "gas", "city", "milano", billListTest).isEmpty)
+  }
+  
+  test("getMonthlyAverageUsageOrCost success scenario") {
+    
+  }
+  
+  test("getMonthlyAverageUsageOrCost fail scenario") {
+    
+  }
 
 
