@@ -226,11 +226,12 @@ class UtilsTest extends AnyFunSuite:
   }
   
   test("getMonthlyAverageUsageOrCost success scenario") {
-    
+    billListTest = ListBuffer(Bill("1","antonio","private","electricity",10,20,1,2020,"milano","lombardia"),
+      Bill("2","marco","private","electricity",20,30,1,2020,"milano","lombardia"))
+
+    assert(getMonthlyAverageUsageOrCost("private","electricity","city","milano",billListTest,"usage",2020,1) == 15)
+    assert(getMonthlyAverageUsageOrCost("private","electricity","city","milano",billListTest,"cost",2020,1) == 25)
   }
-  
-  test("getMonthlyAverageUsageOrCost fail scenario") {
-    
-  }
+
 
 
