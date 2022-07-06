@@ -25,12 +25,12 @@ case class Dashboard(private val user: User):
       val selection = scala.io.StdIn.readLine()
 
       selection match
-        case "1" => println(ChoiceHandler.choiceHandler(user,1))
-        case "2" => println(ChoiceHandler.choiceHandler(user,2))
-        case "3" => ChoiceHandler.choiceHandler(user,3).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "4" => ChoiceHandler.choiceHandler(user,4).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
-        case "5" => ChoiceHandler.choiceHandler(user,5).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "6" => ChoiceHandler.choiceHandler(user,6).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "1" => //println(ChoiceHandler.choiceHandler(user,))
+        case "2" => //println(ChoiceHandler.choiceHandler(user,))
+        case "3" => ChoiceHandler.choiceHandler(user, "cost", "region").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "4" => ChoiceHandler.choiceHandler(user, "usage", "city").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "5" => ChoiceHandler.choiceHandler(user, "cost", "region").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "6" => ChoiceHandler.choiceHandler(user, "usage", "city").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
         case "7" => println("Inserire l'anno d'interesse:")
           try
             val year = scala.io.StdIn.readInt()
