@@ -1,6 +1,6 @@
 package applicationLogicLayer.billOperations
 
-import applicationLogicLayer.billOperations.BillOperations.getMonthlyAverageUsageOrCost
+
 import dataLayer.bill.Bill
 
 import scala.collection.mutable.{LinkedHashMap, ListBuffer}
@@ -11,15 +11,15 @@ object Utils:
   /*
   Il seguente metodo privato ritorna il risultato della previsione richiesta
   */
-  def predictionResult(year: Int, map: LinkedHashMap[Int, Double], percentageUsageVariation: Double, percentageCostVariation: Double, usageType: String): String =
-    year - map.keys.head match
-      case duration if duration <= map.keys.size =>
+  def predictionResult(year: Int, yearMap: LinkedHashMap[Int, Double], usageVariation: Double, costVariation: Double, usageType: String): String =
+    year - yearMap.keys.head match
+      case duration if duration <= yearMap.keys.size =>
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
-      case duration if duration > map.keys.size =>
-        s"Year: ${year}\nPredicted usage variation: ${percentageUsageVariation + Random.between(-1.0, 1.0) * duration}\nPredicted cost variation: ${percentageCostVariation + Random.between(-1.0, 1.0) * duration}"
+      case duration if duration > yearMap.keys.size =>
+        s"Year: ${year}\nPredicted usage variation: ${usageVariation + Random.between(-1.0, 1.0) * duration}\nPredicted cost variation: ${costVariation + Random.between(-1.0, 1.0) * duration}"
 
 
-  def percentageVariation(map: LinkedHashMap[Int, Double]): Double =
+  def variation(map: LinkedHashMap[Int, Double]): Double =
     map.values.foldLeft(0.0)(_ + _) / map.keys.size
 
 

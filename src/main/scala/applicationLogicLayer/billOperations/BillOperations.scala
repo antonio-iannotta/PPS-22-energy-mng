@@ -39,10 +39,10 @@ object BillOperations:
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
 
-    var percentageUsageVariation = percentageVariation(annualUsage)
-    var percentageCostVariation = percentageVariation(annualCost)
+    var usageVariation = variation(annualUsage)
+    var costVariation = variation(annualCost)
 
-    predictionResult(year,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
+    predictionResult(year,annualUsage, usageVariation, costVariation, usageType)
 
 
   def makePredictionByLocation(userType: String, usageType: String, year: Int, cityOrRegion: String, cityRegion: String): String =

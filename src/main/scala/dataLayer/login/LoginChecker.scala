@@ -18,10 +18,10 @@ class LoginChecker(userID: String, password: String):
 
   private def checkUserID(userID: String): String =
     userID match
-      case id if id.isBlank => "LOGIN_USERID_1"
+      case id if id.isEmpty => "LOGIN_USERID_1"
       case _ => "OK"
 
   private def checkPassword(password: String): String =
     password match
-      case userPassword if userPassword.isBlank => "LOGIN_PASSWORD_1"
+      case userPassword if userPassword.isEmpty => "LOGIN_PASSWORD_1"
       case _ => "OK"
