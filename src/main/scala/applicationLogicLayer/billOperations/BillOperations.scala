@@ -7,20 +7,23 @@ import collection.mutable.ListBuffer
 import scala.util.Random
 
 object BillOperations:
+
+
   /*
-  Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad uno specifico utente
+  Il seguente metodo restituisce l'utilizzo o il costo associato ad una certa utenza per un certo utente
   */
   def getIndividualCostOrUsage(userID: String, usageType: String, costOrUsage: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     getBillsByUserIDAndUsageType(userID, usageType, billList)
       .foldLeft[String]("")(_ + composeUsageOrCostInformation(_ , costOrUsage.toLowerCase))
 
+
   /*
-  Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad una certa località geografica
+  Il seguente metodo ritorna il costo o il consumo mensile per una certa utenza relativamente ad una certa località geografica e ad un certo anno di riferimento
   */
-  def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String): LinkedHashMap[Int, Double] =
+  def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList)
+    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList, year)
 
   /*
   Il seguente metodo effettua le previsioni per un singolo utente con riferimento ad un certo anno e con riferimento ad una certa utenza
@@ -120,7 +123,7 @@ object BillOperations:
       case "cost" =>
         map.keys.foreach(
           mapYear => map(mapYear) =
-            billList.filter(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType).foldLeft(0.0)(_ + _.usage) /
+            billList.filter(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType).foldLeft(0.0)(_ + _.cost) /
               billList.count(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType)
         )
 
@@ -181,28 +184,28 @@ object BillOperations:
   /*
   Questo metodo opera un raggruppamento per mesi riportando una mappa anno-consumi/costi in cui i consumi/costi sono la somma di tutti i valori relativi ad una certa località geografica
   */
-  private def monthlyUsageOrCost(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, usageOrCost: String, billList: ListBuffer[Bill]): LinkedHashMap[Int, Double] =
+  private def monthlyUsageOrCost(userType: String, usageType: String, cityOrRegion: String, cityRegion: String, usageOrCost: String, billList: ListBuffer[Bill], year: Int): LinkedHashMap[Int, Double] =
     val monthlyUsageOrCost: LinkedHashMap[Int, Double] = LinkedHashMap()
     usageOrCost match
       case "usage" =>
         for i <- Range(1,13) do
-          val monthlyUsageSum = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
-            .filter(bill => bill.month == i).foldLeft(0.0)(_ + _.usage) /
+          val monthlyAverageUsage = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+            .filter(bill => bill.month == i && bill.year == year).foldLeft(0.0)(_ + _.usage) /
             getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
-              .count(bill => bill.month == i)
+              .count(bill => bill.month == i && bill.year == year)
           monthlyUsageSum match
             case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
-            case _ => monthlyUsageOrCost(i) = monthlyUsageSum
+            case _ => monthlyUsageOrCost(i) = monthlyAverageUsage
 
       case "cost" =>
         for i <- Range(1,13) do
-          val monthlyUsageSum = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
-            .filter(bill => bill.month == i).foldLeft(0.0)(_ + _.cost) /
+          val monthlyAverageCost = getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
+            .filter(bill => bill.month == i && bill.year == year).foldLeft(0.0)(_ + _.cost) /
             getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
-              .count(bill => bill.month == i)
+              .count(bill => bill.month == i && bill.year == year)
           monthlyUsageSum match
             case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
-            case _ => monthlyUsageOrCost(i) = monthlyUsageSum
+            case _ => monthlyUsageOrCost(i) = monthlyAverageCost
 
     monthlyUsageOrCost
 
