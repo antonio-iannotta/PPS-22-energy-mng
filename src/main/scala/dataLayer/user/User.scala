@@ -26,17 +26,17 @@ class User (private val _userID: String, private val _password: String, private 
   def getUsage(usageType: String): String =
     BillOperations.getIndividualCostOrUsage(userID,usageType,"usage")
 
-  def getCostByCity(city: String = city, usageType: String): LinkedHashMap[Int, Double] =
-    BillOperations.getUsageOrCostByLocation(userType,usageType,city,"city","cost")
+  def getCostByCity(city: String = city, usageType: String, year: Int): LinkedHashMap[Int, Double] =
+    BillOperations.getUsageOrCostByLocation(userType,usageType,city,"city","cost",year)
 
-  def getUsageByCity(city: String = city, usageType: String): LinkedHashMap[Int, Double] =
-    BillOperations.getUsageOrCostByLocation(userType,usageType,city,"city","usage")
+  def getUsageByCity(city: String = city, usageType: String, year: Int): LinkedHashMap[Int, Double] =
+    BillOperations.getUsageOrCostByLocation(userType,usageType,city,"city","usage",year)
 
-  def getCostByRegion(region: String = region, usageType: String): LinkedHashMap[Int, Double] =
-    BillOperations.getUsageOrCostByLocation(userType,usageType,region,"region","cost")
+  def getCostByRegion(region: String = region, usageType: String, year: Int): LinkedHashMap[Int, Double] =
+    BillOperations.getUsageOrCostByLocation(userType,usageType,region,"region","cost",year)
 
-  def getUsageByRegion(region: String = region, usageType: String): LinkedHashMap[Int, Double] =
-    BillOperations.getUsageOrCostByLocation(userType,usageType,region,"region","usage")
+  def getUsageByRegion(region: String = region, usageType: String, year: Int): LinkedHashMap[Int, Double] =
+    BillOperations.getUsageOrCostByLocation(userType,usageType,region,"region","usage",year)
 
   def makeIndividualPrediction(usageType: String, year: Int): Unit =
     println(BillOperations.makeIndividualPrediction(userID, usageType, year))
