@@ -38,24 +38,118 @@ class UtilsTest extends AnyFunSuite:
 
 
 
-  var yearUsageCostMap: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
+  var testMap: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
 
-  test("variation should work") {
-    yearUsageCostMap(1) = 10.0
-    yearUsageCostMap(2) = 20.0
-    yearUsageCostMap(3) = 30.0
-    yearUsageCostMap(4) = 40.0
-    yearUsageCostMap(5) = 50.0
-    yearUsageCostMap(6) = 60.0
-    yearUsageCostMap(7) = 70.0
-    yearUsageCostMap(8) = 80.0
-    yearUsageCostMap(9) = 90.0
-    yearUsageCostMap(10) = 100.0
-    yearUsageCostMap(11) = 110.0
-    yearUsageCostMap(12) = 120.0
-    assert(variation(yearUsageCostMap) == 65)
+  test("variationTest1") {
+    testMap(2000) = 10.0
+    testMap(2001) = 20.0
+    testMap(2002) = 30.0
+    testMap(2003) = 40.0
+    testMap(2004) = 50.0
+    testMap(2005) = 60.0
+    testMap(2006) = 70.0
+    testMap(2007) = 80.0
+    testMap(2008) = 90.0
+    testMap(2009) = 100.0
+    testMap(2010) = 110.0
+    testMap(2011) = 120.0
+    assert(variation(testMap) == 65)
   }
 
-  test("variation should not work") {
-    assertThrows(variation(yearUsageCostMap))
+  test("variationTest2") {
+    testMap = mutable.LinkedHashMap()
+    assert(testMap.isEmpty)
   }
+
+
+  test("predictionResult test") {
+    testMap(2000) = 10.0
+    testMap(2000) = 20.0
+    testMap(2000) = 30.0
+    testMap(2000) = 40.0
+    testMap(2000) = 50.0
+    testMap(2000) = 60.0
+    testMap(2000) = 70.0
+    testMap(2000) = 80.0
+    testMap(2000) = 90.0
+    testMap(2000) = 100.0
+    testMap(2000) = 110.0
+    testMap(2000) = 120.0
+
+    assert(predictionResult(2001, testMap, 10.0, 10.0, "water") == "Your usage and cost for water is not supposed to change for 2001")
+    assert(!predictionResult(2003, testMap, 10.0, 10.0, "water").isEmpty)
+    println(predictionResult(2003, testMap, 10.0, 10.0, "water"))
+  }
+
+  test("individualMapInitialization test1") {
+    individualMapInitialization(testMap, "antonio", "water", billListTest)
+    assert(!testMap.isEmpty)
+    testMap = mutable.LinkedHashMap()
+  }
+
+  test("individualMapInitialization test2") {
+    individualMapInitialization(testMap,"marco","water",billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("initializationMapByLocation test1") {
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap,"private","heat","city","milano", billListTest)
+    assert(!testMap.isEmpty)
+  }
+
+  test("initializationMapByLocation test2") {
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "private", "heat", "region", "lazio", billListTest)
+    assert(!testMap.isEmpty)
+  }
+
+  test("initializationMapByLocation when company is not present") {
+    testMap = mutable.LinkedHashMap()
+    initializationMapByLocation(testMap, "company", "heat", "region", "lombardia", billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("fillIndividualUsageCostMap success scenario") {
+    testMap = mutable.LinkedHashMap()
+    individualMapInitialization(testMap,"antonio","electricity", billListTest)
+    fillIndividualUsageCostMap(testMap,"usage","antonio","electricity", billListTest)
+    assert(!testMap.isEmpty)
+    testMap = mutable.LinkedHashMap()
+    individualMapInitialization(testMap,"antonio","electricity", billListTest)
+    fillIndividualUsageCostMap(testMap, "cost", "antonio", "electricity", billListTest)
+    assert(!testMap.isEmpty)
+  }
+
+  test("fillIndividualUsageCost fail scenario with wrong userID 1") {
+    testMap = mutable.LinkedHashMap()
+    fillIndividualUsageCostMap(testMap, "usage", "marco", "electricity", billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("fillIndividualUsageCost fail scenario with wrong userID 2") {
+    testMap = mutable.LinkedHashMap()
+    individualMapInitialization(testMap,"marco","electricity", billListTest)
+    fillIndividualUsageCostMap(testMap, "cost", "marco", "electricity", billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("fillIndividualUsageCost fail with wrong usageOrCost selection") {
+    testMap = mutable.LinkedHashMap()
+    individualMapInitialization(testMap,"marco","electricity", billListTest)
+    fillIndividualUsageCostMap(testMap, "utenza", "marco", "electricity", billListTest)
+    assert(testMap.isEmpty)
+  }
+
+  test("fillIndividualUsageCost fail with wrong usageType selection") {
+    testMap = mutable.LinkedHashMap()
+    individualMapInitialization(testMap,"antonio","electricity", billListTest)
+    fillIndividualUsageCostMap(testMap, "usage", "antonio", "gas", billListTest)
+    assert(testMap.values.head.isNaN)
+  }
+
+
+
+
+
+

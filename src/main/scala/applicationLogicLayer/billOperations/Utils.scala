@@ -3,6 +3,7 @@ package applicationLogicLayer.billOperations
 
 import dataLayer.bill.Bill
 
+import scala.collection.mutable
 import scala.collection.mutable.{LinkedHashMap, ListBuffer}
 import scala.util.Random
 
@@ -16,7 +17,7 @@ object Utils:
       case duration if duration <= yearMap.keys.size =>
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
       case duration if duration > yearMap.keys.size =>
-        s"Year: ${year}\nPredicted usage variation: ${usageVariation + Random.between(-1.0, 1.0) * duration}\nPredicted cost variation: ${costVariation + Random.between(-1.0, 1.0) * duration}"
+        s"Year: ${year}\nPredicted usage variation: ${usageVariation - (costVariation - Random.between(-1.0, 1.0) * duration)}\nPredicted cost variation: ${costVariation - (costVariation - Random.between(-1.0, 1.0) * duration)}"
 
 
   def variation(map: LinkedHashMap[Int, Double]): Double =
@@ -49,6 +50,7 @@ object Utils:
             billList.filter(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType).foldLeft(0.0)(_ + _.cost) /
               billList.count(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType)
         )
+      case _ => println("Error!")
 
   def fillUsageCostMapByLocation(map: LinkedHashMap[Int, Double], usageType: String, usageOrCost: String, userType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): Unit =
     cityOrRegion match

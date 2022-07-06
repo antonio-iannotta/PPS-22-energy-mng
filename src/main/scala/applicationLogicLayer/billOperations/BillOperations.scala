@@ -59,9 +59,9 @@ object BillOperations:
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
 
-    val percentageUsageVariation = annualUsage.values.foldLeft[Double](0.0)(_ + _) / annualUsage.keys.size
-    val percentageCostVariation = annualCost.values.foldLeft[Double](0.0)(_ + _) / annualCost.keys.size
+    val usageVariation = annualUsage.values.foldLeft[Double](0.0)(_ + _) / annualUsage.keys.size
+    val costVariation = annualCost.values.foldLeft[Double](0.0)(_ + _) / annualCost.keys.size
 
-    predictionResult(year,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
+    predictionResult(year,annualUsage, usageVariation, costVariation, usageType)
 
 
