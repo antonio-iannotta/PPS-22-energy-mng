@@ -9,9 +9,6 @@ import scala.util.Random
 object BillOperations:
 
 
-  /*
-  Il seguente metodo restituisce l'utilizzo o il costo associato ad una certa utenza per un certo utente
-  */
   def getIndividualCostOrUsage(userID: String, usageType: String, costOrUsage: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     getBillsByUserIDAndUsageType(userID, usageType, billList)
@@ -25,9 +22,8 @@ object BillOperations:
     val billList: ListBuffer[Bill] = BillBuilder.build()
     monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList, year)
 
-  /*
-  Il seguente metodo effettua le previsioni per un singolo utente con riferimento ad un certo anno e con riferimento ad una certa utenza
-  */
+
+
   def makeIndividualPrediction(userID: String, usageType: String, year: Int): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
@@ -47,9 +43,7 @@ object BillOperations:
 
     predictionResult(year,annualUsage, percentageUsageVariation, percentageCostVariation, usageType)
 
-  /*
-  Il seguente metodo effettua le previsioni relativamente ad una certa tipologia di consumi per un certo anno per una specifica località geografica
-  */
+
   def makePredictionByLocation(userType: String, usageType: String, year: Int, cityOrRegion: String, cityRegion: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
@@ -82,23 +76,17 @@ object BillOperations:
       case duration if duration > map.keys.size =>
         s"Year: ${year}\nPredicted usage variation: ${percentageUsageVariation + Random.nextDouble()}\nPredicted cost variation: ${percentageCostVariation + Random.nextDouble()}"
 
-  /*
-  Il seguente metodo privato ritorna la variazione percentuale di costi o consumi su base annuale.
-  La variazione è calcolata sulla mappa anno-consumi/costi che viene fornita in input
-  */
+
+
   private def percentageVariation(map: LinkedHashMap[Int, Double]): Double =
     map.values.foldLeft(0.0)(_ + _) / map.keys.size
 
 
-  /*
-  Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento, filtrando per singolo utente, di modo da poter essere utilizzata nelle previsioni
-  */
+
   private def individualMapInitialization(map: LinkedHashMap[Int, Double], userID: String, usageType: String, billList: ListBuffer[Bill]): Unit =
     billList.filter(bill => bill.userID == userID && bill.usageType == usageType).foreach(bill => map(bill.year) = 0.0)
 
-  /*
-  Il seguente metodo inizializza la mappa anno-consumi/costi passata come argomento filtrando per la tipologia di utente, la tipologia di consumo e la località geografica
-  */
+
   private def initializationMapByLocation(map: LinkedHashMap[Int, Double], userType: String, usageType: String, cityOrRegion: String, cityRegion: String, billList: ListBuffer[Bill]): Unit =
     cityOrRegion match
       case "city" =>
@@ -193,7 +181,7 @@ object BillOperations:
             .filter(bill => bill.month == i && bill.year == year).foldLeft(0.0)(_ + _.usage) /
             getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
               .count(bill => bill.month == i && bill.year == year)
-          monthlyUsageSum match
+          monthlyAverageUsage match
             case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
             case _ => monthlyUsageOrCost(i) = monthlyAverageUsage
 
@@ -203,7 +191,7 @@ object BillOperations:
             .filter(bill => bill.month == i && bill.year == year).foldLeft(0.0)(_ + _.cost) /
             getBillsByCityOrRegion(userType, usageType, cityOrRegion, cityRegion, billList)
               .count(bill => bill.month == i && bill.year == year)
-          monthlyUsageSum match
+          monthlyAverageCost match
             case sum if sum.isNaN => monthlyUsageOrCost(i) = 0.0
             case _ => monthlyUsageOrCost(i) = monthlyAverageCost
 
