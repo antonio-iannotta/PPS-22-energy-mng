@@ -36,3 +36,5 @@ class BillOperationsTest extends AnyFunSuite:
     assert(result != "Your usage and cost for water is not supposed to change for 2024")
     println(result)
   }
+  
+  
