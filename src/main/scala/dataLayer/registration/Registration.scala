@@ -1,12 +1,11 @@
 package dataLayer.registration
 
 import dataLayer.mongoDriver.{MongoDB, Helpers}
-import dataLayer.registration.MD5.md5HashPassword
+import dataLayer.registration.{MD5, RegistrationChecker}
 import dataLayer.user.User
-
 import java.math.BigInteger
 import java.security.MessageDigest
-import registration.{MD5, RegistrationChecker}
+
 
 object Registration:
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
