@@ -1,6 +1,6 @@
 package presentationLayer.dashboard
 
-import presentationLayer.dashboard.choiceHandler.RegionUsageChoiceHandler
+import presentationLayer.dashboard.choiceHandler.ChoiceHandler
 import dataLayer.user.User
 
 case class Dashboard(private val user: User):
