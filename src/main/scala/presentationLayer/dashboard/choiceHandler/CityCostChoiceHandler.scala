@@ -14,6 +14,8 @@ object CityCostChoiceHandler extends ChoiceHandler:
                          var usage = scala.io.StdIn.readLine()
                          user.getCostByCity(usageType = usage)
 
+               
+               
                case 2 => println("Inserire città")
                          var citySelected = scala.io.StdIn.readLine()
                          println("Inserire il consumo d'interesse")

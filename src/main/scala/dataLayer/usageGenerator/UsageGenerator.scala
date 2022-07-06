@@ -1,12 +1,13 @@
 package dataLayer.usageGenerator
 
 import dataLayer.mongoDriver.MongoDB
+import dataLayer.mongoDriver.Helpers._
 import org.mongodb.scala.bson.{BsonString, Document}
 import scala.collection.mutable.*
 import scala.language.postfixOps
 import scala.util.Random
 
-object UsageGenerator:
+object UsageGenerator extends App:
 
   def generation(): Unit =
     var month = getActualMonthOrYear("month")
@@ -28,6 +29,12 @@ object UsageGenerator:
 
       Thread.sleep(10000)
 
+  /**
+   * Metodo inizializare mese e anno per determinare le date
+   * degli "usages" che verranno creati
+   * @param monthOrYear
+   * @return mese 1 / anno 1970 se non ci sono "usages", ultimo mese/anno se ci sono "usages"
+   */
   private def getActualMonthOrYear(monthOrYear: String): Int =
     val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
 
@@ -42,4 +49,5 @@ object UsageGenerator:
           case 0 => 1970
           case _ => usagesCollection.find().results().last("year").asString().getValue.toInt
 
-  
+
+  generation()
