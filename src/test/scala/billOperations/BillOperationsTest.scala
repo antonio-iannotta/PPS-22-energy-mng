@@ -16,13 +16,13 @@ class BillOperationsTest extends AnyFunSuite:
   }
 
   test("Usage for a certain location is present!") {
-    val result = BillOperations.getUsageOrCostByLocation("private","water","Emilia-Romagna","region", "usage")
+    val result = BillOperations.getUsageOrCostByLocation("private","water","Emilia-Romagna","region", "usage", 2000)
     assert(!result.isEmpty)
     println(result)
   }
   
   test("Usage for a certain location is not present!") {
-    assert(BillOperations.getUsageOrCostByLocation("private","water","Lombardia","region", "usage").isEmpty)
+    assert(BillOperations.getUsageOrCostByLocation("private","water","Lombardia","region", "usage", 2000).isEmpty)
   }
 
   test("Usage and cost are not supposed to change!") {
