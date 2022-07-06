@@ -1,6 +1,6 @@
 package presentationLayer.dashboard
 
-import presentationLayer.dashboard.choiceHandler.{CityCostChoiceHandler, CityUsageChoiceHandler, RegionCostChoiceHandler, RegionUsageChoiceHandler, UserCostChoiceHandler, UserUsageChoiceHandler}
+import presentationLayer.dashboard.choiceHandler.RegionUsageChoiceHandler
 import dataLayer.user.User
 
 case class Dashboard(private val user: User):
@@ -25,12 +25,12 @@ case class Dashboard(private val user: User):
       val selection = scala.io.StdIn.readLine()
 
       selection match
-        case "1" => println(UserCostChoiceHandler.choiceHandler(user))
-        case "2" => println(UserUsageChoiceHandler.choiceHandler(user))
-        case "3" => CityCostChoiceHandler.choiceHandler(user).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "4" => CityUsageChoiceHandler.choiceHandler(user).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
-        case "5" => RegionCostChoiceHandler.choiceHandler(user).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "6" => RegionUsageChoiceHandler.choiceHandler(user).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "1" => println(ChoiceHandler.choiceHandler(user,1))
+        case "2" => println(ChoiceHandler.choiceHandler(user,2))
+        case "3" => ChoiceHandler.choiceHandler(user,3).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "4" => ChoiceHandler.choiceHandler(user,4).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "5" => ChoiceHandler.choiceHandler(user,5).foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "6" => ChoiceHandler.choiceHandler(user,6).foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
         case "7" => println("Inserire l'anno d'interesse:")
           try
             val year = scala.io.StdIn.readInt()
