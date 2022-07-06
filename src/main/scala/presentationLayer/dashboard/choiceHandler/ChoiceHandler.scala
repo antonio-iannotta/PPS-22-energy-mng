@@ -50,18 +50,19 @@ object ChoiceHandler:
     choice match
       case 3 | 5 =>
         classicPrint()
+        println("Selezionare anno")
+        val year = scala.io.StdIn.readInt()
         val usage = scala.io.StdIn.readLine()
-
         usage match
           case "1" => choice match
-            case 3 => user.getCostByCity(usageType = "electricity")
-            case 5 => user.getCostByRegion(usageType = "electricity")
+            case 3 => user.getCostByCity(usageType = "electricity",year)
+            case 5 => user.getCostByRegion(usageType = "electricity",year)
           case "2" => choice match
-            case 3 => user.getCostByCity(usageType = "heat")
-            case 5 => user.getCostByRegion(usageType = "heat")
+            case 3 => user.getCostByCity(usageType = "heat",year)
+            case 5 => user.getCostByRegion(usageType = "heat",year)
           case "3" => choice match
-            case 3 => user.getCostByCity(usageType = "water")
-            case 5 => user.getCostByRegion(usageType = "water")
+            case 3 => user.getCostByCity(usageType = "water",year)
+            case 5 => user.getCostByRegion(usageType = "water",year)
           case _ =>
             println("L'input inserito non è valido.")
             mutable.LinkedHashMap[Int, Double]()
