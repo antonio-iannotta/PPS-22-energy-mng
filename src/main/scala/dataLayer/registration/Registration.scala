@@ -8,6 +8,15 @@ import java.security.MessageDigest
 
 
 object Registration:
+  /**
+   * Il seguente metodo permette di svolgere l’operazione di registrazione
+   * @param userID
+   * @param password
+   * @param userType
+   * @param region
+   * @param city
+   * @return
+   */
   def signUP(userID: String, password: String, userType: Int, region: String, city: String): String =
     val responseMessage = RegistrationChecker(userID, password, userType, region, city).checkFields()
     responseMessage match
