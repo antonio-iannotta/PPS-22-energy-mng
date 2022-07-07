@@ -20,18 +20,20 @@ object ChoiceHandler:
     val choice = scala.io.StdIn.readInt()
     choice match
       case 1 =>
+        /*
         printUsage()
         val usageChoice = scala.io.StdIn.readInt()
         usage = usageChoiceMatch(usageChoice)
+        */
 
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
         locationType match
           case "region" =>
-            user.getUsageOrcostByRegionOrcity(user.region, usage, locationType, usageOrCost, year)
+            user.getUsageOrcostByRegionOrcity(user.region, PrintHelper.usageMenuPrint(), locationType, usageOrCost, year)
           case _ =>
-            user.getUsageOrcostByRegionOrcity(user.city, usage, locationType, usageOrCost, year)
+            user.getUsageOrcostByRegionOrcity(user.city, PrintHelper.usageMenuPrint(), locationType, usageOrCost, year)
 
       case 2 =>
 
@@ -40,15 +42,17 @@ object ChoiceHandler:
           case _ => println("Inserire la città d'interesse:")
 
         val cityOrRegionSelected = scala.io.StdIn.readLine()
-
-        printUsage()
-        val usageChoice = scala.io.StdIn.readInt()
-        usage = usageChoiceMatch(usageChoice)
-
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
-        user.getUsageOrcostByRegionOrcity(cityOrRegionSelected, usage, locationType, usageOrCost, year)
+        /*
+        printUsage()
+        val usageChoice = scala.io.StdIn.readInt()
+        usage = usageChoiceMatch(usageChoice)
+        */
+
+
+        user.getUsageOrcostByRegionOrcity(cityOrRegionSelected, PrintHelper.usageMenuPrint(), locationType, usageOrCost, year)
 
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 
@@ -67,6 +71,7 @@ object ChoiceHandler:
       case 2 => user.getUsageOrCost(usageOrCost,"heat")
       case 3 => user.getUsageOrCost(usageOrCost, "water")
 
+  /*
   def printUsage() =
     println("Inserire il consumo d'interesse")
     println("1) per visualizzare consumi luce")
@@ -79,3 +84,4 @@ object ChoiceHandler:
       case 2 => "heat"
       case 3 => "water"
       case _ => "Input non valido"
+*/
