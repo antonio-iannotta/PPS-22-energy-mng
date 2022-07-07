@@ -315,6 +315,16 @@ Per l'implementazione di tale componente si è cercato di massimizzare insieme K
 Un aspetto da rimarcare riguarda il fatto che tale componente è strettamente legato all'object Helpers che espone i metodi
 per l'elaborazione dei dati ricevuti eseguendo una find su una certa collezione.
 
+#### BillOperations
+
+BillOperations si occupa di eseguire le operazioni sulla lista dei dati raccolti dal database mediante BillBuilder. In particolar modo l'implementazione di questo componente è proceduta di pari passo con l'implementazione della libreria ausiliaria Utils. Entrambi questi componenti sono contenuti all'interno del package applicationLogicLayer.billOperations in modo da rendere ancora più evidente la dipendenza l'uno dall'altro
+
+#### Utils
+La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metodi ausiliari di cui necessitasse per poter eseguire al meglio le operazioni sulla lista delle bollette recuperate dal database. Le operazioni esposte da questa libreria sono le seguenti:
+
+![Utils](https://user-images.githubusercontent.com/91571686/177801860-3f0583d5-7339-4064-8d9c-6e455225e801.png)
+
+
 
 ### Andrea Catani
 
