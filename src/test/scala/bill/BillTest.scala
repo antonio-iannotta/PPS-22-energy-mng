@@ -4,6 +4,7 @@ import org.scalatest.funsuite.AnyFunSuite
 import dataLayer.bill.Bill
 
 class BillTest extends AnyFunSuite:
+  
   val testBill = Bill("234","AntonioIannotta","private","water",234.65,89.6,
     2,2022,"Cesena","Emilia-Romagna")
 

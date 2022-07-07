@@ -22,6 +22,9 @@ object BillOperations:
     getBillsByUserIDAndUsageType(userID, usageType, billList)
       .foldLeft[String]("")(_ + composeUsageOrCostInformation(_ , costOrUsage.toLowerCase))
 
+  
+  
+  
 
   /**
    * Il seguente metodo ritorna una mappa [Int, Double] a cui ogni mese è associato il costo medio di tipologie di consumi o costi relativi ad un certo utente, una certa utenza, una certa città o regione e un certo anno
@@ -37,6 +40,9 @@ object BillOperations:
     val billList: ListBuffer[Bill] = BillBuilder.build()
     monthlyUsageOrCost(userType,usageType,locationType,location,usageOrCost, billList, year)
 
+  
+  
+  
 
   /**
    * Il seguente metodo esegue le previsioni basate su un singolo utente relative ad un certo anno ed una certa utenza
@@ -64,6 +70,9 @@ object BillOperations:
 
     predictionResult(year,annualUsage, averageUsage, averageCost, usageType)
 
+  
+  
+  
 
   /**
    * Il seguente metodo ritorna le previsioni associate ad una certa tipologia di consumo, ad una tipologia di utente, ad una certa città o regione e ad un certo anno.

@@ -13,6 +13,7 @@ class MongoDBTest extends AnyFunSuite:
   test("createBill success scenario") {
 
     var usageFields: ListBuffer[Any] = ListBuffer()
+    
     usageFields += BsonObjectId.apply()
     usageFields += BsonString.apply("userID")
     usageFields += BsonString.apply("private")
@@ -25,6 +26,7 @@ class MongoDBTest extends AnyFunSuite:
     usageFields += BsonString.apply("1970")
 
     val bill: Bill = createBill(usageFields)
+    
     assert(bill.isInstanceOf[Bill])
     assert(bill.userID == "userID")
     assert(bill.usage == 20.0)
@@ -35,11 +37,13 @@ class MongoDBTest extends AnyFunSuite:
     assert(bill.year == 1970)
     assert(bill.usageType == "water")
     assert(bill.cost == 30.0)
+    
   }
 
   test("createBill fail scenario") {
 
     var usageFields: ListBuffer[Any] = ListBuffer()
+    
     usageFields += BsonObjectId.apply()
     usageFields += BsonObjectId.apply()
     usageFields += BsonString.apply("private")
@@ -52,11 +56,13 @@ class MongoDBTest extends AnyFunSuite:
     usageFields += BsonString.apply("1970")
 
     assertThrows[ClassCastException](createBill(usageFields))
+    
   }
 
   test("createUser success scenario") {
 
     var userFields: ListBuffer[Any] = ListBuffer()
+    
     userFields += BsonObjectId.apply()
     userFields += BsonString.apply("userID")
     userFields += BsonString.apply("password")
@@ -77,6 +83,7 @@ class MongoDBTest extends AnyFunSuite:
   test("createUser fail scenario") {
 
     var userFields: ListBuffer[Any] = ListBuffer()
+    
     userFields += BsonObjectId.apply()
     userFields += BsonObjectId.apply()
     userFields += BsonString.apply("password")
