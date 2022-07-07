@@ -5,7 +5,7 @@ import scala.collection.mutable
 import scala.collection.mutable.*
 
 object ChoiceHandler:
-  def choiceHandler(user: User, usageOrCost: String, cityOrRegion: String): LinkedHashMap[Int, Double] =
+  def cityRegionChoiceHandler(user: User, usageOrCost: String, cityOrRegion: String): LinkedHashMap[Int, Double] =
 
     var usage: String = ""
 
@@ -37,7 +37,11 @@ object ChoiceHandler:
         user.getUsageOrcostByRegionOrcity(user.region, usage, cityOrRegion, usageOrCost, year)
 
       case 2 =>
-        println("Inserire la regione d'interesse:")
+
+        cityOrRegion match
+          case "region" => println("Inserire la regione d'interesse:")
+          case "city" => println("Inserire la città d'interesse:")
+
         val selectedRegion = scala.io.StdIn.readLine()
 
         println("Inserire il consumo d'interesse")
@@ -55,3 +59,20 @@ object ChoiceHandler:
         val year = scala.io.StdIn.readInt()
 
         user.getUsageOrcostByRegionOrcity(selectedRegion, usage, cityOrRegion, usageOrCost, year)
+
+  def individualChoiceHandler(user: User, usageOrCost: String): String =
+
+    var usageString = ""
+    usageOrCost match
+      case "cost" => usageString = "costi"
+      case "usage" => usageString = "utilizzi"
+
+    println("1) per visualizzare " + usageString + " luce")
+    println("2) per visualizzare "+ usageString + " gas")
+    println("3) per visualizzare " + usageString + " acqua")
+    val choice = scala.io.StdIn.readInt()
+
+    choice match
+      case 1 => user.getUsageOrCost(usageOrCost, "electricity")
+      case 2 => user.getUsageOrCost(usageOrCost,"heat")
+      case 3 => user.getUsageOrCost(usageOrCost, "water")

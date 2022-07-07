@@ -19,6 +19,8 @@ object Utils:
    * @return
    */
   def predictionResult(year: Int, yearMap: LinkedHashMap[Int, Double], averageUsage: Double, averageCost: Double, usageType: String): String =
+    println("STAMPA QUI")
+    println(yearMap)
     year - yearMap.keys.head match
       case duration if duration <= yearMap.keys.size =>
         "Your usage and cost for " + usageType + " is not supposed to change for " + year

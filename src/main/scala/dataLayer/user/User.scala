@@ -26,6 +26,9 @@ class User(private val _userID: String, private val _password: String, private v
   def getUsage(usageType: String): String =
     BillOperations.getIndividualCostOrUsage(userID, usageType, "usage")
 
+  def getUsageOrCost(usageOrCost: String, usageType: String) =
+    BillOperations.getIndividualCostOrUsage(userID, usageType, usageOrCost)
+
   def getCostByCity(city: String = city, usageType: String, year: Int): LinkedHashMap[Int, Double] =
     BillOperations.getUsageOrCostByLocation(userType, usageType, city, "city", "cost", year)
 
