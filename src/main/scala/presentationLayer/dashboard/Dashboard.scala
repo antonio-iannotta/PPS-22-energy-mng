@@ -34,19 +34,19 @@ case class Dashboard(private val user: User):
         case "7" => println("Inserire l'anno d'interesse:")
           try
             val year = scala.io.StdIn.readInt()
-            user.makeIndividualPrediction(user.userType,year)
+            user.makeIndividualPrediction(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "8" => println("Inserire l'anno d'interesse")
           try
             val year = scala.io.StdIn.readInt()
-            user.makePredictionByCity(user.userType,year)
+            user.makePredictionByCity(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "9" => println("Inserire l'anno d'interesse")
           try
             val year = scala.io.StdIn.readInt()
-            user.makePredictionByRegion(user.userType,year)
+            user.makePredictionByRegion(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "10" => exit = false
@@ -66,3 +66,15 @@ case class Dashboard(private val user: User):
       case 10 => "Ottobre: "
       case 11 => "Novembre: "
       case 12 => "Dicembre: "
+
+  private def classicPrint() : String =
+    println("Inserire il consumo d'interesse")
+    println("1) per visualizzare consumi luce")
+    println("2) per visualizzare consumi gas")
+    println("3) per visualizzare consumi acqua")
+    val usageChoice = scala.io.StdIn.readInt()
+
+    usageChoice match
+      case 1 => "electricity"
+      case 2 => "heat"
+      case 3 => "water"
