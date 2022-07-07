@@ -47,7 +47,7 @@ object MongoDB:
    * @param usages
    * @return
    */
-  private def createBill(usages: ListBuffer[Any]): Bill =
+  def createBill(usages: ListBuffer[Any]): Bill =
     val billID: String = LocalDateTime.now().toString
     val userID: String = usages(1).asInstanceOf[BsonString].asString().getValue
     val userType: String = usages(2).asInstanceOf[BsonString].asString().getValue
@@ -77,7 +77,7 @@ object MongoDB:
    * @param users
    * @return
    */
-  private def createUser(users: ListBuffer[Any]): User =
+  def createUser(users: ListBuffer[Any]): User =
 
     val userID: String = users(1).asInstanceOf[BsonString].asString().getValue
     val password: String = users(2).asInstanceOf[BsonString].asString().getValue
@@ -93,7 +93,7 @@ object MongoDB:
    * @param user
    * @return
    */
-  private def composeUserMap(user: User): LinkedHashMap[String, BsonString] =
+  def composeUserMap(user: User): LinkedHashMap[String, BsonString] =
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
     userMap("userID") = BsonString.apply(user.userID)
     userMap("password") = BsonString.apply(user.password)
