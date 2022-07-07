@@ -290,6 +290,12 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 
 ### Antonio Iannotta
 
+#### Bill
+
+#### BillOperations
+
+#### MongoDB
+
 ### Andrea Catani
 
 ### Demetrio Andriani
