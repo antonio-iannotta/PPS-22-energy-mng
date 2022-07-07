@@ -324,7 +324,8 @@ La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metod
 
 ![Utils](https://user-images.githubusercontent.com/91571686/177801860-3f0583d5-7339-4064-8d9c-6e455225e801.png)
 
-
+#### Bill
+Il componente Bill è stato realizzato come classe per fornire una corretta astrazione del concetto di bolletta e per consentire inoltre di poter eseguire le operazioni sui consumi partendo da tipi di dati strutturati nella maniera più opportuna possibile.
 
 ### Andrea Catani
 
