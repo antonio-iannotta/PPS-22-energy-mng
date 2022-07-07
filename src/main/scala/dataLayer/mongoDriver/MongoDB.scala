@@ -21,33 +21,30 @@ object MongoDB:
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
   /**
-   * Il seguente metodo recupera gli utenti dal DB effettuando una chiamata sulla collezione "users"
+   * Il seguente metodo ritorna una lista di User o di Bill a seconda della collezione, passata come stringa in ingresso, che specifica quali dati debbano essere recuperati dal database
+   * @param collection
    * @return
    */
-  def retrieveUsers(): ListBuffer[User] =
-    var userList: ListBuffer[User] = ListBuffer()
-    MongoDB.mongoDBConnection().getCollection("users")
-      .find().results()
-      .foreach(user => userList += createUser(user.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
-    userList
+  def retrieveDataFromCollection(collection: String): ListBuffer[AnyRef] =
+    var retrievedData: ListBuffer[AnyRef] = ListBuffer()
+    collection match
+      case "users" =>
+        MongoDB.mongoDBConnection().getCollection(collection)
+          .find().results()
+          .foreach(user => retrievedData += createUser(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
+      case "usages" =>
+        MongoDB.mongoDBConnection().getCollection(collection)
+          .find().results()
+          .foreach(user => retrievedData += createBill(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
 
-  /**
-   * Il seguente metodo recupera i consumi dal DB effettuando una chiamata sulla collezione "usages"
-   * @return
-   */
-  def retrieveUsages(): ListBuffer[Bill] =
-    var billList: ListBuffer[Bill] = ListBuffer()
-    MongoDB.mongoDBConnection().getCollection("usages")
-      .find().results()
-      .foreach(usage => billList += createBill(usage.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
-    billList
+    retrievedData
 
   /**
    * Il seguente metodo restituisce una bolletta creata a partire dai campi dei singoli consumi che sono stati recuperati dal database
    * @param usages
    * @return
    */
-  def createBill(usages: ListBuffer[Any]): Bill =
+  def createBill(usages: ListBuffer[AnyRef]): Bill =
     val billID: String = LocalDateTime.now().toString
     val userID: String = usages(1).asInstanceOf[BsonString].asString().getValue
     val userType: String = usages(2).asInstanceOf[BsonString].asString().getValue
@@ -77,7 +74,7 @@ object MongoDB:
    * @param users
    * @return
    */
-  def createUser(users: ListBuffer[Any]): User =
+  def createUser(users: ListBuffer[AnyRef]): User =
 
     val userID: String = users(1).asInstanceOf[BsonString].asString().getValue
     val password: String = users(2).asInstanceOf[BsonString].asString().getValue

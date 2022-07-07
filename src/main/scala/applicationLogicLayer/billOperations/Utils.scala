@@ -19,8 +19,6 @@ object Utils:
    * @return
    */
   def predictionResult(year: Int, yearMap: LinkedHashMap[Int, Double], averageUsage: Double, averageCost: Double, usageType: String): String =
-    println("STAMPA QUI")
-    println(yearMap)
     year - yearMap.keys.head match
       case duration if duration <= yearMap.keys.size =>
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
@@ -56,7 +54,7 @@ object Utils:
    * @param location
    * @param billList
    */
-  def initializationMapByLocation(mapByLocation: LinkedHashMap[Int, Double], userType: String, usageType: String, locationType: String, location: String, billList: ListBuffer[Bill]): Unit =
+  def mapInitializationByLocation(mapByLocation: LinkedHashMap[Int, Double], userType: String, usageType: String, locationType: String, location: String, billList: ListBuffer[Bill]): Unit =
     locationType match
       case "city" =>
         billList.filter(bill => bill.userType == userType && bill.usageType == usageType && bill.city == location)
