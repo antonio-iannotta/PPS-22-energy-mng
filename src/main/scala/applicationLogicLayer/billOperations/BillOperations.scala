@@ -79,8 +79,8 @@ object BillOperations:
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
     val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
 
-    initializationMapByLocation(annualUsage, userType, usageType, locationType, location, billList)
-    initializationMapByLocation(annualCost, userType, usageType, locationType, location, billList)
+    mapInitializationByLocation(annualUsage, userType, usageType, locationType, location, billList)
+    mapInitializationByLocation(annualCost, userType, usageType, locationType, location, billList)
 
     fillUsageCostMapByLocation(annualUsage,usageType,"usage",userType, locationType, location, billList)
     fillUsageCostMapByLocation(annualCost, usageType, "cost", userType, locationType, location, billList)
