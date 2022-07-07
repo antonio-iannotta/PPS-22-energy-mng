@@ -25,28 +25,28 @@ case class Dashboard(private val user: User):
       val selection = scala.io.StdIn.readLine()
 
       selection match
-        case "1" => //println(ChoiceHandler.choiceHandler(user,))
-        case "2" => //println(ChoiceHandler.choiceHandler(user,))
-        case "3" => ChoiceHandler.choiceHandler(user, "cost", "region").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "4" => ChoiceHandler.choiceHandler(user, "usage", "city").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
-        case "5" => ChoiceHandler.choiceHandler(user, "cost", "region").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
-        case "6" => ChoiceHandler.choiceHandler(user, "usage", "city").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "1" => println(ChoiceHandler.individualChoiceHandler(user, "cost"))
+        case "2" => println(ChoiceHandler.individualChoiceHandler(user, "usage"))
+        case "3" => ChoiceHandler.cityRegionChoiceHandler(user, "cost", "city").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "4" => ChoiceHandler.cityRegionChoiceHandler(user, "usage", "city").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        case "5" => ChoiceHandler.cityRegionChoiceHandler(user, "cost", "region").foreach(monthAndCost => println(formatter(monthAndCost._1) + monthAndCost._2.toString))
+        case "6" => ChoiceHandler.cityRegionChoiceHandler(user, "usage", "region").foreach(monthAndUsage => println(formatter(monthAndUsage._1) + monthAndUsage._2.toString))
         case "7" => println("Inserire l'anno d'interesse:")
           try
             val year = scala.io.StdIn.readInt()
-            user.makeIndividualPrediction(user.userType,year)
+            user.makeIndividualPrediction(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "8" => println("Inserire l'anno d'interesse")
           try
             val year = scala.io.StdIn.readInt()
-            user.makePredictionByCity(user.userType,year)
+            user.makePredictionByCity(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "9" => println("Inserire l'anno d'interesse")
           try
             val year = scala.io.StdIn.readInt()
-            user.makePredictionByRegion(user.userType,year)
+            user.makePredictionByRegion(classicPrint(),year)
           catch
             case _ : NumberFormatException => println("Input non valido.")
         case "10" => exit = false
@@ -66,3 +66,15 @@ case class Dashboard(private val user: User):
       case 10 => "Ottobre: "
       case 11 => "Novembre: "
       case 12 => "Dicembre: "
+
+  private def classicPrint() : String =
+    println("Inserire il consumo d'interesse")
+    println("1) per visualizzare consumi luce")
+    println("2) per visualizzare consumi gas")
+    println("3) per visualizzare consumi acqua")
+    val usageChoice = scala.io.StdIn.readInt()
+
+    usageChoice match
+      case 1 => "electricity"
+      case 2 => "heat"
+      case 3 => "water"
