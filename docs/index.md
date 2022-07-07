@@ -290,15 +290,31 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 
 ### Antonio Iannotta
 
-#### Bill
-
-La **classe** Bill è stata realizzata per astrarre il concetto di Bolletta associata ad un certo utente, con una propria città, una propria regione, un proprio consumo in termini di utilizzo e costo. Questa astrazione si è resa utile per poter lavorare su una lista di consumi che fossero strutturati nella stessa maniera.
-
-#### BillOperations
-
-
+Implementazione dei seguenti componenti:
+- **object** MongoDB
+- **object** BillOperations
+- **class** Bill
+- **object** Utils
+- **class** MongoDBTest
+- **class** BillTest
+- **class** UtilsTest
 
 #### MongoDB
+
+L'implementazione di questo componente, le cui operazioni sono rappresentate nel seguente diagramma UML, regolano
+l'interazione del sistema con il supporto scelto per memorizzare i dati. Nel caso in esame si è scelto come supporto di utilizzare
+MongoDB come database NoSQL.
+
+![MongoDB](https://user-images.githubusercontent.com/91571686/177780450-2a5a1312-9abb-4a27-919d-9c7403b77ce9.png)
+
+
+Come è possibile notare le operazioni consentono un'interazione con il database per il recupero delle informazioni memorizzate
+sottoforma di documenti in due collezioni: *usages* e *users*. Il recupero delle informazioni consente di creare una
+lista di entità già definite nel sistema (User e Bill).
+Per l'implementazione di tale componente si è cercato di massimizzare insieme KISS and DRY.
+Un aspetto da rimarcare riguarda il fatto che tale componente è strettamente legato all'object Helpers che espone i metodi
+per l'elaborazione dei dati ricevuti eseguendo una find su una certa collezione.
+
 
 ### Andrea Catani
 
