@@ -1,6 +1,11 @@
 package dataLayer.errorCodeHandler 
 
 object RegistrationErrorCodeHandler extends ErrorCodeHandler :
+  /**
+   * Il seguente metodo associa ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio
+   * @param errorCode
+   * @return
+   */
   def errorCodeHandler(errorCode: String): String =
     errorCode match
       case "REGISTRATION_USERID_1" => "Il campo USERID inserito e' vuoto"
