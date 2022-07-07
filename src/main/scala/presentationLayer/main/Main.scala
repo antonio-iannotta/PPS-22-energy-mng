@@ -4,6 +4,7 @@ import presentationLayer.dashboard.Dashboard
 import dataLayer.login.Login
 import dataLayer.user.User
 import dataLayer.registration.Registration
+import dataLayer.usageGenerator.UsageGenerator
 
 object Main extends App :
 
@@ -20,7 +21,24 @@ object Main extends App :
 
       case "2" =>
         val user = callLogin()
+        val generator = new UsageGenerator
+
+        println("Vuoi avviare la generazione dei dati automatica?")
+        println("1) Si")
+        println("2) No")
+
+        val generatorSelection = scala.io.StdIn.readInt()
+        if generatorSelection == 1 then
+          generator.start()
+
         Dashboard(user.get).view()
+
+        if generatorSelection == 1 then
+          try
+            generator.interrupt()
+          catch
+            case _ : Exception => println("Il generatore è stato interrotto.")
+
       case "3" =>
         exit = false
         println("Arrivederci, grazie per aver utilizzato Energy Management.")
