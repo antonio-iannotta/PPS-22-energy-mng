@@ -53,7 +53,7 @@ class UtilsTest extends AnyFunSuite:
     testMap(2009) = 100.0
     testMap(2010) = 110.0
     testMap(2011) = 120.0
-    assert(variation(testMap) == 65)
+    assert(average(testMap) == 65)
   }
 
   test("variationTest2") {
