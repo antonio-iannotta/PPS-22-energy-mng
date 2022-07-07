@@ -178,13 +178,15 @@ Il seguente diagramma UML mostra e formalizza quando detto:
 Come mostrato da questo diagramma il metodo register riporta una stringa contenente il risultato dell’operazione di registrazione. Nel caso di errore riscontrato in violazione delle verifiche esplicitate nel requisito 3.1.2 la stringa riporta anche la motivazione dell’errore.
 Dal momento che tale componente prevede l’interazione con il database degli utenti per la verifica dell’unicità dello userID di seguito è riportato il corrispondente diagramma delle attività:
 
-![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177271444-3c6d6ae0-27d4-40bf-b95f-14a89a20ab8d.png)
+![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177714692-1ad3c821-7769-4cb7-a27a-ad67dfbfe0d6.png)
+
 
 ### MD5
 
 MD5 è una funzione di hashing che ha il compito di svolgere l’hash function della password e può essere richiamata da altri componenti, per questo è stato rappresentato come un object, di seguito il diagramma di flusso relativo all’hashing della password.
 
-![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177271609-1dced690-0868-4faa-a021-da55b283a975.png)
+![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177714866-486e67b0-e73e-47f7-83a2-d3f7015cbde8.png)
+
 
 ### Login
 
@@ -230,7 +232,8 @@ Tuttavia, trattandosi di un costruttore di bollette è necessario considerare an
 Questa entità si è deciso di modellarla come una **classe**, di modo da rendere più robusta e coerente la costruzione della lista da parte del costruttore.
 Il seguente diagramma UML riporta e formalizza la classe relativa alle bollette.
 
-![bill](https://user-images.githubusercontent.com/91571686/177272335-d0d4ca2b-09e3-40ac-9588-36dcfc148945.png)
+![bill](https://user-images.githubusercontent.com/91571686/177715031-9b994493-e5f8-445c-827b-3d72df989561.png)
+
 
 
 Una volta definita l’entità bolletta è opportuno definire il costruttore delle bollette.
@@ -266,7 +269,9 @@ Dal momento che questo è un metodo che espone semplicemente operazioni si è de
 
 Il seguente diagramma UML mostra e formalizza quanto detto.
 
-![billOperations](https://user-images.githubusercontent.com/91571686/177273269-9ecd1f68-6eb1-432c-a10b-c39aea7ae1c8.png)
+![bill-operations](https://user-images.githubusercontent.com/91571686/177720355-7a90f78b-eb93-4ea8-ab6e-23446bffb9d9.png)
+
+
 
 ### Dashboard
 
@@ -285,13 +290,23 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 
 ### Antonio Iannotta
 
+#### Bill
+
+La **classe** Bill è stata realizzata per astrarre il concetto di Bolletta associata ad un certo utente, con una propria città, una propria regione, un proprio consumo in termini di utilizzo e costo. Questa astrazione si è resa utile per poter lavorare su una lista di consumi che fossero strutturati nella stessa maniera.
+
+#### BillOperations
+
+
+
+#### MongoDB
+
 ### Andrea Catani
 
 ### Demetrio Andriani
 Implementazione dei seguenti componenti:
 - **object** Registration
 - **object** Regions
-- **object** ErrorCodeHandler
+- **object** RegistrationErrorCodeHandler
 - **object** MD5
 - **object** Main
 - **class** RegistrationChecker
@@ -300,11 +315,10 @@ Implementazione dei seguenti componenti:
 
 #### Registration
 Il componente Registration è stato implementato come un **object** in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
-- signUp(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il RegistrationChecker,  permette di svolgere l’operazione di registrazione generando una connessione al database;
-- passwordHash(): questo metodo svolge la funzione di hash della password che lo user vuole utilizzare.
+- signUp(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il RegistrationChecker,  permette di svolgere l’operazione di registrazione generando una connessione al database ed inviando i dati precedentemente validati (userID, hashed password, userType, region, city);
 
 #### RegistrationChecker
-l componente RegistrationChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi della registrazione. E’ presente una mappa key/value (LinkedHashMap) utilizzata per associare ad ogni città la sua relativa regione.
+Il componente RegistrationChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi della registrazione. E’ presente una mappa key/value (LinkedHashMap) utilizzata per associare ad ogni città la sua relativa regione.
 
 I metodi che espone sono:
 - checkFields(): ritorna una stringa che identifica tutti i possibili errori presenti nei campi di registrazione, caso contrario restituisce un messaggio di corretta validazione di tutti i campi;
@@ -312,12 +326,13 @@ I metodi che espone sono:
 - checkPassword():  ritorna una stringa che identifica tutti i possibili errori relativi al campo della password (blank, minore di 6 caratteri, superiore a 20 caratteri), caso contrario restituisce il messaggio di validazione;
 - checkUserType(): ritorna una stringa identifica se l’utente è private(0) oppure company(1) e restituisce il messaggio di validazione;
 - checkCityRegionMatch(): ritorna una stringa che verifica il corretto collegamento tra la città e la sua relativa regione e restituisce il messaggio di validazione
+- checkDuplicateUserId: ritorna un boolean che indica se è gia stato utilizzato oppure no l'userID che l'utente sta inserendo in fase di registrazione. 
 
-#### ErrorCodeHandler
-Il componente ErrorCodeHandler è stato implementato come un object, il cui compito è quello di  associare ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio, per rendere una più chiara individuazione dell’errore. Qualora non ci dovessero essere errori, l’ ErrorCodeHandler presenterà un messaggio di corretta validazione del campo.
+#### RegistrationErrorCodeHandler
+Il componente RegistrationErrorCodeHandler è stato implementato come un **object**, il cui compito è quello di  associare ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio, per rendere una più chiara individuazione dell’errore. Qualora non ci dovessero essere errori, il RegistrationErrorCodeHandler presenterà un messaggio di corretta validazione del campo.
 
 #### Regions
-Il componente Regions è stato implementato come un object,  il cui obbiettivo è quello di associare ad ogni città italiana la relativa regione.
+Il componente Regions è stato implementato come un **object**,  il cui scopo è quello di associare ad ogni città italiana la relativa regione.
 
 #### MD5
 Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato scelto di utilizzare un **object** per incapsularne il comportamento. Il metodo esposto dal componente MD5 è:
@@ -325,11 +340,9 @@ Dal momento che Il componente MD5 deve eseguire un’unica operazione è stato s
 - md5HashPassword(): questo metodo ha come valore in input una stringa, cioè la password, e restituisce come valore una stringa, vale a dire l’hash code della password.
 
 #### Main
-Il componente Main è stato implementato come un **object**. Al suo interno si avranno i seguenti metodi:
-- callRegistration(): metodo che si occupa di dover chiamare la Registration,
-- callLogin(): metodo che si occupa di dover chiamare il Login.
-
-
+Il componente Main è stato implementato come un **object**,il cui compito è quello di mostrare una lista delle possibili operazioni che l'utente può svolgere. Al suo interno si avranno i seguenti metodi:
+- callRegistration(): metodo che ritorna una stringa, che si occupa di prendere i dati inseriti dall'utente relativi alla Registration e successivamente di chiamare la Registration,
+- callLogin(): metodo che si occupa di prendere i dati inseriti dall'utente relativi al Login e successivamente di  chiamare il Login.
 
 ### Carlo Di Raddo
 
