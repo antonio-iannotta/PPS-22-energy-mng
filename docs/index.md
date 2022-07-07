@@ -178,13 +178,15 @@ Il seguente diagramma UML mostra e formalizza quando detto:
 Come mostrato da questo diagramma il metodo register riporta una stringa contenente il risultato dell’operazione di registrazione. Nel caso di errore riscontrato in violazione delle verifiche esplicitate nel requisito 3.1.2 la stringa riporta anche la motivazione dell’errore.
 Dal momento che tale componente prevede l’interazione con il database degli utenti per la verifica dell’unicità dello userID di seguito è riportato il corrispondente diagramma delle attività:
 
-![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177271444-3c6d6ae0-27d4-40bf-b95f-14a89a20ab8d.png)
+![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177714692-1ad3c821-7769-4cb7-a27a-ad67dfbfe0d6.png)
+
 
 ### MD5
 
 MD5 è una funzione di hashing che ha il compito di svolgere l’hash function della password e può essere richiamata da altri componenti, per questo è stato rappresentato come un object, di seguito il diagramma di flusso relativo all’hashing della password.
 
-![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177271609-1dced690-0868-4faa-a021-da55b283a975.png)
+![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177714866-486e67b0-e73e-47f7-83a2-d3f7015cbde8.png)
+
 
 ### Login
 
@@ -230,7 +232,8 @@ Tuttavia, trattandosi di un costruttore di bollette è necessario considerare an
 Questa entità si è deciso di modellarla come una **classe**, di modo da rendere più robusta e coerente la costruzione della lista da parte del costruttore.
 Il seguente diagramma UML riporta e formalizza la classe relativa alle bollette.
 
-![bill](https://user-images.githubusercontent.com/91571686/177272335-d0d4ca2b-09e3-40ac-9588-36dcfc148945.png)
+![bill](https://user-images.githubusercontent.com/91571686/177715031-9b994493-e5f8-445c-827b-3d72df989561.png)
+
 
 
 Una volta definita l’entità bolletta è opportuno definire il costruttore delle bollette.
@@ -266,7 +269,9 @@ Dal momento che questo è un metodo che espone semplicemente operazioni si è de
 
 Il seguente diagramma UML mostra e formalizza quanto detto.
 
-![billOperations](https://user-images.githubusercontent.com/91571686/177273269-9ecd1f68-6eb1-432c-a10b-c39aea7ae1c8.png)
+![bill-operations](https://user-images.githubusercontent.com/91571686/177720355-7a90f78b-eb93-4ea8-ab6e-23446bffb9d9.png)
+
+
 
 ### Dashboard
 
@@ -284,6 +289,12 @@ Il seguente diagramma UML mostra e formalizza quanto detto:
 Il codice è stato organizzato in package. In particolar modo sono presenti 4 package principali, ognuno dei quali si mappa con quelli che sono i layer definiti nel pattern architetturale utilizzato. All'interno di ciascun package sono presenti altri package relativi ai componenti precedentemente definiti. Questi sotto-package corrispondono ai componenti presenti all'interno dei layer come definito precedentemente.
 
 ### Antonio Iannotta
+
+#### Bill
+
+#### BillOperations
+
+#### MongoDB
 
 ### Andrea Catani
 
