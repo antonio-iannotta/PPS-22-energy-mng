@@ -4,6 +4,7 @@ import presentationLayer.dashboard.Dashboard
 import dataLayer.login.Login
 import dataLayer.user.User
 import dataLayer.registration.Registration
+import dataLayer.usageGenerator.UsageGenerator
 
 object Main extends App :
 
@@ -20,13 +21,34 @@ object Main extends App :
 
       case "2" =>
         val user = callLogin()
+        val generator = new UsageGenerator
+
+        println("Vuoi avviare la generazione dei dati automatica?")
+        println("1) Si")
+        println("2) No")
+
+        val generatorSelection = scala.io.StdIn.readInt()
+        if generatorSelection == 1 then
+          generator.start()
+
         Dashboard(user.get).view()
+
+        if generatorSelection == 1 then
+          try
+            generator.interrupt()
+          catch
+            case _ : Exception => println("Il generatore è stato interrotto.")
+
       case "3" =>
         exit = false
         println("Arrivederci, grazie per aver utilizzato Energy Management.")
       case _ =>
         println("Input errato, inserisci una possibile scelta.")
 
+  /**
+   * Il seguente metodo si occupa di prendere i dati inseriti dall'utente relativi alla Registration e successivamente di chiamare la Registration
+   * @return
+   */
   def callRegistration(): String =
     println("Registrazione: inserire userID, password, userType, region e city")
     println("userID: ")
@@ -54,6 +76,10 @@ object Main extends App :
 
     Registration.signUP(userID, password, userType.toInt, region, city)
 
+  /**
+   * Il seguente metodo si occupa di prendere i dati inseriti dall'utente relativi al Login e successivamente di chiamare il Login
+   * @return
+   */
   def callLogin(): Option[User] =
     println("Login: inserire userID, password")
     println("userID: ")

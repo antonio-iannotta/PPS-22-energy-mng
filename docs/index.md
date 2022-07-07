@@ -290,15 +290,42 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 
 ### Antonio Iannotta
 
-#### Bill
+Implementazione dei seguenti componenti:
+- **object** MongoDB
+- **object** BillOperations
+- **class** Bill
+- **object** Utils
+- **class** MongoDBTest
+- **class** BillTest
+- **class** UtilsTest
 
-La **classe** Bill è stata realizzata per astrarre il concetto di Bolletta associata ad un certo utente, con una propria città, una propria regione, un proprio consumo in termini di utilizzo e costo. Questa astrazione si è resa utile per poter lavorare su una lista di consumi che fossero strutturati nella stessa maniera.
+#### MongoDB
+
+L'implementazione di questo componente, le cui operazioni sono rappresentate nel seguente diagramma UML, regolano
+l'interazione del sistema con il supporto scelto per memorizzare i dati. Nel caso in esame si è scelto come supporto di utilizzare
+MongoDB come database NoSQL.
+
+![MongoDB](https://user-images.githubusercontent.com/91571686/177780450-2a5a1312-9abb-4a27-919d-9c7403b77ce9.png)
+
+
+Come è possibile notare le operazioni consentono un'interazione con il database per il recupero delle informazioni memorizzate
+sottoforma di documenti in due collezioni: *usages* e *users*. Il recupero delle informazioni consente di creare una
+lista di entità già definite nel sistema (User e Bill).
+Per l'implementazione di tale componente si è cercato di massimizzare insieme KISS and DRY.
+Un aspetto da rimarcare riguarda il fatto che tale componente è strettamente legato all'object Helpers che espone i metodi
+per l'elaborazione dei dati ricevuti eseguendo una find su una certa collezione.
 
 #### BillOperations
 
+BillOperations si occupa di eseguire le operazioni sulla lista dei dati raccolti dal database mediante BillBuilder. In particolar modo l'implementazione di questo componente è proceduta di pari passo con l'implementazione della libreria ausiliaria Utils. Entrambi questi componenti sono contenuti all'interno del package applicationLogicLayer.billOperations in modo da rendere ancora più evidente la dipendenza l'uno dall'altro
 
+#### Utils
+La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metodi ausiliari di cui necessitasse per poter eseguire al meglio le operazioni sulla lista delle bollette recuperate dal database. Le operazioni esposte da questa libreria sono le seguenti:
 
-#### MongoDB
+![Utils](https://user-images.githubusercontent.com/91571686/177801860-3f0583d5-7339-4064-8d9c-6e455225e801.png)
+
+#### Bill
+Il componente Bill è stato realizzato come classe per fornire una corretta astrazione del concetto di bolletta e per consentire inoltre di poter eseguire le operazioni sui consumi partendo da tipi di dati strutturati nella maniera più opportuna possibile.
 
 ### Andrea Catani
 

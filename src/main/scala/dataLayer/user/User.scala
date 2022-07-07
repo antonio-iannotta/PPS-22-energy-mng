@@ -50,6 +50,5 @@ class User(private val _userID: String, private val _password: String, private v
   def makePredictionByRegion(usageType: String, year: Int, region: String = region): Unit =
     println(BillOperations.makePredictionByLocation(userType, usageType, year, "region", region))
 
-  def getUsageOrcostByRegionOrcity(region: String = region, usageType: String, cityOrRegion: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
-    BillOperations.getUsageOrCostByLocation(userType, usageType, region, cityOrRegion, usageOrCost, year)
-    
+  def getUsageOrcostByRegionOrcity(cityRegion: String, usageType: String, cityOrRegion: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
+    BillOperations.getUsageOrCostByLocation(userType, usageType, cityRegion, cityOrRegion, usageOrCost, year)
