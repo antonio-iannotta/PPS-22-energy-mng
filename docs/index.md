@@ -178,7 +178,8 @@ Il seguente diagramma UML mostra e formalizza quando detto:
 Come mostrato da questo diagramma il metodo register riporta una stringa contenente il risultato dell’operazione di registrazione. Nel caso di errore riscontrato in violazione delle verifiche esplicitate nel requisito 3.1.2 la stringa riporta anche la motivazione dell’errore.
 Dal momento che tale componente prevede l’interazione con il database degli utenti per la verifica dell’unicità dello userID di seguito è riportato il corrispondente diagramma delle attività:
 
-![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177271444-3c6d6ae0-27d4-40bf-b95f-14a89a20ab8d.png)
+![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177714692-1ad3c821-7769-4cb7-a27a-ad67dfbfe0d6.png)
+
 
 ### MD5
 
