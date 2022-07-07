@@ -232,7 +232,8 @@ Tuttavia, trattandosi di un costruttore di bollette è necessario considerare an
 Questa entità si è deciso di modellarla come una **classe**, di modo da rendere più robusta e coerente la costruzione della lista da parte del costruttore.
 Il seguente diagramma UML riporta e formalizza la classe relativa alle bollette.
 
-![bill](https://user-images.githubusercontent.com/91571686/177272335-d0d4ca2b-09e3-40ac-9588-36dcfc148945.png)
+![bill](https://user-images.githubusercontent.com/91571686/177715031-9b994493-e5f8-445c-827b-3d72df989561.png)
+
 
 
 Una volta definita l’entità bolletta è opportuno definire il costruttore delle bollette.
