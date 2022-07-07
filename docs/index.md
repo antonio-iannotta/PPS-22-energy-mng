@@ -185,7 +185,8 @@ Dal momento che tale componente prevede l’interazione con il database degli ut
 
 MD5 è una funzione di hashing che ha il compito di svolgere l’hash function della password e può essere richiamata da altri componenti, per questo è stato rappresentato come un object, di seguito il diagramma di flusso relativo all’hashing della password.
 
-![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177271609-1dced690-0868-4faa-a021-da55b283a975.png)
+![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177714866-486e67b0-e73e-47f7-83a2-d3f7015cbde8.png)
+
 
 ### Login
 
