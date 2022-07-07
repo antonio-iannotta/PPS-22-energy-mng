@@ -27,15 +27,19 @@ object ChoiceHandler:
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
-        user.getUsageOrcostByRegionOrcity(user.region, usage, cityOrRegion, usageOrCost, year)
+        cityOrRegion match
+          case "region" =>
+            user.getUsageOrcostByRegionOrcity(user.region, usage, cityOrRegion, usageOrCost, year)
+          case _ =>
+            user.getUsageOrcostByRegionOrcity(user.city, usage, cityOrRegion, usageOrCost, year)
 
       case 2 =>
 
         cityOrRegion match
           case "region" => println("Inserire la regione d'interesse:")
-          case "city" => println("Inserire la città d'interesse:")
+          case _ => println("Inserire la città d'interesse:")
 
-        val selectedRegion = scala.io.StdIn.readLine()
+        val cityOrRegionSelected = scala.io.StdIn.readLine()
 
         printUsage()
         val usageChoice = scala.io.StdIn.readInt()
@@ -44,7 +48,7 @@ object ChoiceHandler:
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
-        user.getUsageOrcostByRegionOrcity(selectedRegion, usage, cityOrRegion, usageOrCost, year)
+        user.getUsageOrcostByRegionOrcity(cityOrRegionSelected, usage, cityOrRegion, usageOrCost, year)
 
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 

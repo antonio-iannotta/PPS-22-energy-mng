@@ -85,11 +85,11 @@ class RegistrationChecker(private val userID: String, private val password: Stri
    * @return
    */
   private def checkCityRegionMatch(city: String, region: String): String =
-    try
+    if regionCityMap.contains(city.toLowerCase.capitalize)then
       if regionCityMap(region.toLowerCase.capitalize).contains(city.toLowerCase.capitalize) then "OK"
       else "REGISTRATION_CITY_1"
-    catch
-      case _ : NoSuchElementException => "REGISTRATION_CITY_2"
+    else "REGISTRATION_CITY_2"
+
   /**
    * Il seguente metodo fa il controllo se è gia stato utilizzato oppure no l'userID
    * @param userID
