@@ -5,11 +5,11 @@ import scala.collection.mutable
 import scala.collection.mutable.*
 
 object ChoiceHandler:
-  def cityRegionChoiceHandler(user: User, usageOrCost: String, cityOrRegion: String): LinkedHashMap[Int, Double] =
+  def cityRegionChoiceHandler(user: User, usageOrCost: String, locationType: String): LinkedHashMap[Int, Double] =
 
     var usage: String = ""
 
-    cityOrRegion match
+    locationType match
       case "region" =>
         println("1) Regione relativa all'utente")
         println("2) Regione a scelta")
@@ -27,15 +27,15 @@ object ChoiceHandler:
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
-        cityOrRegion match
+        locationType match
           case "region" =>
-            user.getUsageOrcostByRegionOrcity(user.region, usage, cityOrRegion, usageOrCost, year)
+            user.getUsageOrcostByRegionOrcity(user.region, usage, locationType, usageOrCost, year)
           case _ =>
-            user.getUsageOrcostByRegionOrcity(user.city, usage, cityOrRegion, usageOrCost, year)
+            user.getUsageOrcostByRegionOrcity(user.city, usage, locationType, usageOrCost, year)
 
       case 2 =>
 
-        cityOrRegion match
+        locationType match
           case "region" => println("Inserire la regione d'interesse:")
           case _ => println("Inserire la città d'interesse:")
 
@@ -48,7 +48,7 @@ object ChoiceHandler:
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
-        user.getUsageOrcostByRegionOrcity(cityOrRegionSelected, usage, cityOrRegion, usageOrCost, year)
+        user.getUsageOrcostByRegionOrcity(cityOrRegionSelected, usage, locationType, usageOrCost, year)
 
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 
