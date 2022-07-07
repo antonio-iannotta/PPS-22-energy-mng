@@ -27,15 +27,15 @@ object BillOperations:
    * Il seguente metodo ritorna una mappa [Int, Double] a cui ogni mese è associato il costo medio di tipologie di consumi o costi relativi ad un certo utente, una certa utenza, una certa città o regione e un certo anno
    * @param userType
    * @param usageType
-   * @param cityRegion
-   * @param cityOrRegion
+   * @param location
+   * @param locationType
    * @param usageOrCost
    * @param year
    * @return
    */
-  def getUsageOrCostByLocation(userType: String, usageType: String, cityRegion: String, cityOrRegion: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
+  def getUsageOrCostByLocation(userType: String, usageType: String, location: String, locationType: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    monthlyUsageOrCost(userType,usageType,cityOrRegion,cityRegion,usageOrCost, billList, year)
+    monthlyUsageOrCost(userType,usageType,locationType,location,usageOrCost, billList, year)
 
 
   /**
@@ -70,20 +70,20 @@ object BillOperations:
    * @param userType
    * @param usageType
    * @param year
-   * @param cityOrRegion
-   * @param cityRegion
+   * @param locationType
+   * @param location
    * @return
    */
-  def makePredictionByLocation(userType: String, usageType: String, year: Int, cityOrRegion: String, cityRegion: String): String =
+  def makePredictionByLocation(userType: String, usageType: String, year: Int, locationType: String, location: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
     val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
 
-    initializationMapByLocation(annualUsage, userType, usageType, cityOrRegion, cityRegion, billList)
-    initializationMapByLocation(annualCost, userType, usageType, cityOrRegion, cityRegion, billList)
+    initializationMapByLocation(annualUsage, userType, usageType, locationType, location, billList)
+    initializationMapByLocation(annualCost, userType, usageType, locationType, location, billList)
 
-    fillUsageCostMapByLocation(annualUsage,usageType,"usage",userType, cityOrRegion, cityRegion, billList)
-    fillUsageCostMapByLocation(annualCost, usageType, "cost", userType, cityOrRegion, cityRegion, billList)
+    fillUsageCostMapByLocation(annualUsage,usageType,"usage",userType, locationType, location, billList)
+    fillUsageCostMapByLocation(annualCost, usageType, "cost", userType, locationType, location, billList)
 
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)

@@ -14,11 +14,11 @@ import dataLayer.mongoDriver.Helpers._
 object MongoDB:
 
   /**
-   * Il seguente metodo ritorna il database passato come argomento
+   * Il seguente metodo ritorna il database 
    * @return
    */
-  def mongoDBConnection(database: String): MongoDatabase =
-    MongoClient("mongodb://localhost:27017").getDatabase(database)
+  def mongoDBConnection(): MongoDatabase =
+    MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
   /**
    * Il seguente metodo recupera gli utenti dal DB effettuando una chiamata sulla collezione "users"
@@ -26,7 +26,7 @@ object MongoDB:
    */
   def retrieveUsers(): ListBuffer[User] =
     var userList: ListBuffer[User] = ListBuffer()
-    MongoDB.mongoDBConnection("energymanagement").getCollection("users")
+    MongoDB.mongoDBConnection().getCollection("users")
       .find().results()
       .foreach(user => userList += createUser(user.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
     userList
@@ -37,7 +37,7 @@ object MongoDB:
    */
   def retrieveUsages(): ListBuffer[Bill] =
     var billList: ListBuffer[Bill] = ListBuffer()
-    MongoDB.mongoDBConnection("energymanagement").getCollection("usages")
+    MongoDB.mongoDBConnection().getCollection("usages")
       .find().results()
       .foreach(usage => billList += createBill(usage.foldLeft[ListBuffer[Any]](ListBuffer())(_ += _._2.asInstanceOf[Any])))
     billList
@@ -69,7 +69,7 @@ object MongoDB:
    */
   def addUser(user: User): String =
     val document = Document(composeUserMap(user))
-    mongoDBConnection("energymanagement").getCollection("users").insertOne(document).results()
+    mongoDBConnection().getCollection("users").insertOne(document).results()
 
 
   /**
