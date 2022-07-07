@@ -292,7 +292,11 @@ Il codice è stato organizzato in package. In particolar modo sono presenti 4 pa
 
 #### Bill
 
+La **classe** Bill è stata realizzata per astrarre il concetto di Bolletta associata ad un certo utente, con una propria città, una propria regione, un proprio consumo in termini di utilizzo e costo. Questa astrazione si è resa utile per poter lavorare su una lista di consumi che fossero strutturati nella stessa maniera.
+
 #### BillOperations
+
+
 
 #### MongoDB
 
