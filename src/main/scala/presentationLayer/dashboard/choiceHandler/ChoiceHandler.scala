@@ -20,16 +20,9 @@ object ChoiceHandler:
     val choice = scala.io.StdIn.readInt()
     choice match
       case 1 =>
-        println("Inserire il consumo d'interesse:")
-        println("1) per visualizzare consumi luce")
-        println("2) per visualizzare consumi gas")
-        println("3) per visualizzare consumi acqua")
+        printUsage()
         val usageChoice = scala.io.StdIn.readInt()
-
-        usageChoice match
-          case 1 => usage = "electricity"
-          case 2 => usage ="heat"
-          case 3 => usage ="water"
+        usage = usageChoiceMatch(usageChoice)
 
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
@@ -44,16 +37,9 @@ object ChoiceHandler:
 
         val selectedRegion = scala.io.StdIn.readLine()
 
-        println("Inserire il consumo d'interesse")
-        println("1) per visualizzare consumi luce")
-        println("2) per visualizzare consumi gas")
-        println("3) per visualizzare consumi acqua")
+        printUsage()
         val usageChoice = scala.io.StdIn.readInt()
-
-        usageChoice match
-          case 1 => usage = "electricity"
-          case 2 => usage = "heat"
-          case 3 => usage = "water"
+        usage = usageChoiceMatch(usageChoice)
 
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
@@ -76,3 +62,16 @@ object ChoiceHandler:
       case 1 => user.getUsageOrCost(usageOrCost, "electricity")
       case 2 => user.getUsageOrCost(usageOrCost,"heat")
       case 3 => user.getUsageOrCost(usageOrCost, "water")
+
+  def printUsage() =
+    println("Inserire il consumo d'interesse")
+    println("1) per visualizzare consumi luce")
+    println("2) per visualizzare consumi gas")
+    println("3) per visualizzare consumi acqua")
+
+  def usageChoiceMatch(usage: Int) : String =
+    usage match
+      case 1 => "electricity"
+      case 2 => "heat"
+      case 3 => "water"
+      case _ => "Input non valido"
