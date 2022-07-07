@@ -269,7 +269,8 @@ Dal momento che questo è un metodo che espone semplicemente operazioni si è de
 
 Il seguente diagramma UML mostra e formalizza quanto detto.
 
-![bill operations](https://user-images.githubusercontent.com/91571686/177718006-3a27c302-9ec5-40c3-90dc-0f365554965a.png)
+![bill-operations](https://user-images.githubusercontent.com/91571686/177720355-7a90f78b-eb93-4ea8-ab6e-23446bffb9d9.png)
+
 
 
 ### Dashboard
