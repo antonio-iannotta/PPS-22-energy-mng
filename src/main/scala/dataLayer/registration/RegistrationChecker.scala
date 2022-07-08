@@ -1,8 +1,9 @@
 package dataLayer.registration
 
 import dataLayer.errorCodeHandler.RegistrationErrorCodeHandler
-import dataLayer.mongoDriver.MongoDB.retrieveUsers
-import scala.collection.mutable.LinkedHashMap
+import dataLayer.mongoDriver.MongoDB.{retrieveDataFromCollection, retrieveUsers}
+
+import scala.collection.mutable.{LinkedHashMap, ListBuffer}
 
 class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
 
@@ -96,5 +97,5 @@ class RegistrationChecker(private val userID: String, private val password: Stri
    * @return
    */
   private def checkDuplicatedUserID(userID: String): Boolean =
-    val users = retrieveUsers()
+    val users = retrieveDataFromCollection("users").asInstanceOf[ListBuffer[User]]    
     users.exists(user => user.userID == userID)
