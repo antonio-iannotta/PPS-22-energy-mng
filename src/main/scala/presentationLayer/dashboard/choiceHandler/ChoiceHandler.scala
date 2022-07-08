@@ -48,7 +48,6 @@ object ChoiceHandler:
         val year = scala.io.StdIn.readInt()
 
         user.getUsageOrCostByRegionOrCity(cityOrRegionSelected, usage, locationType, usageOrCost, year)
-      case _ => println("Input non valido!")
 
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 
