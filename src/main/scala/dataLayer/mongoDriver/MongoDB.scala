@@ -35,11 +35,11 @@ object MongoDB:
       case "users" =>
         MongoDB.mongoDBConnection().getCollection(collection)
           .find().results()
-          .foreach(user => retrievedData.asInstanceOf[ListBuffer[User]] += createUser(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
+          .foreach(user => retrievedData += createUser(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
       case "usages" =>
         MongoDB.mongoDBConnection().getCollection(collection)
           .find().results()
-          .foreach(user => retrievedData.asInstanceOf[ListBuffer[Bill]] += createBill(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
+          .foreach(user => retrievedData += createBill(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
 
     retrievedData
 
