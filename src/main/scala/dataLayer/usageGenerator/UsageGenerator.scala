@@ -20,8 +20,8 @@ class UsageGenerator extends Thread:
     val usageTypes: List[String] = List("water", "heat", "electricity")
 
     while true do
-      MongoDB.retrieveUsers().foreach(user => usageTypes.foreach(
-        usageType => usagesCollection.insertOne(Document(MongoDB.composeUsageMap(user,usageType,month,year))).results()
+      MongoDB.retrieveDataFromCollection("users").foreach(user => usageTypes.foreach(
+        usageType => usagesCollection.insertOne(Document(MongoDB.composeUsageMap(user.asInstanceOf[User],usageType,month,year))).results()
       ))
 
       month match

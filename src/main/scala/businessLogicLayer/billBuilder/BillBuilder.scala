@@ -10,4 +10,4 @@ object BillBuilder:
    * @return
    */
   def build(): ListBuffer[Bill] =
-    MongoDB.retrieveUsages()
+    MongoDB.retrieveDataFromCollection().asInstanceOf[ListBuffer[Bill]]
