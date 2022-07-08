@@ -7,6 +7,6 @@ object CityManager extends CityRegionManager :
     println("Inserire l'anno d'interesse")
   try
     val year = scala.io.StdIn.readInt()
-    user.makePredictionByCity(usageMenuPrint(), year, city)
+    user.makePredictionByCity(PrintHelper.usageMenuPrint(), year, city)
   catch
     case _: NumberFormatException => println("Input non valido.")
