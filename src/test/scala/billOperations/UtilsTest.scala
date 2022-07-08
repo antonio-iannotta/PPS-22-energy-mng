@@ -84,28 +84,28 @@ class UtilsTest extends AnyFunSuite:
     
   }
 
-  test("initializationMapByLocation test1") {
+  test("mapInitializationByLocation() test1") {
     
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap,"private","heat","city","milano", billListTest)
+    mapInitializationByLocation(testMap,"private","heat","city","milano", billListTest)
     assert(testMap.nonEmpty)
     
   }
 
-  test("initializationMapByLocation test2") {
+  test("mapInitializationByLocation() test2") {
     
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "private", "heat", "region", "lazio", billListTest)
+    mapInitializationByLocation(testMap, "private", "heat", "region", "lazio", billListTest)
     assert(testMap.nonEmpty)
   }
 
-  test("initializationMapByLocation when company is not present") {
+  test("mapInitializationByLocation() when company is not present") {
     
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "company", "heat", "region", "lombardia", billListTest)
+    mapInitializationByLocation(testMap, "company", "heat", "region", "lombardia", billListTest)
     assert(testMap.isEmpty)
     
   }
@@ -169,13 +169,13 @@ class UtilsTest extends AnyFunSuite:
     
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "private", "electricity", "city", "milano", billListTest)
+    mapInitializationByLocation(testMap, "private", "electricity", "city", "milano", billListTest)
     fillUsageCostMapByLocation(testMap, "electricity", "usage", "private", "city", "milano", billListTest)
     assert(testMap.nonEmpty)
     
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "private", "electricity", "region", "lazio", billListTest)
+    mapInitializationByLocation(testMap, "private", "electricity", "region", "lazio", billListTest)
     fillUsageCostMapByLocation(testMap, "electricity", "cost", "private", "region", "lazio", billListTest)
     assert(testMap.nonEmpty)
     
@@ -186,28 +186,28 @@ class UtilsTest extends AnyFunSuite:
     //Caso in cui il tipo di utente è una azienda. Questo test fallirà dal momento in cui non c'è nessuna bolletta relativa ad un'azienda.
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "company", "electricity", "city", "milano", billListTest)
+    mapInitializationByLocation(testMap, "company", "electricity", "city", "milano", billListTest)
     fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "city", "milano", billListTest)
     assert(testMap.isEmpty)
 
     //Caso in cui il tipo di utenza inserita non esiste
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "company", "gas", "city", "milano", billListTest)
+    mapInitializationByLocation(testMap, "company", "gas", "city", "milano", billListTest)
     fillUsageCostMapByLocation(testMap, "gas", "usage", "company", "city", "milano", billListTest)
     assert(testMap.isEmpty)
 
     //Caso in cui non c'è alcuna bolletta relativa ad una specifica città
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "company", "electricity", "city", "bologna", billListTest)
+    mapInitializationByLocation(testMap, "company", "electricity", "city", "bologna", billListTest)
     fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "city", "bologna", billListTest)
     assert(testMap.isEmpty)
 
     //Caso in cui non c'è alcuna bolletta relativa ad una certa regione
     testMap = mutable.LinkedHashMap()
     
-    initializationMapByLocation(testMap, "company", "electricity", "region", "veneto", billListTest)
+    mapInitializationByLocation(testMap, "company", "electricity", "region", "veneto", billListTest)
     fillUsageCostMapByLocation(testMap, "electricity", "usage", "company", "region", "veneto", billListTest)
     assert(testMap.isEmpty)
     

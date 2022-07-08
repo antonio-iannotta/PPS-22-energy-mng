@@ -1,4 +1,4 @@
-package dataLayer.mongoDriver
+package mongoDriver
 
 import org.mongodb.scala.bson.{BsonObjectId, BsonString}
 import org.scalatest.funsuite.AnyFunSuite
@@ -12,7 +12,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createBill success scenario") {
 
-    var usageFields: ListBuffer[Any] = ListBuffer()
+    val usageFields: ListBuffer[Any] = ListBuffer()
     
     usageFields += BsonObjectId.apply()
     usageFields += BsonString.apply("userID")
@@ -42,7 +42,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createBill fail scenario") {
 
-    var usageFields: ListBuffer[Any] = ListBuffer()
+    val usageFields: ListBuffer[Any] = ListBuffer()
     
     usageFields += BsonObjectId.apply()
     usageFields += BsonObjectId.apply()
@@ -61,7 +61,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createUser success scenario") {
 
-    var userFields: ListBuffer[Any] = ListBuffer()
+    val userFields: ListBuffer[Any] = ListBuffer()
     
     userFields += BsonObjectId.apply()
     userFields += BsonString.apply("userID")
@@ -82,7 +82,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createUser fail scenario") {
 
-    var userFields: ListBuffer[Any] = ListBuffer()
+    val userFields: ListBuffer[Any] = ListBuffer()
     
     userFields += BsonObjectId.apply()
     userFields += BsonObjectId.apply()
