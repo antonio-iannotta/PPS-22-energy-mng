@@ -12,7 +12,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createBill success scenario") {
 
-    val usageFields: ListBuffer[Any] = ListBuffer()
+    val usageFields: ListBuffer[AnyRef] = ListBuffer()
     
     usageFields += BsonObjectId.apply()
     usageFields += BsonString.apply("userID")
@@ -42,7 +42,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createBill fail scenario") {
 
-    val usageFields: ListBuffer[Any] = ListBuffer()
+    val usageFields: ListBuffer[AnyRef] = ListBuffer()
     
     usageFields += BsonObjectId.apply()
     usageFields += BsonObjectId.apply()
@@ -61,7 +61,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createUser success scenario") {
 
-    val userFields: ListBuffer[Any] = ListBuffer()
+    val userFields: ListBuffer[AnyRef] = ListBuffer()
     
     userFields += BsonObjectId.apply()
     userFields += BsonString.apply("userID")
@@ -82,7 +82,7 @@ class MongoDBTest extends AnyFunSuite:
 
   test("createUser fail scenario") {
 
-    val userFields: ListBuffer[Any] = ListBuffer()
+    val userFields: ListBuffer[AnyRef] = ListBuffer()
     
     userFields += BsonObjectId.apply()
     userFields += BsonObjectId.apply()
