@@ -156,7 +156,8 @@ L’utente è l’elemento centrale dell’applicazione. Infatti è l’utente c
 All’interno del sistema sono presenti due tipologie di utenti: l’utente privato e l’azienda. Tuttavia questa distinzione viene effettuata all’atto di registrazione. Al momento del login l’utente viene creato con i dati rilevanti recuperati dal DB in corrispondenza del proprio username e viene istanziato con un campo che riporta la tipologia di utente a cui ci si riferisce.  Quest’ultimo punto è estremamente importante per riportare i consumi relativi ad una certa località con riferimento agli utenti privati o alle aziende. E’ per questa ragione che is è scelto di rappresentare l’utente per mezzo di una **classe**.
 Il seguente diagramma UML mostra e formalizza quanto detto:
 
-![user](https://user-images.githubusercontent.com/91571686/177270890-02ef360d-27ba-4976-8185-9f78ef9cc408.png)
+![user](https://user-images.githubusercontent.com/91571686/178055474-73ce61a3-931e-452e-afa2-da2b9cbbd6bc.png)
+
 
 L’utente si trova nella Dashboard, in particolar modo, come spiegato successivamente, la Dashboard è istanziata ricevendo in ingresso un Utente.
 Dal diagramma riportato è possibile notare come un utente venga istanziato tenendo conto del suo userID (univoco all’interno del sistema) la propria città, la propria regione e la tipologia di utente. In particolar modo la tipologia di utente risulta importante sia per effettuare le previsioni relative ad una certa località geografica (le previsioni sull’andamento dei consumi privati o aziendali relativi ad una certa città o regione) e sia per mostrare l’andamento dei consumi in una certa località geografica (andamento dei consumi privati o aziendali relativi ad una certa città o regione)
