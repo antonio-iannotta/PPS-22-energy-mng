@@ -5,6 +5,7 @@ import dataLayer.mongoDriver.Helpers._
 import org.mongodb.scala.bson.{BsonString, Document}
 import scala.collection.mutable.*
 import scala.language.postfixOps
+import dataLayer.user.User
 import scala.util.Random
 
 class UsageGenerator extends Thread:
