@@ -3,9 +3,12 @@ package applicationLogicLayer.billOperations
 import scala.collection.mutable.LinkedHashMap
 import dataLayer.bill.Bill
 import businessLogicLayer.billBuilder.BillBuilder
+
 import collection.mutable.ListBuffer
 import scala.util.Random
-import Utils._
+import Utils.*
+
+import scala.collection.mutable
 
 object BillOperations:
 
@@ -27,16 +30,16 @@ object BillOperations:
   
 
   /**
-   * Il seguente metodo ritorna una mappa [Int, Double] a cui ogni mese è associato il costo medio di tipologie di consumi o costi relativi ad un certo utente, una certa utenza, una certa città o regione e un certo anno
-   * @param userType
-   * @param usageType
-   * @param location
-   * @param locationType
-   * @param usageOrCost
-   * @param year
+   * This function returns the average monthly cost for a certain user type related to a certain usage type and a certain location
+   * @param userType is the user type target for the search of stored bills
+   * @param usageType is the usage type target for the search of stored bills
+   * @param location is the location target for the search of stored bills
+   * @param locationType is the location type (city or region)
+   * @param usageOrCost is the variable that states if computation must be computed on usage or cost
+   * @param year is the target year
    * @return
    */
-  def getUsageOrCostByLocation(userType: String, usageType: String, location: String, locationType: String, usageOrCost: String, year: Int): LinkedHashMap[Int, Double] =
+  def getUsageOrCostByLocation(userType: String, usageType: String, location: String, locationType: String, usageOrCost: String, year: Int): mutable.LinkedHashMap[Int, Double] =
     val billList: ListBuffer[Bill] = BillBuilder.build()
     monthlyUsageOrCost(userType,usageType,locationType,location,usageOrCost, billList, year)
 
@@ -45,16 +48,16 @@ object BillOperations:
   
 
   /**
-   * Il seguente metodo esegue le previsioni basate su un singolo utente relative ad un certo anno ed una certa utenza
-   * @param userID
-   * @param usageType
-   * @param year
+   * The following function returns the prediction for an individual user, for a certain usage type and related to a certain year
+   * @param userID is the userID target
+   * @param usageType is the usage
+   * @param year is the reference year for the prediction
    * @return
    */
   def makeIndividualPrediction(userID: String, usageType: String, year: Int): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
-    val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
+    val annualUsage: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
+    val annualCost: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
 
     individualMapInitialization(annualUsage, userID, usageType, billList)
     individualMapInitialization(annualCost, userID, usageType, billList)
@@ -65,8 +68,8 @@ object BillOperations:
     annualUsage.toSeq.sortBy(_._1)
     annualCost.toSeq.sortBy(_._1)
 
-    var averageUsage = average(annualUsage)
-    var averageCost = average(annualCost)
+    val averageUsage = average(annualUsage)
+    val averageCost = average(annualCost)
 
     predictionResult(year,annualUsage, averageUsage, averageCost, usageType)
 
@@ -75,18 +78,18 @@ object BillOperations:
   
 
   /**
-   * Il seguente metodo ritorna le previsioni associate ad una certa tipologia di consumo, ad una tipologia di utente, ad una certa città o regione e ad un certo anno.
-   * @param userType
-   * @param usageType
-   * @param year
-   * @param locationType
-   * @param location
+   * The following function returns the prediction for a certain location related to a certain usage type and a certain user type
+   * @param userType is the user type target
+   * @param usageType is the usage type target
+   * @param year is the year for which the prediction is desired
+   * @param locationType is the location type (city or region)
+   * @param location is the location target
    * @return
    */
   def makePredictionByLocation(userType: String, usageType: String, year: Int, locationType: String, location: String): String =
     val billList: ListBuffer[Bill] = BillBuilder.build()
-    val annualUsage: LinkedHashMap[Int, Double] = LinkedHashMap()
-    val annualCost: LinkedHashMap[Int, Double] = LinkedHashMap()
+    val annualUsage: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
+    val annualCost: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
 
     mapInitializationByLocation(annualUsage, userType, usageType, locationType, location, billList)
     mapInitializationByLocation(annualCost, userType, usageType, locationType, location, billList)
