@@ -11,10 +11,10 @@ object BillOperations:
 
 
   /**
-   * Il seguente metodo ritorna sottoforma di stringa i costi o i consumi relativi alle bollette associate ad un certo utente per una certa tipologia di consumi
-   * @param userID
-   * @param usageType
-   * @param costOrUsage
+   * The following function returns the cost or usage related to a certain userID and a certain user type
+   * @param userID is the userID target for the search of stored bills
+   * @param usageType is the usageType target for the search of stored bills
+   * @param costOrUsage is the variable that states if the required information is the cost or usage
    * @return
    */
   def getIndividualCostOrUsage(userID: String, usageType: String, costOrUsage: String): String =
