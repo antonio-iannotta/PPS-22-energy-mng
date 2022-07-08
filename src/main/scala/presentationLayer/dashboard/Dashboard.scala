@@ -15,6 +15,7 @@ case class Dashboard(private val user: User):
       PrintHelper.printMenu()
       val selection = scala.io.StdIn.readLine()
 
+
       selection match
         case "1" => println(ChoiceHandler.individualChoiceHandler(user, "cost"))
         case "2" => println(ChoiceHandler.individualChoiceHandler(user, "usage"))
