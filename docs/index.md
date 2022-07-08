@@ -136,7 +136,10 @@ Di seguito è riportata l'architettura generale del sistema:
 
 Energy Management è un’applicazione con un forte flusso informativo, in cui è possibile individuare diversi livelli. Per questa ragione il pattern architetturale scelto è il **Layered Pattern**.
 
-![pattern](https://user-images.githubusercontent.com/91571686/177270038-de09205d-255f-4a59-a87a-87c008163eb7.png)
+![pattern](https://user-images.githubusercontent.com/91571686/178061042-19be6ff0-f79a-41d1-9f35-bce0776c4e90.png)
+
+
+
 
 
 La scelta di questo pattern è stata dettata dalla possibilità fornita dallo stesso di poter posizionare le varie componenti precedentemente elencate in un livello specifico.
@@ -145,6 +148,10 @@ La scelta di questo pattern è stata dettata dalla possibilità fornita dallo st
 - **Business logic layer**: in questo livello troviamo il componente dedito alla costruzione delle bollette
 - **Application logic layer**: in questo layer è posizionato il componente predisposto alle operazioni sulle bollette.
 - **Presentation layer**:  in questo livello è posizionato il componente Dashboard ed il componente Main che consente l’interazione con l’utente per le specifiche operazioni.
+
+La rappresentazione del grafico e la direzione del flusso di dati rende ancora più evidente il flusso informativo. L'utente accede solamente attraverso un punto di accesso al sistema mentre tutto le informazioni vengono generate dai dati e successivamente elaborate dai vari livelli sulla base delle operazioni richieste.
+Il sistema è stato inoltre pensato per essere un sistema distribuito in cui diversi utenti possono accedere, in maniera simultanea ai dati relativi ad essi, ad una certa città o una certa regione.
+
 
 ## Design di dettaglio
 
