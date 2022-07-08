@@ -23,7 +23,7 @@ object Helpers:
 
     def results(initial: String = ""): String =
       var result = ""
+      if initial.length > 0 then print(initial)
       results().foreach(res => result += converter(res) + "\n")
       result
-
 
