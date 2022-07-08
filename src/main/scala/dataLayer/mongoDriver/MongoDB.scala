@@ -20,6 +20,10 @@ object MongoDB:
   def mongoDBConnection(): MongoDatabase =
     MongoClient("mongodb://localhost:27017").getDatabase("energymanagement")
 
+
+
+
+
   /**
    * Il seguente metodo ritorna una lista di User o di Bill a seconda della collezione, passata come stringa in ingresso, che specifica quali dati debbano essere recuperati dal database
    * @param collection
@@ -39,12 +43,17 @@ object MongoDB:
 
     retrievedData
 
+
+
+
+
   /**
    * Il seguente metodo restituisce una bolletta creata a partire dai campi dei singoli consumi che sono stati recuperati dal database
    * @param usages
    * @return
    */
   def createBill(usages: ListBuffer[AnyRef]): Bill =
+
     val billID: String = LocalDateTime.now().toString
     val userID: String = usages(1).asInstanceOf[BsonString].asString().getValue
     val userType: String = usages(2).asInstanceOf[BsonString].asString().getValue
@@ -59,14 +68,21 @@ object MongoDB:
     Bill(billID,userID,userType,usageType,usage,cost,month,year,city,region)
 
 
+
+
+
   /**
    * Il seguente metodo aggiunge un utente al database
    * @param user
    * @return
    */
   def addUser(user: User): String =
+
     val document = Document(composeUserMap(user))
     mongoDBConnection().getCollection("users").insertOne(document).results()
+
+
+
 
 
   /**
@@ -85,13 +101,18 @@ object MongoDB:
     User(userID,password,userType,region,city)
 
 
+
+
+
   /**
    * Il seguente metodo si occupa di comporre una mappa [String, BsonString] che servirà come input per il Document da memorizzare nel database degli utenti
    * @param user
    * @return
    */
   def composeUserMap(user: User): LinkedHashMap[String, BsonString] =
+
     val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
+
     userMap("userID") = BsonString.apply(user.userID)
     userMap("password") = BsonString.apply(user.password)
     userMap("userType") = BsonString.apply(user.userType)
@@ -99,6 +120,10 @@ object MongoDB:
     userMap("city") = BsonString.apply(user.city)
 
     userMap
+
+
+
+
 
   /**
    * Il seguente metodo si occupa di comporre una mappa [String, BsonString] che servirà come input per il Document da memorizzare nel database dei consumi
@@ -109,6 +134,7 @@ object MongoDB:
    * @return
    */
   def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
+
     val usageMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
 
     usageMap("userID") = BsonString.apply(user.userID)
