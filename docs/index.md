@@ -334,14 +334,21 @@ Implementazione dei componenti:
 - **object** Helpers
 
 #### BillBuilder
-Il componente BillBuilder è stato realizzato come **object** poiché essendo un'implementazione del design pattern singleton, può essere richiamato da altri componenti senza il bisogno di essere istanziato. La funzionalità di BillBuilder è quella di ottenere un **ListBuffer** di oggetti di tipo **Bill** estraendoli dal database. La creazione di tale componente deriva dalla necessità di avere un oggetto che potesse rimodellare gli oggetti di tipo **Bill** coerentemente con le specifiche del progetto, all'interno di BillBuilder è possibile infatti, sotto un'ottica di modularità e scalabilità, esporre metodi aggiuntivi per modellare il valore di ritorno a fronte di eventuali richieste future. I metodi esposti sono:
-- Build(): il metodo si occupa di estrarre i dati dal database ed accorparli in un oggetto di tipo ListBuffer.
+Il componente **BillBuilder** è stato realizzato come **object** poiché essendo un'implementazione del design pattern **singleton**, può essere richiamato da altri componenti senza il bisogno di essere istanziato. La funzionalità di **BillBuilder** è quella di ottenere un **ListBuffer** di oggetti di tipo **Bill** estraendoli dal database. La creazione di tale componente deriva dalla necessità di avere un oggetto che potesse rimodellare gli oggetti di tipo **Bill** coerentemente con le specifiche del progetto, all'interno di **BillBuilder** è possibile infatti, sotto un'ottica di modularità e scalabilità, esporre metodi aggiuntivi per modellare il valore di ritorno a fronte di eventuali richieste future. I metodi esposti sono:
+- **Build()**: il metodo si occupa di estrarre i dati dal database ed accorparli in un oggetto di tipo **ListBuffer**.
 
 #### UsageGenerator
-Il componente UsageGenerator è un componente implementato come una classe **Thread**. Il compito di questo componente è quello di avviare una generazione randomica dei dati delle bollette, organizzarli e caricarli sul database. Grazie alle funzionalità della classe **Thread** è possibile eseguire UsageGenerator in maniera parallela al resto del progetto così da simulare l'eventualità, all'interno di un sistema distribuito, in cui vengano inseriti più dati in diversi istanti di tempo.
+Il componente **UsageGenerator** è un componente implementato come una classe **Thread**. Il compito di questo componente è quello di avviare una generazione randomica dei dati delle bollette, organizzarli e caricarli sul database. Grazie alle funzionalità della classe **Thread** è possibile eseguire **UsageGenerator** in maniera parallela al resto del progetto così da simulare l'eventualità, all'interno di un sistema distribuito, in cui vengano inseriti più dati in diversi istanti di tempo.
 I metodi che espone sono:
-- run(): è l'override del metodo ereditato dalla classe **Thread**. Questo metodo avvia la generazione dei dati e li carica sul database.
-- getActualMonthOrYear(): questo metodo è utilizzato per inizializzare i valori delle variabili **month** e **year** in base ai dati già presenti nel database. Le due variabili riguardano il mese e l'anno a cui dovranno corrispondere le bollette create randomicamente dal metodo **run()**.
+- **run()**: è l'override del metodo ereditato dalla classe **Thread**. Questo metodo avvia la generazione dei dati e li carica sul database.
+- **getActualMonthOrYear()**: questo metodo è utilizzato per inizializzare i valori delle variabili **month** e **year** in base ai dati già presenti nel database. Le due variabili riguardano il mese e l'anno a cui dovranno corrispondere le bollette create randomicamente dal metodo **run()**.
+
+### Helpers
+Il componente **Helpers**, implementato come **object**, è un oggetto ausiliario al componente **MongoDB**. La sua funzionalità è quella di rielaborare le informazioni ottenute dal database.
+Attraverso il metodo **results()** chiamato sull'oggetto di tipo **Observable** restituito dalla funzione **find()** è possibile restituire l'elenco dei dati presenti in una certa collezione.
+
+
+
 
 ### Demetrio Andriani
 Implementazione dei seguenti componenti:
