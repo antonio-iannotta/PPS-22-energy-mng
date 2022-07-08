@@ -3,18 +3,20 @@ package dataLayer.mongoDriver
 import org.mongodb.scala.*
 import org.mongodb.scala.bson.BsonString
 
-
 import java.time.{LocalDate, LocalDateTime}
-import dataLayer.bill.{Bill}
-import dataLayer.user.{User}
+import dataLayer.bill.Bill
+import dataLayer.user.User
+
 import scala.collection.mutable.{LinkedHashMap, ListBuffer}
 import scala.util.Random
-import dataLayer.mongoDriver.Helpers._
+import dataLayer.mongoDriver.Helpers.*
+
+import scala.collection.mutable
 
 object MongoDB:
 
   /**
-   * Il seguente metodo ritorna il database 
+   * The following function returns an instance of MongoDatabase
    * @return
    */
   def mongoDBConnection(): MongoDatabase =
@@ -25,12 +27,12 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo ritorna una lista di User o di Bill a seconda della collezione, passata come stringa in ingresso, che specifica quali dati debbano essere recuperati dal database
-   * @param collection
+   * The following function returns the data stored in a certain collections provided as argument, organized as ListBuffer
+   * @param collection is the name of collection of interest
    * @return
    */
   def retrieveDataFromCollection(collection: String): ListBuffer[AnyRef] =
-    var retrievedData: ListBuffer[AnyRef] = ListBuffer()
+    val retrievedData: ListBuffer[AnyRef] = ListBuffer()
     collection match
       case "users" =>
         MongoDB.mongoDBConnection().getCollection(collection)
@@ -48,8 +50,8 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo restituisce una bolletta creata a partire dai campi dei singoli consumi che sono stati recuperati dal database
-   * @param usages
+   * The following function create a Bill starting from a list of usages retrieved from the database
+   * @param usages is the list of information retrieved from the collection "usages"
    * @return
    */
   def createBill(usages: ListBuffer[AnyRef]): Bill =
@@ -72,8 +74,8 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo aggiunge un utente al database
-   * @param user
+   * The following function adds a user to the collection "users"
+   * @param user is the user to be added
    * @return
    */
   def addUser(user: User): String =
@@ -86,8 +88,8 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo restituisce una bolletta creata a partire dia campi dei singoli utenti creati dal database
-   * @param users
+   * The following function create a User starting from a list of users retrieved from the database
+   * @param users is the list of information retrieved from the collection "users"
    * @return
    */
   def createUser(users: ListBuffer[AnyRef]): User =
@@ -105,13 +107,13 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo si occupa di comporre una mappa [String, BsonString] che servirà come input per il Document da memorizzare nel database degli utenti
-   * @param user
+   * The following function returns a map used to compose a document to be add a user to collection "users"
+   * @param user is the user used to create the map
    * @return
    */
-  def composeUserMap(user: User): LinkedHashMap[String, BsonString] =
+  def composeUserMap(user: User): mutable.LinkedHashMap[String, BsonString] =
 
-    val userMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
+    val userMap: mutable.LinkedHashMap[String, BsonString] = mutable.LinkedHashMap()
 
     userMap("userID") = BsonString.apply(user.userID)
     userMap("password") = BsonString.apply(user.password)
@@ -126,16 +128,16 @@ object MongoDB:
 
 
   /**
-   * Il seguente metodo si occupa di comporre una mappa [String, BsonString] che servirà come input per il Document da memorizzare nel database dei consumi
-   * @param user
-   * @param usageType
-   * @param month
-   * @param year
+   * The following function returns a map used to compose a document to be add a Bill to collection "usages"
+   * @param user is the user needed to retrieve user information
+   * @param usageType is the usage type
+   * @param month is the month of the bill
+   * @param year is the year of the bill
    * @return
    */
-  def composeUsageMap(user: User, usageType: String, month: Int, year: Int): LinkedHashMap[String, BsonString] =
+  def composeUsageMap(user: User, usageType: String, month: Int, year: Int): mutable.LinkedHashMap[String, BsonString] =
 
-    val usageMap: LinkedHashMap[String, BsonString] = LinkedHashMap()
+    val usageMap: mutable.LinkedHashMap[String, BsonString] = mutable.LinkedHashMap()
 
     usageMap("userID") = BsonString.apply(user.userID)
     usageMap("userType") = BsonString.apply(user.userType)

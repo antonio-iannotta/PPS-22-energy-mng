@@ -328,6 +328,20 @@ La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metod
 Il componente Bill è stato realizzato come classe per fornire una corretta astrazione del concetto di bolletta e per consentire inoltre di poter eseguire le operazioni sui consumi partendo da tipi di dati strutturati nella maniera più opportuna possibile.
 
 ### Andrea Catani
+Implementazione dei componenti:
+- **object** BillBuilder
+- **object** UsageGenerator
+- **object** Helpers
+
+#### BillBuilder
+Il componente BillBuilder è stato realizzato come **object** poiché essendo un'implementazione del design pattern singleton, può essere richiamato da altri componenti senza il bisogno di essere istanziato. La funzionalità di BillBuilder è quella di ottenere un **ListBuffer** di oggetti di tipo **Bill** estraendoli dal database. La creazione di tale componente deriva dalla necessità di avere un oggetto che potesse rimodellare gli oggetti di tipo **Bill** coerentemente con le specifiche del progetto, all'interno di BillBuilder è possibile infatti, sotto un'ottica di modularità e scalabilità, esporre metodi aggiuntivi per modellare il valore di ritorno a fronte di eventuali richieste future. I metodi esposti sono:
+- Build(): il metodo si occupa di estrarre i dati dal database ed accorparli in un oggetto di tipo ListBuffer.
+
+#### UsageGenerator
+Il componente UsageGenerator è un componente implementato come una classe **Thread**. Il compito di questo componente è quello di avviare una generazione randomica dei dati delle bollette, organizzarli e caricarli sul database. Grazie alle funzionalità della classe **Thread** è possibile eseguire UsageGenerator in maniera parallela al resto del progetto così da simulare l'eventualità, all'interno di un sistema distribuito, in cui vengano inseriti più dati in diversi istanti di tempo.
+I metodi che espone sono:
+- run(): è l'override del metodo ereditato dalla classe **Thread**. Questo metodo avvia la generazione dei dati e li carica sul database.
+- getActualMonthOrYear(): questo metodo è utilizzato per inizializzare i valori delle variabili **month** e **year** in base ai dati già presenti nel database. Le due variabili riguardano il mese e l'anno a cui dovranno corrispondere le bollette create randomicamente dal metodo **run()**.
 
 ### Demetrio Andriani
 Implementazione dei seguenti componenti:

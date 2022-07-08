@@ -1,10 +1,10 @@
 
 package presentationLayer.dashboard
-
-import presentationLayer.dashboard.cityRegionManager
+import dataLayer.user.User
 import presentationLayer.dashboard.choiceHandler.ChoiceHandler
 import presentationLayer.dashboard.printHelper.PrintHelper
-import dataLayer.user.User
+import presentationLayer.dashboard.cityRegionManager.RegionManager
+import presentationLayer.dashboard.cityRegionManager.CityManager
 
 
 case class Dashboard(private val user: User):
@@ -17,6 +17,7 @@ case class Dashboard(private val user: User):
       println("\nBenvenuto " + user.userID + "! Seleziona l'operazione desiderata:")
       PrintHelper.printMenu()
       val selection = scala.io.StdIn.readLine()
+
 
       selection match
         case "1" => println(ChoiceHandler.individualChoiceHandler(user, "cost"))
@@ -40,11 +41,11 @@ case class Dashboard(private val user: User):
           val choice = scala.io.StdIn.readInt()
           choice match
             case 1 =>
-              cityManager(user,user.city,PrintHelper.usageMenuPrint())
+              CityManager(user,user.city,PrintHelper.usageMenuPrint())
             case 2 =>
               println("Inserire la città di cui si desidera visualizzare la previsione")
               val city = scala.io.StdIn.readLine()
-              cityManager(user,city,PrintHelper.usageMenuPrint())
+              CityManager(user,city,PrintHelper.usageMenuPrint())
 
         case "9" =>
           println("1) Previsione regione corrente utente")
@@ -52,11 +53,11 @@ case class Dashboard(private val user: User):
           val choice = scala.io.StdIn.readInt()
           choice match
             case 1 =>
-              regionManager(user,user.region,PrintHelper.usageMenuPrint())
+              RegionManager(user,user.region,PrintHelper.usageMenuPrint())
             case 2 =>
               println("Inserire la regione di cui si desidera visualizzare la previsione")
               val region = scala.io.StdIn.readLine()
-              regionManager(user,region,PrintHelper.usageMenuPrint())
+              RegionManager(user,region,PrintHelper.usageMenuPrint())
 
         case "10" => exit = false
         case _ => println("Scelta non valida!")
