@@ -26,3 +26,4 @@ object Helpers:
       results().foreach(res => result += converter(res) + "\n")
       result
 
+
