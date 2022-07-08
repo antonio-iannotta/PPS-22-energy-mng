@@ -2,6 +2,9 @@
 package presentationLayer.dashboard
 import dataLayer.user.User
 import presentationLayer.dashboard.choiceHandler.ChoiceHandler
+import presentationLayer.dashboard.printHelper.PrintHelper
+import presentationLayer.dashboard.cityRegionManager.RegionManager
+import presentationLayer.dashboard.cityRegionManager.CityManager
 
 
 case class Dashboard(private val user: User):
