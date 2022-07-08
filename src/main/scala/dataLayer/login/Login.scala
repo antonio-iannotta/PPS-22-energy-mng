@@ -3,6 +3,8 @@ package dataLayer.login
 import dataLayer.mongoDriver.MongoDB._
 import dataLayer.registration.MD5
 import dataLayer.user.User
+import scala.collection.mutable.{LinkedHashMap, ListBuffer}
+
 
 object Login:
   def signIN(userID: String, password: String): Option[User] =

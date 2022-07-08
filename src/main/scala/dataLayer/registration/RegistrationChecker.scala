@@ -2,8 +2,8 @@ package dataLayer.registration
 
 import dataLayer.errorCodeHandler.RegistrationErrorCodeHandler
 import dataLayer.mongoDriver.MongoDB.{retrieveDataFromCollection, retrieveUsers}
-
 import scala.collection.mutable.{LinkedHashMap, ListBuffer}
+import dataLayer.user.User
 
 class RegistrationChecker(private val userID: String, private val password: String, private val userType: Int, private val region: String, private val city: String):
 
