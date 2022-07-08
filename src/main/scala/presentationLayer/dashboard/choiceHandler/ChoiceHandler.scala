@@ -31,7 +31,7 @@ object ChoiceHandler:
           case "region" =>
             user.getUsageOrcostByRegionOrCity(user.region, usage, locationType, usageOrCost, year)
           case _ =>
-            user.getUsageOrcostByRegionOrCity(user.city, usage, locationType, usageOrCost, year)
+            user.getUsageOrCostByRegionOrCity(user.city, usage, locationType, usageOrCost, year)
 
       case 2 =>
 
