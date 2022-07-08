@@ -7,6 +7,14 @@ import scala.collection.mutable
 import scala.collection.mutable.*
 
 object ChoiceHandler:
+
+  /**
+   * The following function returns a LinkedHashMap[Int,Double] by calling the user.getUsageOrCostByRegionOrCity(...) function
+   * @param user is the variable which contains the user
+   * @param usageOrCost is the variable which indicates which one of the usage or cost we wanna view
+   * @param locationType is the variable which indicates the location type ex (city or region)
+   * @return
+   */
   def cityRegionChoiceHandler(user: User, usageOrCost: String, locationType: String): LinkedHashMap[Int, Double] =
 
     var usage: String = ""
@@ -49,6 +57,13 @@ object ChoiceHandler:
 
         user.getUsageOrCostByRegionOrCity(cityOrRegionSelected, usage, locationType, usageOrCost, year)
 
+
+  /**
+   * The following function returns a String which contains the usage or the cost for a specific usage ex(heat,water,electricity)
+   * @param user is the variable which contains the user
+   * @param usageOrCost is the variable which indicates which one of the usage or cost we wanna view
+   * @return
+   */
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 
     var usageString = ""

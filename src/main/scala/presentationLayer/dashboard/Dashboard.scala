@@ -7,6 +7,12 @@ import presentationLayer.dashboard.cityRegionManager.RegionManager
 import presentationLayer.dashboard.cityRegionManager.CityManager
 
 
+/**
+ * The following class is a kind of interface for the user. Thanks to this class the user can navigate in to the System
+ * @param user is the variable which contains the user
+ * @return
+ */
+
 case class Dashboard(private val user: User):
 
   def view(): Unit =
