@@ -14,17 +14,21 @@ class PrintHelper:
     println("9) Previsione regione")
     println("10) Logout e torna al menu iniziale")
 
-  def usageMenuPrint(): String =
+  def printUsage() : Unit =
     println("Inserire il consumo d'interesse")
     println("1) per visualizzare consumi luce")
     println("2) per visualizzare consumi gas")
     println("3) per visualizzare consumi acqua")
+
+  def usageMenuPrint(): String =
+    printUsage()
     val usageChoice = scala.io.StdIn.readInt()
 
     usageChoice match
       case 1 => "electricity"
       case 2 => "heat"
       case 3 => "water"
+      case _ => "Input non valido"
 
   def formatter(month: Int): String =
     month match
