@@ -2,7 +2,7 @@ package presentationLayer.dashboard.printHelper
 
 class PrintHelper:
 
-  def printMenu() =
+  def printMenu():Unit =
     println("1) Visualizza costi utente")
     println("2) Visualizza utilizzi utente")
     println("3) Visualizza costi città")
