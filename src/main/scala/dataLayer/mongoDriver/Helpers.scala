@@ -9,10 +9,10 @@ import scala.concurrent.duration.Duration
 object Helpers:
 
   implicit class DocumentObservable[C](val observable: Observable[Document]) extends ImplicitObservable[Document] :
-    override def converter(doc: Document): String = doc.toJson
+    override val converter: Document => String = doc => doc.toJson
 
   implicit class GenericObservable[C](val observable: Observable[C]) extends ImplicitObservable[C] :
-    override def converter(doc: C): String = doc.toString
+    override val converter: C => String = doc => doc.toString
   
   trait ImplicitObservable[C]:
 
