@@ -19,8 +19,7 @@ object Utils:
    * @return
    */
   def predictionResult(year: Int, yearMap: mutable.LinkedHashMap[Int, Double], averageUsage: Double, averageCost: Double, usageType: String): String =
-
-    year - yearMap.keys.head match
+    year - yearMap.keys.last match
 
       case duration if duration <= yearMap.keys.size =>
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
@@ -109,7 +108,7 @@ object Utils:
               billList.count(bill => bill.userID == userID && bill.year == mapYear && bill.usageType == usageType)
         )
 
-      case _ => println("Error!")
+      case _ => individualMap.empty
 
 
 

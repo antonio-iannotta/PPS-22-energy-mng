@@ -51,7 +51,8 @@ class UtilsTest extends AnyFunSuite:
 
 
   test("predictionResult test") {
-    
+
+    testMap = mutable.LinkedHashMap()
     testMap(2000) = 10.0
 
     assert(predictionResult(2001, testMap, 10.0, 10.0, "water") == "Your usage and cost for water is not supposed to change for 2001")
@@ -78,7 +79,7 @@ class UtilsTest extends AnyFunSuite:
 
   test("individualMapInitialization test2") {
     
-    individualMapInitialization(testMap,"marco","water",billListTest)
+    individualMapInitialization(testMap,"giacomo","water",billListTest)
     
     assert(testMap.isEmpty)
     
@@ -140,8 +141,8 @@ class UtilsTest extends AnyFunSuite:
     testMap = mutable.LinkedHashMap()
     
     individualMapInitialization(testMap,"marco","electricity", billListTest)
-    fillIndividualUsageCostMap(testMap, "cost", "marco", "electricity", billListTest)
-    assert(testMap.isEmpty)
+    fillIndividualUsageCostMap(testMap, "cost", "giacomo", "electricity", billListTest)
+    assert(testMap.values.head.isNaN)
     
   }
 
@@ -150,8 +151,8 @@ class UtilsTest extends AnyFunSuite:
     testMap = mutable.LinkedHashMap()
     
     individualMapInitialization(testMap,"marco","electricity", billListTest)
-    fillIndividualUsageCostMap(testMap, "utenza", "marco", "electricity", billListTest)
-    assert(testMap.isEmpty)
+    fillIndividualUsageCostMap(testMap, "utenza", "giacomo", "electricity", billListTest)
+    assert(testMap.values.sum == 0.0)
     
   }
 
