@@ -46,7 +46,7 @@ object Main extends App :
         println("Input errato, inserisci una possibile scelta.")
 
   /**
-   * Il seguente metodo si occupa di prendere i dati inseriti dall'utente relativi alla Registration e successivamente di chiamare la Registration
+   * The following method takes care of taking the data entered by the User relating to the Registration and subsequently calling the Registration
    * @return
    */
   def callRegistration(): String =
@@ -77,7 +77,7 @@ object Main extends App :
     Registration.signUP(userID, password, userType.toInt, region, city)
 
   /**
-   * Il seguente metodo si occupa di prendere i dati inseriti dall'utente relativi al Login e successivamente di chiamare il Login
+   * The following method takes care of taking the data entered by the User relating to the Login and subsequently calling the Login
    * @return
    */
   def callLogin(): Option[User] =

@@ -5,7 +5,7 @@ import java.security.MessageDigest
 
 object MD5:
   /**
-   * il seguente metodo svolge l'hash code della password in ingresso
+   * The following method generates the hash code of the incoming password 
    * @param password
    * @return
    */
