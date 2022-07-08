@@ -1,13 +1,24 @@
 package presentationLayer.dashboard.choiceHandler
 
 import dataLayer.user.User
+import presentationLayer.dashboard.printHelper.PrintHelper
+
 import scala.collection.mutable
 import scala.collection.mutable.*
 
 object ChoiceHandler:
+
+  /**
+   * The following function returns a LinkedHashMap[Int,Double] by calling the user.getUsageOrCostByRegionOrCity(...) function
+   * @param user is the variable which contains the user
+   * @param usageOrCost is the variable which indicates which one of the usage or cost we wanna view
+   * @param locationType is the variable which indicates the location type ex (city or region)
+   * @return
+   */
   def cityRegionChoiceHandler(user: User, usageOrCost: String, locationType: String): LinkedHashMap[Int, Double] =
 
     var usage: String = ""
+    val printHelper = new PrintHelper
 
     locationType match
       case "region" =>
@@ -20,9 +31,8 @@ object ChoiceHandler:
     val choice = scala.io.StdIn.readInt()
     choice match
       case 1 =>
-        printUsage()
-        val usageChoice = scala.io.StdIn.readInt()
-        usage = usageChoiceMatch(usageChoice)
+
+        usage =  printHelper.usageMenuPrint()
 
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
@@ -40,16 +50,20 @@ object ChoiceHandler:
           case _ => println("Inserire la città d'interesse:")
 
         val cityOrRegionSelected = scala.io.StdIn.readLine()
-
-        printUsage()
-        val usageChoice = scala.io.StdIn.readInt()
-        usage = usageChoiceMatch(usageChoice)
+        usage = printHelper.usageMenuPrint()
 
         println("Inserire l'anno d'interesse:")
         val year = scala.io.StdIn.readInt()
 
         user.getUsageOrCostByRegionOrCity(cityOrRegionSelected, usage, locationType, usageOrCost, year)
 
+
+  /**
+   * The following function returns a String which contains the usage or the cost for a specific usage ex(heat,water,electricity)
+   * @param user is the variable which contains the user
+   * @param usageOrCost is the variable which indicates which one of the usage or cost we wanna view
+   * @return
+   */
   def individualChoiceHandler(user: User, usageOrCost: String): String =
 
     var usageString = ""
@@ -66,16 +80,3 @@ object ChoiceHandler:
       case 1 => user.getUsageOrCost(usageOrCost, "electricity")
       case 2 => user.getUsageOrCost(usageOrCost,"heat")
       case 3 => user.getUsageOrCost(usageOrCost, "water")
-
-  def printUsage() =
-    println("Inserire il consumo d'interesse")
-    println("1) per visualizzare consumi luce")
-    println("2) per visualizzare consumi gas")
-    println("3) per visualizzare consumi acqua")
-
-  def usageChoiceMatch(usage: Int) : String =
-    usage match
-      case 1 => "electricity"
-      case 2 => "heat"
-      case 3 => "water"
-      case _ => "Input non valido"
