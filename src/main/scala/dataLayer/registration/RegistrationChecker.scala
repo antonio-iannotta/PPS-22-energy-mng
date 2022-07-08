@@ -1,7 +1,7 @@
 package dataLayer.registration
 
 import dataLayer.errorCodeHandler.RegistrationErrorCodeHandler
-import dataLayer.mongoDriver.MongoDB.{retrieveDataFromCollection, retrieveUsers}
+import dataLayer.mongoDriver.MongoDB.{retrieveDataFromCollection}
 import scala.collection.mutable.{LinkedHashMap, ListBuffer}
 import dataLayer.user.User
 
