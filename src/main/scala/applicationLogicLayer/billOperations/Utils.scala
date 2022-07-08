@@ -4,13 +4,13 @@ package applicationLogicLayer.billOperations
 import dataLayer.bill.Bill
 
 import scala.collection.mutable
-import scala.collection.mutable.{LinkedHashMap, ListBuffer}
+import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 object Utils:
 
   /**
-   * The following method returns the string related to a certain prediction
+   * The following function returns the string related to a certain prediction
    * @param year is the target year for the prediction
    * @param yearMap is the map of the average usage/cost for every year stored into the database
    * @param averageUsage is the average usage of every year stored into the database, related to a certain usage type
@@ -34,7 +34,7 @@ object Utils:
 
   /**
    * The following function returns the average for every values stored into a [Int, Double] map
-   * @param map is a general map indixed by Int and with Double as values
+   * @param map is a general map indexed by Int and with Double as values
    * @return
    */
   def average(map: mutable.LinkedHashMap[Int, Double]): Double =
@@ -46,12 +46,12 @@ object Utils:
 
   /**
    * The following function initializes a map with 0.0 for every year stored into the database related to a certain userID and a certain usage type
-   * @param individualMap
-   * @param userID
-   * @param usageType
-   * @param billList
+   * @param individualMap is the map to be initialized with value 0.0 for every year of stored bills related to a specific userID and a specific usage type
+   * @param userID is the userID target for the search of stored bills
+   * @param usageType is the usage type target for the search of stored bills
+   * @param billList is the list of bills stored into the database
    */
-  def individualMapInitialization(individualMap: mutable.LinkedHashMap[Int, Double], userID: String, usageType: String, billList: ListBuffer[Bill]): Unit =
+  def individualMapInitialization(individualMap: mutable.LinkedHashMap[Int, Double], userID: String, usageType: String, billList: mutable.ListBuffer[Bill]): Unit =
     billList.filter(bill => bill.userID == userID && bill.usageType == usageType).foreach(bill => individualMap(bill.year) = 0.0)
 
 
@@ -59,15 +59,15 @@ object Utils:
 
 
   /**
-   * Il seguente metodo inizializza una mappa [Int, Double] con valori 0.0 sulla base di una specifica città o regione inserita, di una specifica tipologia di utente e di una specifica tipologia di consumo
-   * @param mapByLocation
-   * @param userType
-   * @param usageType
-   * @param locationType
-   * @param location
-   * @param billList
+   * The following function initializes a map with 0.0 for every year stored into the database related to a certain user type, a certain usage type, a certain location type (region or city) and a certain location
+   * @param mapByLocation is the map to be initialized with value 0.0 for every year of stored filtered bills
+   * @param userType is the target user type for the search of stored bills
+   * @param usageType is the target usage type for the search of stored bills
+   * @param locationType is the target location type for the search of stored bills
+   * @param location is the target location for the search of stored bills
+   * @param billList is the list of bills stored into the database
    */
-  def mapInitializationByLocation(mapByLocation: LinkedHashMap[Int, Double], userType: String, usageType: String, locationType: String, location: String, billList: ListBuffer[Bill]): Unit =
+  def mapInitializationByLocation(mapByLocation: mutable.LinkedHashMap[Int, Double], userType: String, usageType: String, locationType: String, location: String, billList: mutable.ListBuffer[Bill]): Unit =
 
     locationType match
 
@@ -84,14 +84,14 @@ object Utils:
 
 
   /**
-   * Il seguente metodo riempie una mappa [Int, Double] con la media dei consumi o dei costi annuali per ogni anno memorizzato all'interno del sistema relativi ad uno specifico utente e ad ima specifica tipologia di consumi
-   * @param individualMap
-   * @param usageOrCost
-   * @param userID
-   * @param usageType
-   * @param billList
+   * The following function fills a map with the average of usage or cost for a certain usage type, a certain userID for every year stored into the database
+   * @param individualMap is the map to be filled with average values
+   * @param usageOrCost is the variable that indicates if the average must be calculated on the usages or the costs
+   * @param userID is the userID target for the search of stored bills
+   * @param usageType is the usage type target for the search of stored bills
+   * @param billList is the list of bills stored into the database
    */
-  def fillIndividualUsageCostMap(individualMap: LinkedHashMap[Int, Double], usageOrCost: String, userID: String, usageType: String, billList: ListBuffer[Bill]): Unit =
+  def fillIndividualUsageCostMap(individualMap: mutable.LinkedHashMap[Int, Double], usageOrCost: String, userID: String, usageType: String, billList: mutable.ListBuffer[Bill]): Unit =
 
     usageOrCost match
 
@@ -116,17 +116,17 @@ object Utils:
 
 
   /**
-   * Il seguente metodo riempie una mappa [Int, Double] con la media dei consumi o dei costi annuali per ogni anno memorizzato all'interno del sistema relativi ad una specifica tipologia di utente, di consumi, e una specifica
-   * città o regione
-   * @param usageCostMap
-   * @param usageType
-   * @param usageOrCost
-   * @param userType
-   * @param locationType
-   * @param location
-   * @param billList
+   * The following function fills a map with the average value of usage or cost for a certain user type, a certain usage type, a certain location type (region or city) and a certain location for every year stored into the
+   * database
+   * @param usageCostMap is the map to be filled
+   * @param usageType is the usage type target for the search of stored bills
+   * @param usageOrCost is the parameter that states if the average must be computed on usages or costs
+   * @param userType is the user type target for the search of stored bills
+   * @param locationType is the location type target for the search of stored bills
+   * @param location is the location target for the search of stored bills
+   * @param billList is the list of bills stored into the database
    */
-  def fillUsageCostMapByLocation(usageCostMap: LinkedHashMap[Int, Double], usageType: String, usageOrCost: String, userType: String, locationType: String, location: String, billList: ListBuffer[Bill]): Unit =
+  def fillUsageCostMapByLocation(usageCostMap: mutable.LinkedHashMap[Int, Double], usageType: String, usageOrCost: String, userType: String, locationType: String, location: String, billList: mutable.ListBuffer[Bill]): Unit =
 
     locationType match
 
@@ -171,13 +171,13 @@ object Utils:
 
 
   /**
-   *Il seguente metodo ritorna una lista di bollette associata ad un certo userID per una certa tipologia di consumi
-   * @param userID
-   * @param usageType
-   * @param billList
+   *The following function returns the bills related to a certain user ID for a certain usage type
+   * @param userID is the userID target for the search of stored bills
+   * @param usageType is the usage type for the search of stored bills
+   * @param billList is the list of bills stored into the database
    * @return
    */
-  def getBillsByUserIDAndUsageType(userID: String, usageType: String, billList: ListBuffer[Bill]): ListBuffer[Bill] =
+  def getBillsByUserIDAndUsageType(userID: String, usageType: String, billList: mutable.ListBuffer[Bill]): mutable.ListBuffer[Bill] =
     billList.filter(bill => bill.userID == userID && bill.usageType == usageType)
 
 
@@ -185,15 +185,15 @@ object Utils:
 
 
   /**
-   * Il seguente metodo ritorna una lista di bollette associata ad una specifica città o regione, ad una specifica tipologia di utente e ad una specifica tipologia di consumi
-   * @param userType
-   * @param usageType
-   * @param locationType
-   * @param location
-   * @param billList
+   * The following function returns the bills related to a certain user type, for a certain usage type, related to a certain location
+   * @param userType is the user type target for the search of stored bills
+   * @param usageType is the usage type target for the search of stored bills
+   * @param locationType is the location type (city or region)
+   * @param location is the location target for the search of stored bills
+   * @param billList is the list of bills stored into the database
    * @return
    */
-  def getBillsByCityOrRegion(userType: String, usageType: String, locationType: String, location: String, billList: ListBuffer[Bill]): ListBuffer[Bill] =
+  def getBillsByCityOrRegion(userType: String, usageType: String, locationType: String, location: String, billList: mutable.ListBuffer[Bill]): mutable.ListBuffer[Bill] =
 
     locationType match
 
@@ -208,19 +208,19 @@ object Utils:
 
 
   /**
-   * Il seguente metodo ritorna una mappa [Int, Double] in cui ad ogni mese è associata la media dei consumi o dei costi relativi ad una certa tipologia di utente, una certa tipologia di consumi e una certa città o regione.
-   * @param userType
-   * @param usageType
-   * @param locationType
-   * @param location
-   * @param usageOrCost
-   * @param billList
-   * @param year
+   * The following function returns the average usage or cost for every month of a certain year stored into the database, related to a certain user type and a certain usage type and location
+   * @param userType is the user type target for the search of stored bills
+   * @param usageType is the usage type target for the search of stored bills
+   * @param locationType is the location type (city or region)
+   * @param location is the location target for the search of stored bills
+   * @param usageOrCost is the variable that states if the average must be computed on usages or costs
+   * @param billList is the list of bills stored into the database
+   * @param year is the target year
    * @return
    */
-  def monthlyUsageOrCost(userType: String, usageType: String, locationType: String, location: String, usageOrCost: String, billList: ListBuffer[Bill], year: Int): LinkedHashMap[Int, Double] =
+  def monthlyUsageOrCost(userType: String, usageType: String, locationType: String, location: String, usageOrCost: String, billList: mutable.ListBuffer[Bill], year: Int): mutable.LinkedHashMap[Int, Double] =
 
-    val monthlyUsageOrCost: LinkedHashMap[Int, Double] = LinkedHashMap()
+    val monthlyUsageOrCost: mutable.LinkedHashMap[Int, Double] = mutable.LinkedHashMap()
 
     usageOrCost match
 
@@ -245,15 +245,15 @@ object Utils:
 
 
   /**
-   * Il seguente metodo ritorna la media mensile di consumi o costi relativi ad un certo anno, ad una certa tipologia di utente, ad una certa città o regione e ad un certo anno
-   * @param userType
-   * @param usageType
-   * @param locationType
-   * @param location
-   * @param billList
-   * @param usageOrCost
-   * @param year
-   * @param month
+   * The following function returns the average usage or cost for a specific month, a specific location, a specific usage type and a specific user type
+   * @param userType is the user type target for the search of stored bills into the database
+   * @param usageType is the usage type target for the search of stored bills stored into the database
+   * @param locationType is the location type (city or region)
+   * @param location is the location target for the search of stored bills stored into the database
+   * @param billList is the list of bills stored into the database
+   * @param usageOrCost is the variable that states if the average must be computed on usages or costs
+   * @param year is the target year
+   * @param month is the target month
    * @return
    */
   def getMonthlyAverageUsageOrCost(userType: String, usageType: String, locationType: String, location: String, billList: ListBuffer[Bill], usageOrCost: String, year: Int, month: Int): Double =
@@ -273,14 +273,14 @@ object Utils:
 
 
   /**
-   * Il seguente metodo compone e restituisce sottoforma di stringa le informazioni relative al costo o al consumo associati ad una certa bolletta.
-   * @param bill
-   * @param requestedInformation
+   * The following function returns the information related to cost or usages for a certain bill
+   * @param bill is the bill for which information ar desired
+   * @param usageOrCost is the variable that states if the information must be returned for usage or cost
    * @return
    */
-  def composeUsageOrCostInformation(bill: Bill, requestedInformation: String): String =
+  def composeUsageOrCostInformation(bill: Bill, usageOrCost: String): String =
 
-    requestedInformation match
+    usageOrCost match
 
       case "cost" =>
         "cost: " + bill.cost + "\nmonth: " + bill.month + "\nyear: " + bill.year+"\n"
