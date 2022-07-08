@@ -9,10 +9,10 @@ import scala.concurrent.duration.Duration
 object Helpers:
 
   implicit class DocumentObservable[C](val observable: Observable[Document]) extends ImplicitObservable[Document] :
-    override val converter: (Document) => String = (doc) => doc.toJson
+    override def converter(doc: Document): String = doc.toJson
 
   implicit class GenericObservable[C](val observable: Observable[C]) extends ImplicitObservable[C] :
-    override val converter: (C) => String = (doc) => doc.toString
+    override def converter(doc: C): String = doc.toString
   
   trait ImplicitObservable[C]:
 
@@ -21,12 +21,8 @@ object Helpers:
 
     def results(): Seq[C] = Await.result(observable.toFuture(), Duration(10, TimeUnit.SECONDS))
 
-    def headResult() = Await.result(observable.head(), Duration(10, TimeUnit.SECONDS))
-
     def results(initial: String = ""): String =
       var result = ""
-      if (initial.length > 0) print(initial)
-      results().foreach(res => result += (converter(res)) + "\n")
+      results().foreach(res => result += converter(res) + "\n")
       result
 
-    def printHeadResult(initial: String = ""): Unit = println(s"${initial}${converter(headResult())}")
