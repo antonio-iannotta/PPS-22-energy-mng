@@ -29,9 +29,9 @@ object ChoiceHandler:
 
         locationType match
           case "region" =>
-            user.getUsageOrcostByRegionOrcity(user.region, usage, locationType, usageOrCost, year)
+            user.getUsageOrcostByRegionOrCity(user.region, usage, locationType, usageOrCost, year)
           case _ =>
-            user.getUsageOrcostByRegionOrcity(user.city, usage, locationType, usageOrCost, year)
+            user.getUsageOrcostByRegionOrCity(user.city, usage, locationType, usageOrCost, year)
 
       case 2 =>
 
