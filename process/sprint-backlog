@@ -36,3 +36,22 @@ Obiettivi raggiunti alla fine di questo sprint (20 ore):
    
 Durante lo sprint review si è discusso dell'impiego delle tecnologie presentate nella settimana precedente, con l'obiettivo di studiare in maniera più approfondita l'applicabilità
 della liberia scala.rx
+
+Settimana 04/07/2022 - 09/07/2022
+Durante questa settimana si è proceduto a limare i dettagli del progetto di modo da poter giungere ad una versione definitiva.
+Obiettivi prefissati all'inizio di questo sprint:
+    Implementazione Dashboard e interazione con l'utente
+    Refactoring del codice, ognuno con focus sulla propria parte
+    Refactoring dei commenti scaladoc del codice rendendoli tutti in inglese per uniformità con il codice
+    Test del sistema nel complesso
+    Completamento relazione
+
+Obiettivi raggiunti alla fine di questo sprint (30 ore):
+    Implementazione Dashboard e interazione con l'utente
+    Refactoring del codice, ognuno con focus sulla propria parte
+    Refactoring dei commenti scaladoc del codice rendendoli tutti in inglese per uniformità con il codice
+    Test del sistema nel complesso
+    Relazione quasi completata
+    
+Durante lo sprint review si è stabilito il progetto come concluso, riservandoci il fine settimana per completare gli ultimi dettagli sulla relazione e per testare le ultime
+funzionalità del sistema nel contesto di interazione con gli utenti.
