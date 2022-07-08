@@ -29,7 +29,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
   regionCityMap("Veneto") = Regions.VenetoCities
 
   /**
-   * Il seguente metodo fa il controllo dei vari campi
+   * The following method checks the various fields of the registration
    * @return
    */
   def checkFields(): String =
@@ -45,7 +45,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
       case _ => checkResponseList.head
 
   /**
-   * Il seguente metodo fa il controllo del' userID
+   * The following method checks the userID
    * @param userID
    * @return
    */
@@ -58,7 +58,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
       case _ => "OK"
 
   /**
-   * Il seguente metodo fa il controllo della password
+   * The following method checks the password
    * @param password
    * @return
    */
@@ -70,7 +70,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
       case _ => "OK"
 
   /**
-   * Il seguente metodo fa il controllo dello userType
+   * The following method checks the userType
    * @param userType
    * @return
    */
@@ -79,7 +79,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     else "REGISTRATION_USERTYPE_1"
 
   /**
-   * Il seguente metodo fa il controllo del collegamento  tra la città e la sua relativa regione
+   * The following method checks the match between the cities and their regions
    * @param city
    * @param region
    * @return
@@ -91,7 +91,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
     else "REGISTRATION_CITY_2"
 
   /**
-   * Il seguente metodo fa il controllo se è gia stato utilizzato oppure no l'userID
+   * The following method checks whether the userID has already been used or not
    * @param userID
    * @return
    */

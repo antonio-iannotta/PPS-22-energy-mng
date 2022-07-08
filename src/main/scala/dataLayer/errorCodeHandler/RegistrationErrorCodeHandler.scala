@@ -2,21 +2,21 @@ package dataLayer.errorCodeHandler
 
 object RegistrationErrorCodeHandler extends ErrorCodeHandler :
   /**
-   * Il seguente metodo associa ad ogni possibile errore presente nel RegistrationChecker un ben definito messaggio
+   * the following method match to every possible error present in the RegistrationChecker a well defined message
    * @param errorCode
    * @return
    */
   def errorCodeHandler(errorCode: String): String =
     errorCode match
-      case "REGISTRATION_USERID_1" => "Il campo USERID inserito e' vuoto"
-      case "REGISTRATION_USERID_2" => "Il campo USERID inserito e' superiore a 20 caratteri"
-      case "REGISTRATION_USERID_3" => "Il campo USERID inserito e' minore di 6 caratteri"
-      case "REGISTRATION_USERID_4" => "Il campo USERID inserito e' già stato utilizzato"
-      case "REGISTRATION_PASSWORD_1" => "Il campo PASSWORD inserito e' vuoto"
-      case "REGISTRATION_PASSWORD_2" => "Il campo PASSWORD inserito e' minore di 6 caratteri"
-      case "REGISTRATION_PASSWORD_3" => "Il campo PASSWORD inserito e' superiore a 20 caratteri"
-      case "REGISTRATION_USERTYPE_1" => "Il campo USERTYPE inserito non è privato o azienda"
-      case "REGISTRATION_REGION_1" => "Il campo REGION inserito e' vuoto"
-      case "REGISTRATION_CITY_1" => "Il campo CITY non e' presente nella regione"
-      case "REGISTRATION_CITY_2" => "Il campo REGION non e' presente tra le regioni possibili"
+      case "REGISTRATION_USERID_1" => "the field USERID inserted is blank"
+      case "REGISTRATION_USERID_2" => "the field USERID inserted is longer than 20 characters"
+      case "REGISTRATION_USERID_3" => "the field USERID inserted is less than 6 characters"
+      case "REGISTRATION_USERID_4" => "the field USERID inserted is already been used"
+      case "REGISTRATION_PASSWORD_1" => "the field PASSWORD inserted is blank"
+      case "REGISTRATION_PASSWORD_2" => "the field PASSWORD inserted is longer than 20 characters"
+      case "REGISTRATION_PASSWORD_3" => "the field PASSWORD inserted is less than 6 characters"
+      case "REGISTRATION_USERTYPE_1" => "the field USERTYPE inserted is not private or company"
+      case "REGISTRATION_REGION_1" => "the field REGION inserted is blank"
+      case "REGISTRATION_CITY_1" => "the CITY is not present in the region"
+      case "REGISTRATION_CITY_2" => "the REGION is not present among the possible regions"
       case _ => "OK"
