@@ -70,7 +70,7 @@ class RegistrationChecker(private val userID: String, private val password: Stri
       case _ => "OK"
 
   /**
-   * The following method checks the userType
+   * The following method checks the userType 
    * @param userType
    * @return
    */

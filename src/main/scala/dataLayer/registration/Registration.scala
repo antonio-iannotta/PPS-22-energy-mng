@@ -9,7 +9,7 @@ import java.security.MessageDigest
 
 object Registration:
   /**
-   * the following method allows you to do the operation of signUP
+   * the following method allows you to do the operation of signUP 
    * @param userID
    * @param password
    * @param userType
