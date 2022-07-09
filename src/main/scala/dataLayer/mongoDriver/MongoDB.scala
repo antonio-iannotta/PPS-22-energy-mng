@@ -144,8 +144,8 @@ object MongoDB:
     usageMap("city") = BsonString.apply(user.city)
     usageMap("region") = BsonString.apply(user.region)
     usageMap("usageType") = BsonString.apply(usageType)
-    usageMap("usage") = BsonString.apply(Random.between(100.0,500.0).toString)
-    usageMap("cost") = BsonString.apply(Random.between(100.0,500.0).toString)
+    usageMap("usage") = BsonString.apply(BigDecimal(Random.between(100.0,500.0)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble.toString)
+    usageMap("cost") = BsonString.apply(BigDecimal(Random.between(100.0,500.0)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble.toString)
     usageMap("month") = BsonString.apply(month.toString)
     usageMap("year") = BsonString.apply(year.toString)
 
