@@ -282,7 +282,21 @@ object Utils:
     usageOrCost match
 
       case "cost" =>
-        "cost: " + bill.cost + "\nmonth: " + bill.month + "\nyear: " + bill.year+"\n"
+        "Cost: " + bill.cost + "€ " + "- " + "Usage type: " + bill.usageType + "- Month: " + bill.month + "- Year: " + bill.year
 
       case "usage" =>
-        "usage: " + bill.usage + "\nmonth: " + bill.month + "\nyear: " + bill.year+"\n"
+        "Usage: " + usageFormatter(bill.usageType, bill.usage) + "- Usage type: " + bill.usageType +  "- Month: " + bill.month + "- Year: " + bill.year
+
+
+  def usageFormatter(usageType: String, usage: Double): String =
+
+    usageType match
+
+      case "water" =>
+        usage + "Lmc"
+
+      case "heat" =>
+        usage + "Smc"
+
+      case "electricity" =>
+        usage + "Kw/h"
