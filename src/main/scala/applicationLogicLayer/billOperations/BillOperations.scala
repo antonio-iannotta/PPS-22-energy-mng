@@ -6,7 +6,7 @@ import businessLogicLayer.billBuilder.BillBuilder
 
 import collection.mutable.ListBuffer
 import scala.util.Random
-import Utils.*
+import Utils._
 
 import scala.collection.mutable
 

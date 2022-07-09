@@ -224,14 +224,14 @@ object Utils:
     usageOrCost match
 
       case "usage" =>
-        for month <- Range(1,13) do
+        for month <- 1 to 12 do
           val monthlyAverageUsage = getMonthlyAverageUsageOrCost(userType, usageType, locationType, location, billList, usageOrCost, year, month)
           monthlyAverageUsage match
             case sum if sum.isNaN => monthlyUsageOrCost(month) = 0.0
             case _ => monthlyUsageOrCost(month) = monthlyAverageUsage
 
       case "cost" =>
-        for month <- Range(1,13) do
+        for month <- 1 to 12 do
           val monthlyAverageCost = getMonthlyAverageUsageOrCost(userType, usageType, locationType, location, billList, usageOrCost, year, month)
           monthlyAverageCost match
             case sum if sum.isNaN => monthlyUsageOrCost(month) = 0.0

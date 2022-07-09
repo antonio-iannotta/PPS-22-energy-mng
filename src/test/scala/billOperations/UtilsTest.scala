@@ -280,8 +280,8 @@ class UtilsTest extends AnyFunSuite:
 
   private def fillBillList(billList: ListBuffer[Bill], userID: String, userType: String, city: String, region: String): Unit =
 
-    for month <- Range(1,13) do
-      for year <- Range(2000, 2005) do
+    for month <- 1 to 12 do
+      for year <- 2000 to 2005 do
         for usageType <- List("water", "heat", "electricity") do
           billList += Bill(LocalDateTime.now().toString, userID, userType, usageType, Random.between(100.0, 200.0), Random.between(100.0, 200.0), month, year, city, region)
 
