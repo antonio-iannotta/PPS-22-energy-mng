@@ -307,7 +307,7 @@ Implementazione dei seguenti componenti:
 - **class** BillTest
 - **class** UtilsTest
 
-#### MongoDB
+#### MongoDB (In collaborazione con Andrea Catani)
 
 L'implementazione di questo componente, le cui operazioni sono rappresentate nel seguente diagramma UML, regolano
 l'interazione del sistema con il supporto scelto per memorizzare i dati. Nel caso in esame si è scelto come supporto di utilizzare
@@ -351,7 +351,7 @@ I metodi che espone sono:
 - **run()**: è l'override del metodo ereditato dalla classe **Thread**. Questo metodo avvia la generazione dei dati e li carica sul database.
 - **getActualMonthOrYear()**: questo metodo è utilizzato per inizializzare i valori delle variabili **month** e **year** in base ai dati già presenti nel database. Le due variabili riguardano il mese e l'anno a cui dovranno corrispondere le bollette create randomicamente dal metodo **run()**.
 
-### Helpers
+### Helpers (In collaborazione con Antonio Iannotta)
 Il componente **Helpers**, implementato come **object**, è un oggetto ausiliario al componente **MongoDB**. La sua funzionalità è quella di rielaborare le informazioni ottenute dal database.
 Attraverso il metodo **results()** chiamato sull'oggetto di tipo **Observable** restituito dalla funzione **find()** è possibile restituire l'elenco dei dati presenti in una certa collezione.
 
@@ -403,3 +403,19 @@ Il componente Main è stato implementato come un **object**,il cui compito è qu
 ### Carlo Di Raddo
 
 ## Retrospettiva
+
+
+### Metodologia di sviluppo
+Lo sviluppo si è diramato su un arco temporale di 70 ore per studente, per un totale di 280 ore di lavoro. Le iterazioni non hanno avuto tutte la stessa durata, in particolar modo si è deciso di adottare un'iterazione con una durata temporale più ampia nel momento esatto in cui il progetto si è capito fosse in fase di terminazione, di modo da non protarlo perdendo il focus senza, tuttavia, sovraccaricare i vari componenti del gruppo. 
+Ciascuna iterazione, data anche la presenza di daily sprint ha previsto che ogni giornata fosse caratterizzata da una breve discussione sull'andamento generale del progetto e su eventuali modifiche che potessero essere apportate in corso d'opera sulle parti assegnate. Da questo si evince nettamente come il processo di sviluppo sia stato estremamente flessibile e caratterizzato da un continuo scambio di idee tra i componenti del gruppo.
+
+### Iterazioni
+
+La durata delle singole iterazioni è sempre stata decisa durante il meeting iniziale sulla base del lavoro da effettuare durante la settimana. A questo si deve la differenza di durata dei primi due sprint rispetto al terzo ed ultimo sprint.
+Durante le iterazioni non è stato imposto alcun vincolo ai partecipanti del gruppo sul dove eseguire il lavoro e con quali orari, adottando un approccio smart ci si è maggiormente focalizzati sul raggiungimento del risultato nel miglior modo possibile piuttosto che su poca flessibilità per quel che riguarda gli orari.
+
+
+### Commenti finali
+
+Si è implementato il sistema sempre con l'ottica di sviluppi futuri. In particolar modo l'obiettivo è stato quello di realizzare una versione funzionante del sistema che fosse la migliore possibile restando all'interno del limite delle 60/70 ore a studente. Questo ha portato ad individuare funzionalità e prerogative diverse sulla base di cosa potesse essere o meno fatto. Un esempio è visibile dal non impiego della libreria **scala.rx** dal momento che tale libreria si è pensata perfetta in un contesto di interfaccia grafica in cui i vari grafici vengono aggiornati automaticamente ad ogni aggiunta di dati all'interno del database dei consumi.
+Nell'ottica di una metodologia di sviluppo agile quindi si è deciso fin dall'inizio di adottare un insieme di metodologie. Scrum come approggio generale ma una classica metodologia agile per ciascun daily sprint.
