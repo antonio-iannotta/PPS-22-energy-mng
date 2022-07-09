@@ -101,6 +101,7 @@ Come strumento di build è stato scelto **sbt**, come strumento di test si è sc
 | 5.1 | Il sistema deve essere in grado di girare su di una generica JVM, quindi con una forte indipendenza rispetto alla macchina sottostante. |
 | 5.2 | Per la memorizzazione il sistema deve utilizzare un database NoSQL dal momento che risulta più appropriata la lavorazione di dati di questa tipologia con un database basato sui documenti. |
 | 5.3 | Per l’implementazione si utilizza l’IDE IntelliJ di modo da poter sfruttare tutte le peculiarità di un ambiente integrato. |
+| 5.4 | Il linguaggio di programmazione da utilizzare per l'implementazione è **Scala** |
 
 ## Design architetturale
 
@@ -109,7 +110,8 @@ Come strumento di build è stato scelto **sbt**, come strumento di test si è sc
 Elemento centrale dell’architettura di Energy Management è l’utente (sia esso utente privato piuttosto che azienda).
 Dall’utente partono due flussi operazionali differenti:
 
-- Registrazione: con la registrazione l’utente memorizza le sue informazioni all’interno del database. Successivamente queste informazioni sono prese da un generatore di consumi che genera i consumi, come specificato nel requisito funzionale 3.5. Questi consumi generati vengono memorizzati all’interno del DB e saranno poi recuperati da un generatore di bollette relative che, partendo dai consumi recuperati dal database, costruisce le bollette in modo opportuno di modo che queste possano essere gestite dal componente predisposto alle operazioni. Tale componente recupera le bollette costruite e sulla base di queste esegue delle operazioni, queste operazioni saranno poi utilizzate per visualizzare i dati specifici richiesti dall’utente dopo il login.
+- Registrazione: con la registrazione l’utente memorizza le sue informazioni all’interno del database. Tale componente si occupa di effettuare tutti i controlli d
+- Successivamente queste informazioni (che corrispondono ai dati forniti dall'utente all'atto di registrazione) sono prese da un generatore di consumi che genera i consumi stessi, come specificato nel requisito funzionale 3.5. Questi consumi generati vengono memorizzati all’interno del DB e saranno poi recuperati da un generatore di bollette relative che, partendo dai consumi recuperati dal database, costruisce le bollette in modo opportuno di modo che queste possano essere gestite dal componente predisposto alle operazioni. Tale componente recupera le bollette costruite e sulla base di queste esegue delle operazioni, queste operazioni saranno poi utilizzate per visualizzare i dati specifici richiesti dall’utente dopo il login.
 - Login: con il login l’utente ottiene accesso al sistema ottenendo la possibilità di scegliere quali informazioni visualizzare, relative a quali consumi a quale città. Con il login l’utente ottiene la possibilità di operare ed interfacciarsi con le varie operazioni fornite dal sistema.
 
 Operazioni centrali del sistema sono le seguenti:
@@ -125,7 +127,7 @@ Di seguito è riportata l'architettura generale del sistema:
 
 - **Registrazione**: la registrazione riceve in input i dati dell’utente quando questo vuole registrarsi al sistema. Esegue una serie di controlli di validità sui dati forniti in input come specificato nei requisiti 3.1.22 e in caso di successo registra l’utente al sistema memorizzando i dati all’interno del database degli utenti.
 - **Login**: Il login riceve in input lo UserID e la password ed esegue i controlli sul database degli utenti per verificare se lo specifico userID è presente. Nel caso in cui questo sia presente allora verifica la password e nel caso di corrispondenza consente all’utente di accedere al sistema.
-- **Generatore consumi**: Il generatore dei consumi recupera i dati memorizzati all’interno del database degli utenti con l’obiettivo di generare, sulla base di questi dati recuperati, dei consumi random. E’ importante, con l’obiettivo di garantire consistenza e nell’ottica di rispettare il requisito non funzionale 4.2 che la richiesta al DB avvenga con una frequenza sufficientemente elevata. Il generatore, per ogni utente recuperato ad intervalli regolari genera dei consumi random che vengono successivamente memorizzati all’interno del database dei consumi.
+- **Generatore consumi**: Il generatore dei consumi recupera i dati memorizzati all’interno del database degli utenti con l’obiettivo di generare, sulla base di questi dati recuperati, dei consumi random. E’ importante, con l’obiettivo di garantire consistenza e nell’ottica di rispettare il requisito non funzionale 4.2 che la richiesta al DB avvenga con una frequenza corretta, di modo da non causare overload del sistema. Il generatore, per ogni utente recuperato ad intervalli regolari genera dei consumi random che vengono successivamente memorizzati all’interno del database dei consumi.
 - **Database utenti**: il database utenti memorizza le informazioni relative agli utenti che hanno effettuato la registrazione al sistema.
 - **Database consumi**:  il database dei consumi memorizza i consumi generati dal generatore dei consumi relativi agli utenti che sono presenti all’interno del sistema.
 - **Costruttore bollette**:  il costruttore delle bollette recupera i dati memorizzati all’interno del database dei consumi e li utilizza per generare le relative bollette. Le bollette hanno una propria struttura ed è opportuno che siano generate in modo conforme alla struttura stessa nell’ottica di poter essere utilizzate in modo ottimale dal componente predisposto alle operazioni. Con l’obiettivo di ridurre al minimo problemi di inconsistenza non generando bollette per consumi effettivamente presenti e nell’ottica di soddisfare quindi il requisito non funzionale 4.2 l’interazione tra il costruttore delle bollette e il database dei consumi avviene con una frequenza elevata.
@@ -134,7 +136,7 @@ Di seguito è riportata l'architettura generale del sistema:
 
 ### Pattern
 
-Energy Management è un’applicazione con un forte flusso informativo, in cui è possibile individuare diversi livelli. Per questa ragione il pattern architetturale scelto è il **Layered Pattern**.
+Energy Management è un’applicazione con un forte flusso informativo verticale, in cui è possibile individuare quattro livelli. Per questa ragione il pattern architetturale scelto è il **Layered Pattern**.
 
 ![pattern](https://user-images.githubusercontent.com/91571686/178061042-19be6ff0-f79a-41d1-9f35-bce0776c4e90.png)
 
@@ -160,7 +162,7 @@ Si presenta ora il design di dettaglio relativo alle varie componenti architettu
 ### Utente
 
 L’utente è l’elemento centrale dell’applicazione. Infatti è l’utente che effettua le scelte relative alla tipologia di dati da visualizzare e a quali previsioni effettuare all’interno della Dashboard.
-All’interno del sistema sono presenti due tipologie di utenti: l’utente privato e l’azienda. Tuttavia questa distinzione viene effettuata all’atto di registrazione. Al momento del login l’utente viene creato con i dati rilevanti recuperati dal DB in corrispondenza del proprio username e viene istanziato con un campo che riporta la tipologia di utente a cui ci si riferisce.  Quest’ultimo punto è estremamente importante per riportare i consumi relativi ad una certa località con riferimento agli utenti privati o alle aziende. E’ per questa ragione che is è scelto di rappresentare l’utente per mezzo di una **classe**.
+All’interno del sistema sono presenti due tipologie di utenti: l’utente privato e l’azienda. Tuttavia questa distinzione viene effettuata all’atto di registrazione. Al momento del login l’utente viene creato con i dati rilevanti recuperati dal DB in corrispondenza del proprio username e viene istanziato con un campo che riporta la tipologia di utente a cui ci si riferisce.  Quest’ultimo punto è estremamente importante per riportare i consumi relativi ad una certa località con riferimento agli utenti privati o alle aziende.
 Il seguente diagramma UML mostra e formalizza quanto detto:
 
 ![user](https://user-images.githubusercontent.com/91571686/178055474-73ce61a3-931e-452e-afa2-da2b9cbbd6bc.png)
@@ -178,12 +180,12 @@ Il componente registrazione esegue solo due operazioni:
 - Ricava l'hash code relativo alla password ricevuta in input
 - Invia i dati presentati in input con l’hash code della password al database.
 
-In virtù del fatto che si tratta di un componente che esegue solo un’operazione verso l’esterno si è deciso di realizzarlo come **object**.
+
 Il seguente diagramma UML mostra e formalizza quando detto:
 
 ![registration](https://user-images.githubusercontent.com/91571686/177271294-772b2d8a-2a6d-451e-9df5-cf3c873e635d.png)
 
-Come mostrato da questo diagramma il metodo register riporta una stringa contenente il risultato dell’operazione di registrazione. Nel caso di errore riscontrato in violazione delle verifiche esplicitate nel requisito 3.1.2 la stringa riporta anche la motivazione dell’errore.
+Come mostrato da questo diagramma il metodo signUP riporta una stringa contenente il risultato dell’operazione di registrazione. Nel caso di errore riscontrato in violazione delle verifiche esplicitate nel requisito 3.1.2 la stringa riporta anche la motivazione dell’errore.
 Dal momento che tale componente prevede l’interazione con il database degli utenti per la verifica dell’unicità dello userID di seguito è riportato il corrispondente diagramma delle attività:
 
 ![activity-diagram-registration](https://user-images.githubusercontent.com/91571686/177714692-1ad3c821-7769-4cb7-a27a-ad67dfbfe0d6.png)
@@ -191,7 +193,7 @@ Dal momento che tale componente prevede l’interazione con il database degli ut
 
 ### MD5
 
-MD5 è una funzione di hashing che ha il compito di svolgere l’hash function della password e può essere richiamata da altri componenti, per questo è stato rappresentato come un object, di seguito il diagramma di flusso relativo all’hashing della password.
+MD5 è una funzione di hashing che ha il compito di svolgere l’hash function della password e può essere richiamata da altri componenti. Di seguito il diagramma di flusso relativo all’hashing della password.
 
 ![MD5-activity-diagram](https://user-images.githubusercontent.com/91571686/177714866-486e67b0-e73e-47f7-83a2-d3f7015cbde8.png)
 
@@ -201,7 +203,6 @@ MD5 è una funzione di hashing che ha il compito di svolgere l’hash function d
 L’operazione di login consente all’utente di guadagnare accesso al sistema verificando prima che l’userID inserito dall’utente sia presente all’interno del database degli utenti e successivamente verificando che la password memorizzata per lo specifico userID sia effettivamente quella inserita dall’utente.
 Allo scopo di fare questo la password recuperata dal database viene hashata e successivamente viene confrontata con l’hash code relativo alla password inserita dall’utente. 
 Nel caso in cui le password combaciassero dal database degli utenti vengono recuperati tutti i dati utili per ritornare l’oggetto utente associato a quello userID.
-Dal momento che tale componente deve eseguire un’unica operazione è stato scelto di utilizzare un **object** per incapsularne il comportamento.
 Il seguente diagramma UML mostra e formalizza quanto detto:
 
 ![login](https://user-images.githubusercontent.com/91571686/177271754-b5037ea4-2902-4f62-9edd-070906f4bc74.png)
@@ -220,7 +221,6 @@ Ogni generazione, oltre ai dati tipici dei consumi quali consumo effettivo e cos
 Ulteriore elemento importante è assegnare ad ogni consumo generato un proprio id.
 Questo, come successivamente descritto, è importante per la costruzione della lista di bollette realizzata con i dati recuperati dal database dei consumi.
 Questo componente espone verso l’esterno una sola operazione, la generazione, la quale prevede contestualmente l’invio dei dati al database dei consumi. 
-Per questa ragione si è deciso di realizzarlo come **object**.
 
 ![generator](https://user-images.githubusercontent.com/91571686/177272162-7b937a52-e2e0-49ea-895a-7328b7b8917d.png)
 
@@ -228,7 +228,7 @@ Aspetto importante per quanto riguarda la generazione dei consumi e che questi d
 
 ### Database
 
-Per quanto riguarda il database (sia quello relativo agli utenti sia quello relativo ai consumi) la scelta è stata quella di utilizzare un Object che potesse effettivamente mediare tra la necessità di:
+Per quanto riguarda il database (sia quello relativo agli utenti sia quello relativo ai consumi) la scelta è stata quella di utilizzare un elemento che potesse effettivamente mediare tra la necessità di:
 - recuperare i dati relativi agli utenti e aggiungere un nuovo utente
 - recuperare i dati relativi ai consumi per poter costruire la lista delle bollette sulla quale poter eseguire le operazioni di ricerca.
 
@@ -237,7 +237,6 @@ Per quanto riguarda il database (sia quello relativo agli utenti sia quello rela
 Il costruttore delle bollette ritorna la lista delle bollette ricavata interrogando in un certo istante il database dei consumi. 
 Il primo elemento da considerare riguarda la frequenza con cui questo componente interroga il database con l’obiettivo di costruire la lista.
 Tuttavia, trattandosi di un costruttore di bollette è necessario considerare anche l’entità bolletta.
-Questa entità si è deciso di modellarla come una **classe**, di modo da rendere più robusta e coerente la costruzione della lista da parte del costruttore.
 Il seguente diagramma UML riporta e formalizza la classe relativa alle bollette.
 
 ![bill](https://user-images.githubusercontent.com/91571686/177715031-9b994493-e5f8-445c-827b-3d72df989561.png)
@@ -254,7 +253,6 @@ Il flusso di attività che il costruttore delle bollette esegue è quindi il seg
 - costruzione della lista delle bollette a partire dai dati recuperati
 
 Un aspetto importante da rimarcare è che questo è un flusso di attività ciclico. In particolar modo il componente attende di aver recuperato i dati, costruisce le bollette e dopo la costruzione esegue un’altra interrogazione al database.
-Dal momento che il costruttore di bollette esegue un’unica operazione si è deciso di modellarlo come un object.
 Il seguente diagramma UML mostra e formalizza il costruttore delle bollette:
 
 ![billBuilder](https://user-images.githubusercontent.com/91571686/177272570-c4c3d17a-27a3-47b2-a1e3-c2eddf93ac27.png)
@@ -273,7 +271,6 @@ Le operazioni che vengono effettuate da tale componente si suddividono in due ca
   - previsioni per una specifica località relativamente ad uno specifico anno
 
 Le operazioni definite da questo componente trovano applicazione in quelli che sono i metodi che ciascun utente può richiamare per avere una visualizzazione delle informazioni richieste.
-Dal momento che questo è un metodo che espone semplicemente operazioni si è deciso di realizzarlo come **object**.
 
 Il seguente diagramma UML mostra e formalizza quanto detto.
 
@@ -284,7 +281,6 @@ Il seguente diagramma UML mostra e formalizza quanto detto.
 ### Dashboard
 
 La Dashboard è il punto in cui il sistema viene utilizzato dall’utente. In particolar modo si occupa di ricevere gli input dall’utente che ha effettuato il login e di visualizzare i risultati delle richieste ottenute.
-La Dashboard si è scelto di modellarla come un **case class** che prende in ingresso un utente ed espone come unico metodo quello che consente di visualizzare i dati sulla base delle operazioni richieste dall’utente.
 All’interno del metodo esposto la dashboard consente l’interazione con l’utente sfruttando i metodi definiti all’interno della classe User.
 Il seguente diagramma UML mostra e formalizza quanto detto:
 
@@ -319,13 +315,14 @@ MongoDB come database NoSQL.
 Come è possibile notare le operazioni consentono un'interazione con il database per il recupero delle informazioni memorizzate
 sottoforma di documenti in due collezioni: *usages* e *users*. Il recupero delle informazioni consente di creare una
 lista di entità già definite nel sistema (User e Bill).
+Dal momento che tale componente funge da mediazione tra componenti operazionali e supporto di memorizzazione esponendo semplicemente operazioni per il recupero dei dati si è deciso di modellarlo come *object*
 Per l'implementazione di tale componente si è cercato di massimizzare insieme KISS and DRY.
 Un aspetto da rimarcare riguarda il fatto che tale componente è strettamente legato all'object Helpers che espone i metodi
 per l'elaborazione dei dati ricevuti eseguendo una find su una certa collezione.
 
 #### BillOperations
 
-BillOperations si occupa di eseguire le operazioni sulla lista dei dati raccolti dal database mediante BillBuilder. In particolar modo l'implementazione di questo componente è proceduta di pari passo con l'implementazione della libreria ausiliaria Utils. Entrambi questi componenti sono contenuti all'interno del package applicationLogicLayer.billOperations in modo da rendere ancora più evidente la dipendenza l'uno dall'altro
+BillOperations si occupa di eseguire le operazioni sulla lista dei dati raccolti dal database mediante BillBuilder. In particolar modo l'implementazione di questo componente è proceduta di pari passo con l'implementazione della libreria ausiliaria Utils. Entrambi questi componenti sono contenuti all'interno del package applicationLogicLayer.billOperations in modo da rendere ancora più evidente la dipendenza l'uno dall'altro. Dal momento che BillOperations espone i propri metodi all'utente senza la necessità di alcuna istanziazione si è deciso di modellarlo come **object**
 
 #### Utils
 La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metodi ausiliari di cui necessitasse per poter eseguire al meglio le operazioni sulla lista delle bollette recuperate dal database. Le operazioni esposte da questa libreria sono le seguenti:
@@ -333,7 +330,7 @@ La libreria Utils è stata sviluppata per fornire a BillOperations tutti i metod
 ![Utils](https://user-images.githubusercontent.com/91571686/177801860-3f0583d5-7339-4064-8d9c-6e455225e801.png)
 
 #### Bill
-Il componente Bill è stato realizzato come classe per fornire una corretta astrazione del concetto di bolletta e per consentire inoltre di poter eseguire le operazioni sui consumi partendo da tipi di dati strutturati nella maniera più opportuna possibile. Per la Bill si è deciso di utilizzare una class e non una case class dal momento che è ipotizzabile una futura estensione di questa classe.
+Il componente Bill è stato realizzato come classe per fornire una corretta astrazione del concetto di bolletta e per consentire inoltre di poter eseguire le operazioni sui consumi partendo da tipi di dati strutturati nella maniera più opportuna possibile. Per la Bill si è deciso di utilizzare una **class** e non come una case class dal momento che è ipotizzabile una futura estensione di questa classe in bollette relative solo ad utenti privati con caratteristiche proprie e bollette relative solo ad aziende con caratteristiche proprie
 
 ### Andrea Catani
 Implementazione dei componenti:
