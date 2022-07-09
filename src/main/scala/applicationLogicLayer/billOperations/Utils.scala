@@ -282,10 +282,10 @@ object Utils:
     usageOrCost match
 
       case "cost" =>
-        "Cost: " + bill.cost + "€ " + "- " + "Usage type: " + bill.usageType + "- Month: " + bill.month + "- Year: " + bill.year
+        "Cost: " + bill.cost + "€ " + "- " + "Usage type: " + bill.usageType + "- Month: " + bill.month + "- Year: " + bill.year + "\n"
 
       case "usage" =>
-        "Usage: " + usageFormatter(bill.usageType, bill.usage) + "- Usage type: " + bill.usageType +  "- Month: " + bill.month + "- Year: " + bill.year
+        "Usage: " + usageFormatter(bill.usageType, bill.usage) + "- Usage type: " + bill.usageType +  "- Month: " + bill.month + "- Year: " + bill.year + "\n"
 
 
   def usageFormatter(usageType: String, usage: Double): String =
