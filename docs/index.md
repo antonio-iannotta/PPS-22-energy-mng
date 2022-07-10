@@ -416,12 +416,54 @@ Il componente Login è stato implementato come un **object** in quanto, essendo 
 -signIN(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il LoginChecker,  permette di svolgere l’operazione di login facendo una retrive con il database, tornando un oggetto di tipo Option[User] che può contenere l'utente in questione (in caso esso sia effettivamente presente all'interno del database) o un empty (nel caso non dovesse essere presente l'utente all'interno del database)
 
 #### LoginChecker
-Il componente LoginChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi del login. 
+Il componente LoginChecker è implementato come una **class**. Questa classe viene usata per svolgere un controllo su tutti i campi del login. 
 
 I metodi che espone sono:
 - checkFields(): ritorna una stringa che identifica tutti i possibili errori presenti nei campi di registrazione, caso contrario restituisce un messaggio di corretta validazione di tutti i campi;
 - checkUserID(): ritorna una stringa che restituisce un messaggio di corretta validazione se lo user non è vuto altrimenti un errore che indica che il campo è vuoto.
 - checkPassword(): ritorna una stringa che restituisce un messaggio di corretta validazione se lo user non è vuto altrimenti un errore che indica che il campo è vuoto.
+
+#### User
+Il componente User è implementato come una **class**. Questa classe viene utilizzate per definire gli attributi dell'utente e specifica i metodi che è possbile invocare per ottenere determinati output. 
+
+I metodi che espone sono:
+-printUser()
+-getUsageOrCost(): ritorna i costi o gli usi relativi ad un certo userId e ad un certo tipo di utenza.
+-makeIndividualPrediction(): ritorna una predizione per un certo tipo di uso relativo ad un determinato anno. 
+-makePredictionByCity(): ritorna una predizione relativa ad una determinata città, ad un determinato tipo di utente (azienda o privato) e ad un determinato anno.
+-makePredictionByRegion(): ritorna una predizione relativa ad una determinata regione, ad un determinato tipo di utente (azienda o privato) e ad un determinato anno.
+-getUsageOrCostByRegionOrCity(): ritorna una LinkedHashMap[Int,Double] che contine i costi o gli usi relativi ad una certa città o relativi una determinata regione e ad un determinato anno.
+
+#### ChoiceHandler
+Il componente ChoiceHandler è stato implementato come un **object**.
+
+I metodi che espone sono:
+-cityRegionChoiceHandler(): ritorna una LinkedHashMap[Int,Double], richiamando il metodo getUsageOrCostByRegionOrCity() di User dopo aver interagito con l'utente tramite una serie di stampa in modo da capire la location (città o regione) d'interesse.
+-individualChoiceHandler(): ritorna una stringa (elettricità, acqua, gas), questo metodo ha una funzione di supporto nella scelta delle utenze
+
+#### CityRegionManager
+Il componente è stato implementato come un **trait** in quanto ha un metodo che deve essere implementato in maniera diversa da due oggetti.
+
+#### CityManager
+Il componente è stato implementato come un **object** in quanto estende il trait CityRegionManager ed implementa il solo metodo che possiede nel seguente modo:
+-manager(): ritorna un Unit contente una predizione riguardante un utenza di una specifica città di uno specifico anno o un messaggio di errore 
+
+#### RegionManager
+Il componente è stato implementato come un **object** in quanto estende il trait CityRegionManager ed implementa il solo metodo che possiede nel seguente modo:
+-manager(): ritorna un Unit contente una predizione riguardante un utenza di una specifica regione di uno specifico anno o un messaggio di errore
+
+
+#### PrintHelper
+Il componente PrintHelper è stato implementato come una **class** in quanto dispone di una serire di metodi che aiutano lo sviluppatore nella stampa di messaggi che vengono utilizzati più volte all'interno dell'applicazione. In particolar modo tale componente ha l'obiettivo di risolvere le problematiche del Repet Your Self.
+
+#### Dashboard
+Il componente Dashboard è stato implementato come una **class**, tale componente rappresenta il punto d'interazione con l'utente in quato permette di visualizzare a video un menù con un serie di voci relative alle operazione che l'utente può effettuare.
+
+
+
+ 
+
+  
 
 
 ## Retrospettiva
