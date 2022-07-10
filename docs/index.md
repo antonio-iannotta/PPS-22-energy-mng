@@ -400,6 +400,29 @@ Il componente Main è stato implementato come un **object**,il cui compito è qu
 - callLogin(): metodo che si occupa di prendere i dati inseriti dall'utente relativi al Login e successivamente di  chiamare il Login.
 
 ### Carlo Di Raddo
+Implementazione dei seguenti componenti:
+- **object** Login
+- **object** ChoiceHandler
+- **object** CityManager
+- **object** RegionManager
+- **trait** CityRegionManager
+- **class** LoginChecker
+- **class** User
+- **class** PrintHelper
+- **class** Dashboard
+
+#### Login
+Il componente Login è stato implementato come un **object** in quanto, essendo un’implementazione del design pattern singleton, è stato considerato il tipo di dato astratto più adatto. Al suo interno si avranno i seguenti metodi:
+-signIN(): questo metodo riceve in input i dati dello user nei relativi campi e, dopo averne controllato la validità con il LoginChecker,  permette di svolgere l’operazione di login facendo una retrive con il database, tornando un oggetto di tipo Option[User] che può contenere l'utente in questione (in caso esso sia effettivamente presente all'interno del database) o un empty (nel caso non dovesse essere presente l'utente all'interno del database)
+
+#### LoginChecker
+Il componente LoginChecker è implementato come una classe. Questa classe viene usata per svolgere un controllo su tutti i campi del login. 
+
+I metodi che espone sono:
+- checkFields(): ritorna una stringa che identifica tutti i possibili errori presenti nei campi di registrazione, caso contrario restituisce un messaggio di corretta validazione di tutti i campi;
+- checkUserID(): ritorna una stringa che restituisce un messaggio di corretta validazione se lo user non è vuto altrimenti un errore che indica che il campo è vuoto.
+- checkPassword(): ritorna una stringa che restituisce un messaggio di corretta validazione se lo user non è vuto altrimenti un errore che indica che il campo è vuoto.
+
 
 ## Retrospettiva
 
