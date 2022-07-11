@@ -293,10 +293,10 @@ object Utils:
     usageType match
 
       case "water" =>
-        usage + "Lmc"
+        usage + " Lmc"
 
       case "heat" =>
-        usage + "Smc"
+        usage + " Smc"
 
       case "electricity" =>
-        usage + "Kw/h"
+        usage + " Kw/h"
