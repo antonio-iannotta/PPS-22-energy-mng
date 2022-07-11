@@ -19,3 +19,8 @@ class PasswordTest extends AnyFunSuite:
     assert(md5HashPassword("bar") == "37b51d194a7513e45b56f6524f2d51f2")
     assert(md5HashPassword("foobar") == "3858f62230ac3c915f300c664312c63f")
   }
+
+
+  test(" deme3io are hashed with success") {
+    assert(md5HashPassword("deme3io") == "1e901ebb1e1bea53d5f2765524d88f55")
+  }
