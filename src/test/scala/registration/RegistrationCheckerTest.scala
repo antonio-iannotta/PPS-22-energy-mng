@@ -21,6 +21,9 @@ class RegistrationCheckerTest extends AnyFunSuite :
     assert(dataLayer.registration.Registration.signUP("Massimiliano Maria Antonio", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is longer than 20 characters")
   }
 
+  test("userID is  already been used") {
+    assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is already been used")
+  }
   test("password is ok") {
     assert(dataLayer.registration.Registration.signUP("Alberto3", "pierino", 1, "Lombardia", "Milano") == "OK")
   }
