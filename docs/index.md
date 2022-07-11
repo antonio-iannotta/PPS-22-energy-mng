@@ -359,7 +359,8 @@ La classe **ImplicitObservable** è una tipo di dato astratto **trait** espone i
 - **results()**: Questo metodo ritorna i dati dal database iscrivendosi all'**Observable** ricevuto in input dal costruttore della sua classe. Ritorna un oggetto di tipo **Seq[C]** riempito con i dati memorizzati sul database.
 - **results(String)**: Questo metudo computa l'oggetto di tipo **Seq[C]** ricevuto come output dalla funzione results() e converte ogni elemento in **String**.
 
-![](../../implicitObservable.png)
+![implicitObservable](https://user-images.githubusercontent.com/91571686/178297871-64ca2cad-8443-4e49-8d55-dd4eaf43676b.png)
+
 
 
 ### Demetrio Andriani
