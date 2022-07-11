@@ -5,10 +5,6 @@ import org.scalatest.funsuite.AnyFunSuite
 
 class RegistrationCheckerTest extends AnyFunSuite :
 
-  test("userID is ok") {
-    assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "OK")
-  }
-
   test("userID is blank") {
     assert(dataLayer.registration.Registration.signUP("", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is blank")
   }
@@ -24,9 +20,7 @@ class RegistrationCheckerTest extends AnyFunSuite :
   test("userID is  already been used") {
     assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is already been used")
   }
-  test("password is ok") {
-    assert(dataLayer.registration.Registration.signUP("Alberto3", "pierino", 1, "Lombardia", "Milano") == "OK")
-  }
+
 
   test("password is blank") {
     assert(dataLayer.registration.Registration.signUP("Claudio1", "", 1, "Lombardia", "Milano") == "the field PASSWORD inserted is blank")
@@ -40,13 +34,6 @@ class RegistrationCheckerTest extends AnyFunSuite :
     assert(dataLayer.registration.Registration.signUP("Francesco", "internazionale milano football club", 1, "Lombardia", "Milano") == "the field PASSWORD inserted is longer than 20 characters")
   }
 
-  test("userType is private(0)") {
-    assert(dataLayer.registration.Registration.signUP("Margherita", "pierino", 0, "Lombardia", "Milano") == "OK")
-  }
-
-  test("userType is company(1)") {
-    assert(dataLayer.registration.Registration.signUP("Roberto", "pierino", 1, "Lombardia", "Milano") == "OK")
-  }
 
   test("userType is not private(0)") {
     assert(dataLayer.registration.Registration.signUP("Alberto1", "pierino", 2, "Lombardia", "Milano") == "the field USERTYPE inserted is not private or company")
@@ -60,12 +47,7 @@ class RegistrationCheckerTest extends AnyFunSuite :
     assert(dataLayer.registration.Registration.signUP("Demetrio3", "pierino", 0, "Lombardia", "Napoli") == "the CITY is not present in the region")
   }
 
-  test("Milano is in Lombardia") {
-    assert(dataLayer.registration.Registration.signUP("Maurizio", "pierino", 1, "Lombardia", "Milano") == "OK")
-  }
-  test("region is ok") {
-    assert(dataLayer.registration.Registration.signUP("Carletto2", "pierino", 1, "Lombardia", "Monza") == "OK")
-  }
+
 
 
 
