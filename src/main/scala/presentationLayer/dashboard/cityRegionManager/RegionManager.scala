@@ -31,14 +31,14 @@ object RegionManager extends CityRegionManager:
     val year = scala.io.StdIn.readInt()
     costOrUsage match
       case "cost" =>
-        print("-------------------" + region1 + "------------------------------\n")
+        print("------------------- " + region1.capitalize + " ------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
-        print("-------------------" + region2 + "------------------------------\n")
+        print("------------------- " + region2.capitalize + " ------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
       case "usage" =>
-        print("-------------------" + region1 + "------------------------------\n")
+        print("------------------- " + region1.capitalize + " ------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
-        print("-------------------" + region2 + "------------------------------\n")
+        print("------------------- " + region2.capitalize + " ------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
       case _ => println("ERROR!")
 
