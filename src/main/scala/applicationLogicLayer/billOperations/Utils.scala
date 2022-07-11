@@ -25,7 +25,7 @@ object Utils:
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
 
       case duration if duration > yearMap.keys.size =>
-        s"Year: $year\nPredicted usage variation: ${BigDecimal(averageUsage - (averageUsage - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}\nPredicted cost variation: ${BigDecimal(averageCost - (averageCost - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}"
+        s"Year: $year\nPredicted usage variation: ${BigDecimal(averageUsage - (averageUsage - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}%\nPredicted cost variation: ${BigDecimal(averageCost - (averageCost - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}%"
 
 
 
@@ -282,10 +282,10 @@ object Utils:
     usageOrCost match
 
       case "cost" =>
-        "Cost: " + bill.cost + "€ " + "- " + "Usage type: " + bill.usageType + "- Month: " + bill.month + "- Year: " + bill.year + "\n"
+        "Cost: " + bill.cost + "€" + " - Usage type: " + bill.usageType + " - Month: " + bill.month + " - Year: " + bill.year + "\n"
 
       case "usage" =>
-        "Usage: " + usageFormatter(bill.usageType, bill.usage) + "- Usage type: " + bill.usageType +  "- Month: " + bill.month + "- Year: " + bill.year + "\n"
+        "Usage: " + usageFormatter(bill.usageType, bill.usage) + " - Usage type: " + bill.usageType +  " - Month: " + bill.month + " - Year: " + bill.year + "\n"
 
 
   def usageFormatter(usageType: String, usage: Double): String =
@@ -293,10 +293,10 @@ object Utils:
     usageType match
 
       case "water" =>
-        usage + "Lmc"
+        usage + " Lmc"
 
       case "heat" =>
-        usage + "Smc"
+        usage + " Smc"
 
       case "electricity" =>
-        usage + "Kw/h"
+        usage + " Kw/h"
