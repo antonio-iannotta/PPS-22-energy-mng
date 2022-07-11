@@ -46,3 +46,35 @@ class PrintHelper:
       case 10 => "Ottobre: "
       case 11 => "Novembre: "
       case 12 => "Dicembre: "
+
+  def comparisonCity(): (String, String, Int) =
+    println("Inserire città 1")
+    val city1 = scala.io.StdIn.readLine()
+    println("Inserire città 2")
+    val city2 = scala.io.StdIn.readLine()
+    println("Inserire l'anno di riferimento")
+    val year = scala.io.StdIn.readInt()
+    (city1, city2 ,year)
+
+  def comparisonRegion(): (String, String, Int) =
+    println("Inserire regione 1")
+    val region1 = scala.io.StdIn.readLine()
+    println("Inserire regione 2")
+    val region2 = scala.io.StdIn.readLine()
+    println("Inserire l'anno di riferimento")
+    val year = scala.io.StdIn.readInt()
+    (region1,region2,year)
+
+
+  def usageFormatter(usageType: String, usage: Double): String =
+
+    usageType match
+
+      case "water" =>
+        usage + " Lmc"
+
+      case "heat" =>
+        usage + " Smc"
+
+      case "electricity" =>
+        usage + " Kw/h"
