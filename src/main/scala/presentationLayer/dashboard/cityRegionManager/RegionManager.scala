@@ -30,6 +30,6 @@ object RegionManager extends CityRegionManager:
     println("Inserire l'anno di riferimento")
     val year = scala.io.StdIn.readInt()
     print("-------------------REGIONE 1 ------------------------------")
-    user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year)
+    println(user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year))
     print("-------------------REGIONE 2 ------------------------------")
-    user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year)
+    println(user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year))
