@@ -6,7 +6,7 @@ import org.scalatest.funsuite.AnyFunSuite
 class RegistrationCheckerTest extends AnyFunSuite :
 
   test("userID is ok") {
-    assert(dataLayer.registration.Registration.signUP("antonioIannotta", "deme3io", 1, "Lombardia", "Milano") == "OK")
+    assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "OK")
   }
 
   test("userID is blank") {
@@ -14,13 +14,16 @@ class RegistrationCheckerTest extends AnyFunSuite :
   }
 
   test("userID is less than 6") {
-    assert(dataLayer.registration.Registration.signUP("Marco", "pierino", 1, "Lombardia", "Milano") != "OK")
+    assert(dataLayer.registration.Registration.signUP("Marco", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is less than 6 characters")
   }
 
   test("userId is more than 20") {
     assert(dataLayer.registration.Registration.signUP("Massimiliano Maria Antonio", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is longer than 20 characters")
   }
 
+  test("userID is  already been used") {
+    assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is already been used")
+  }
   test("password is ok") {
     assert(dataLayer.registration.Registration.signUP("Alberto3", "pierino", 1, "Lombardia", "Milano") == "OK")
   }
