@@ -46,3 +46,16 @@ class PrintHelper:
       case 10 => "Ottobre: "
       case 11 => "Novembre: "
       case 12 => "Dicembre: "
+
+  def usageFormatter(usageType: String, usage: Double): String =
+
+    usageType match
+
+      case "water" =>
+        usage + " Lmc"
+
+      case "heat" =>
+        usage + " Smc"
+
+      case "electricity" =>
+        usage + " Kw/h"

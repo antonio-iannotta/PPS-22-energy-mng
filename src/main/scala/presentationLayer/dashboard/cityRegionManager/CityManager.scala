@@ -4,9 +4,11 @@ import dataLayer.user.User
 import presentationLayer.dashboard.printHelper.PrintHelper
 
 object CityManager extends CityRegionManager :
+
+  val printHelper = new PrintHelper
+
   override def manager(user: User, city: String, usage:String): Unit =
     println("Inserire l'anno d'interesse")
-    val printHelper = new PrintHelper
     try
       val year = scala.io.StdIn.readInt()
       user.makePredictionByCity(printHelper.usageMenuPrint(), year, city)
@@ -36,23 +38,7 @@ object CityManager extends CityRegionManager :
             user.getUsageOrCostByRegionOrCity(city2,usage,"city",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
           case "usage" =>
             print("------------------- " + city1.capitalize + " ------------------------------\n")
-            user.getUsageOrCostByRegionOrCity(city1,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+            user.getUsageOrCostByRegionOrCity(city1,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + printHelper.usageFormatter(usage, monthAndUsage._2)))
             print("------------------- " + city2.capitalize + " ------------------------------\n")
-            user.getUsageOrCostByRegionOrCity(city2,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+            user.getUsageOrCostByRegionOrCity(city2,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + printHelper.usageFormatter(usage, monthAndUsage._2)))
           case _ => println("ERROR!")
-
-
-  
-  
-  def usageFormatter(usageType: String, usage: Double): String =
-
-    usageType match
-
-      case "water" =>
-        usage + " Lmc"
-
-      case "heat" =>
-        usage + " Smc"
-
-      case "electricity" =>
-        usage + " Kw/h"

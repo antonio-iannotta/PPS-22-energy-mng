@@ -5,9 +5,11 @@ import dataLayer.user.User
 import presentationLayer.dashboard.printHelper.PrintHelper
 
 object RegionManager extends CityRegionManager:
+
+  val printHelper = new PrintHelper
+
   override def manager(user: User, region: String, usage:String): Unit =
     println("Inserire l'anno d'interesse")
-    val printHelper = new PrintHelper
     try
       val year = scala.io.StdIn.readInt()
       user.makePredictionByRegion(printHelper.usageMenuPrint(), year, region)
@@ -37,21 +39,9 @@ object RegionManager extends CityRegionManager:
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
       case "usage" =>
         print("------------------- " + region1.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + printHelper.usageFormatter(usage, monthAndUsage._2)))
         print("------------------- " + region2.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + printHelper.usageFormatter(usage, monthAndUsage._2)))
       case _ => println("ERROR!")
 
 
-  def usageFormatter(usageType: String, usage: Double): String =
-
-    usageType match
-
-      case "water" =>
-        usage + " Lmc"
-
-      case "heat" =>
-        usage + " Smc"
-
-      case "electricity" =>
-        usage + " Kw/h"
