@@ -6,7 +6,7 @@ import org.scalatest.funsuite.AnyFunSuite
 class RegistrationCheckerTest extends AnyFunSuite :
 
   test("userID is ok") {
-    assert(dataLayer.registration.Registration.signUP("antonioIannotta", "deme3io", 1, "Lombardia", "Milano") == "OK")
+    assert(dataLayer.registration.Registration.signUP("AntonioIannotta", "pierino", 1, "Lombardia", "Milano") == "OK")
   }
 
   test("userID is blank") {
