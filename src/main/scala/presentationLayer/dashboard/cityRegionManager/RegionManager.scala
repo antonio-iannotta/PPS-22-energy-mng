@@ -5,6 +5,7 @@ import dataLayer.user.User
 import presentationLayer.dashboard.printHelper.PrintHelper
 
 object RegionManager extends CityRegionManager:
+  
   override def manager(user: User, region: String, usage:String): Unit =
     println("Inserire l'anno d'interesse")
     val printHelper = new PrintHelper
