@@ -353,7 +353,13 @@ I metodi che espone sono:
 ### Helpers (In collaborazione con Antonio Iannotta)
 Il componente **Helpers**, implementato come **object**, è un oggetto ausiliario al componente **MongoDB**. La sua funzionalità è quella di rielaborare le informazioni ottenute dal database.
 Attraverso il metodo **results()** chiamato sull'oggetto di tipo **Observable** restituito dalla funzione **find()** è possibile restituire l'elenco dei dati presenti in una certa collezione.
+L'oggetto helpers implementa una classe **implicit** **GenericObservable** che estende il **trait** **ImplicitObservable** e si occupa di convertire i parametri in ingresso in String.
+La classe **ImplicitObservable** è una tipo di dato astratto **trait** espone i metodi:
 
+- **results()**: Questo metodo ritorna i dati dal database iscrivendosi all'**Observable** ricevuto in input dal costruttore della sua classe. Ritorna un oggetto di tipo **Seq[C]** riempito con i dati memorizzati sul database.
+- **results(String)**: Questo metudo computa l'oggetto di tipo **Seq[C]** ricevuto come output dalla funzione results() e converte ogni elemento in **String**.
+
+![implicitObservable](https://user-images.githubusercontent.com/91571686/178297871-64ca2cad-8443-4e49-8d55-dd4eaf43676b.png)
 
 
 
