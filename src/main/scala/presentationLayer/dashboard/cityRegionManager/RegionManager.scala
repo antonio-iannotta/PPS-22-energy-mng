@@ -16,13 +16,13 @@ object RegionManager extends CityRegionManager:
 
   override def comparison(printHelper: PrintHelper, user: User): Unit =
     var costOrUsage = ""
-    val usage = printHelper.usageMenuPrint()
+    val usageType = printHelper.usageMenuPrint()
     println("1) Per visualizzare il costo")
     println("2) Per visualizzare l'utilizzo")
     val choice = scala.io.StdIn.readInt()
     choice match
       case 1 => costOrUsage = "cost"
-      case 2 => costOrUsage = "usage"
+      case 2 => costOrUsage = "usageType"
     println("Inserire regione 1")
     val region1 = scala.io.StdIn.readLine()
     println("Inserire regione 2")
@@ -32,12 +32,12 @@ object RegionManager extends CityRegionManager:
     costOrUsage match
       case "cost" =>
         print("-------------------" + region1 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
+        user.getUsageOrCostByRegionOrCity(region1,usageType,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
         print("-------------------" + region2 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
-      case "usage" =>
+        user.getUsageOrCostByRegionOrCity(region2,usageType,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
+      case "usageType" =>
         print("-------------------" + region1 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        user.getUsageOrCostByRegionOrCity(region1,usageType,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
         print("-------------------" + region2 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        user.getUsageOrCostByRegionOrCity(region2,usageType,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
       case _ => println("ERROR!")
