@@ -25,7 +25,7 @@ object Utils:
         "Your usage and cost for " + usageType + " is not supposed to change for " + year
 
       case duration if duration > yearMap.keys.size =>
-        s"Year: $year\nPredicted usage variation: ${BigDecimal(averageUsage - (averageUsage - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}\nPredicted cost variation: ${BigDecimal(averageCost - (averageCost - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}"
+        s"Year: $year\nPredicted usage variation: ${BigDecimal(averageUsage - (averageUsage - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}%\nPredicted cost variation: ${BigDecimal(averageCost - (averageCost - Random.between(-1.0, 1.0) * duration)).setScale(2, BigDecimal.RoundingMode.HALF_UP).toDouble}%"
 
 
 
