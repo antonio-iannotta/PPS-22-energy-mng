@@ -15,27 +15,30 @@ class UsageGenerator extends Thread:
    * @Return Unit
    */
   override def run(): Unit =
-    var month = getActualMonthOrYear("month")
-    var year = getActualMonthOrYear("year")
-    val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
-    val usageTypes: List[String] = List("water", "heat", "electricity")
+    try
+      var month = getActualMonthOrYear("month")
+      var year = getActualMonthOrYear("year")
+      val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")
+      val usageTypes: List[String] = List("water", "heat", "electricity")
 
-    while true do
-      MongoDB.retrieveDataFromCollection("users").foreach(user => usageTypes.foreach(
-        usageType => usagesCollection.insertOne(Document(MongoDB.composeUsageMap(user.asInstanceOf[User],usageType,month,year))).results()
-      ))
+      while true do
+        MongoDB.retrieveDataFromCollection("users").foreach(user => usageTypes.foreach(
+          usageType => usagesCollection.insertOne(Document(MongoDB.composeUsageMap(user.asInstanceOf[User],usageType,month,year))).results()
+        ))
 
-      month match
-        case 12 =>
-          month = 1
-          year += 1
-        case _ =>
-          month += 1
+        month match
+          case 12 =>
+            month = 1
+            year += 1
+          case _ =>
+            month += 1
 
-      Thread.sleep(10000)
+        Thread.sleep(10000)
+    catch
+      case _ : InterruptedException => println("Il generatore è stato interrotto")
 
   /**
-   * Mtheod to initialize month and year used to determine the dates of "usages" that will be generated randomically and uploaded into the database
+   * Method to initialize month and year used to determine the dates of "usages" that will be generated randomically and uploaded into the database
    * @param monthOrYear String that specifies wether it has to initialize the month or the year
    * @return Int based on the String given in input:
    * if monthOrYear = "month" returns 1 if there are no usages in the database; the following month as Int otherwise

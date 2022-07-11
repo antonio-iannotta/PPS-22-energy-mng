@@ -35,10 +35,7 @@ object Main extends App :
           Dashboard(user.get).view()
 
           if generatorSelection == 1 then
-            try
-              generator.interrupt()
-            catch
-              case _ : InterruptedException => println("Il generatore è stato interrotto.")
+            generator.interrupt()
 
       case "3" =>
         exit = false

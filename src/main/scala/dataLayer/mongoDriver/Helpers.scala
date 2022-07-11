@@ -9,7 +9,7 @@ import scala.concurrent.duration.Duration
 object Helpers:
 
   /**
-   * Classe implicit per convertire un oggetto di tipo Observable[Generics] in String
+   * Implicit class used to convert an object type Observable[Generics] to String
    * @param observable
    * @tparam C
    */
