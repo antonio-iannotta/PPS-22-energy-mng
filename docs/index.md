@@ -110,7 +110,7 @@ Come strumento di build è stato scelto **sbt**, come strumento di test si è sc
 Elemento centrale dell’architettura di Energy Management è l’utente (sia esso utente privato piuttosto che azienda).
 Dall’utente partono due flussi operazionali differenti:
 
-- Registrazione: con la registrazione l’utente memorizza le sue informazioni all’interno del database. Tale componente si occupa di effettuare tutti i controlli d
+- Registrazione: con la registrazione l’utente memorizza le sue informazioni all’interno del database. Tale componente si occupa di effettuare tutti i controlli del caso.
 - Successivamente queste informazioni (che corrispondono ai dati forniti dall'utente all'atto di registrazione) sono prese da un generatore di consumi che genera i consumi stessi, come specificato nel requisito funzionale 3.5. Questi consumi generati vengono memorizzati all’interno del DB e saranno poi recuperati da un generatore di bollette relative che, partendo dai consumi recuperati dal database, costruisce le bollette in modo opportuno di modo che queste possano essere gestite dal componente predisposto alle operazioni. Tale componente recupera le bollette costruite e sulla base di queste esegue delle operazioni, queste operazioni saranno poi utilizzate per visualizzare i dati specifici richiesti dall’utente dopo il login.
 - Login: con il login l’utente ottiene accesso al sistema ottenendo la possibilità di scegliere quali informazioni visualizzare, relative a quali consumi a quale città. Con il login l’utente ottiene la possibilità di operare ed interfacciarsi con le varie operazioni fornite dal sistema.
 
@@ -147,7 +147,7 @@ Energy Management è un’applicazione con un forte flusso informativo verticale
 La scelta di questo pattern è stata dettata dalla possibilità fornita dallo stesso di poter posizionare le varie componenti precedentemente elencate in un livello specifico.
 
 - **Data layer**: in questo livello troviamo il database degli utenti, il database dei consumi, il componente relativo alla registrazione,il componente relativo alla gestione degli errori della registrazione e del login, il componente relativo al login  e quello relativo al generatore dei consumi.
-- **Business logic layer**: in questo livello troviamo il componente dedito alla costruzione delle bollette
+- **Business logic layer**: in questo livello troviamo il componente dedito alla costruzione delle bollette.
 - **Application logic layer**: in questo layer è posizionato il componente predisposto alle operazioni sulle bollette.
 - **Presentation layer**:  in questo livello è posizionato il componente Dashboard ed il componente Main che consente l’interazione con l’utente per le specifiche operazioni.
 
@@ -210,7 +210,7 @@ Il seguente diagramma UML mostra e formalizza quanto detto:
 ### Generatore consumi
 
 Questo componente è pensato per essere un componente sempre attivo in grado di generare dei consumi con cadenza periodica. Per poter generare i consumi il generatore recupera la lista di utenti dal database degli utenti. Ad ogni aggiornamento di questa lista vengono generati i consumi per tutti gli utenti e vengono inseriti all’interno del database dei consumi. Il flusso di esecuzione di questo componente è il seguente:
-- recupero degli utenti presenti all’interno del database degli utenti
+- recupero degli utenti presenti all’interno del database degli utenti.
 - generazione dei consumi a partire dalla lista e invio dei consumi al database dei consumi. In particolar modo, si attende il completamente del recupero dei dati e poi si effettua la generazione.
 - dopo il termine della generazione dei consumi si attende una definita quantità di tempo e si effettua la richiesta al database per il recupero degli utenti.
 
@@ -229,7 +229,7 @@ Aspetto importante per quanto riguarda la generazione dei consumi e che questi d
 ### Database
 
 Per quanto riguarda il database (sia quello relativo agli utenti sia quello relativo ai consumi) la scelta è stata quella di utilizzare un elemento che potesse effettivamente mediare tra la necessità di:
-- recuperare i dati relativi agli utenti e aggiungere un nuovo utente
+- recuperare i dati relativi agli utenti e aggiungere un nuovo utente.
 - recuperare i dati relativi ai consumi per poter costruire la lista delle bollette sulla quale poter eseguire le operazioni di ricerca.
 
 ### Costruttore bollette
@@ -266,7 +266,7 @@ Le operazioni che vengono effettuate da tale componente si suddividono in due ca
   - costo su base mensile per una specifica utenza
   - utilizzo su base mensile per una specifica località
   - costo su base mensile per una specifica località
-- Operazioni di previsioni sulla base di determinate specifiche.
+- Operazioni di previsioni sulla base di determinate specifiche:
   - previsioni individuali per una specifica utenza relativamente ad uno specifico anno
   - previsioni per una specifica località relativamente ad uno specifico anno
 

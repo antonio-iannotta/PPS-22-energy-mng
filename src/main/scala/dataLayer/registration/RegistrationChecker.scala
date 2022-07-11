@@ -97,5 +97,5 @@ class RegistrationChecker(private val userID: String, private val password: Stri
    * @return
    */
   private def checkDuplicatedUserID(userID: String): Boolean =
-    val users = retrieveDataFromCollection("users").asInstanceOf[ListBuffer[User]]    
+    val users = retrieveDataFromCollection("users").asInstanceOf[ListBuffer[User]]
     users.exists(user => user.userID == userID)
