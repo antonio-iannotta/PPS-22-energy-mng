@@ -14,7 +14,7 @@ class RegistrationCheckerTest extends AnyFunSuite :
   }
 
   test("userID is less than 6") {
-    assert(dataLayer.registration.Registration.signUP("Marco", "pierino", 1, "Lombardia", "Milano") != "OK")
+    assert(dataLayer.registration.Registration.signUP("Marco", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is less than 6 characters")
   }
 
   test("userId is more than 20") {
