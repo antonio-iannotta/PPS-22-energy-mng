@@ -1,7 +1,5 @@
 # PPS-22-energy-mng
 
-![maurizio-costanzo-1](https://user-images.githubusercontent.com/107400348/178273480-be43f541-de8c-4b46-9f8f-439651fd4680.jpg)
-
 
 ## Introduzione
 
