@@ -14,6 +14,7 @@ object CityManager extends CityRegionManager :
       case _: NumberFormatException => println("Input non valido.")
 
   override def comparison(printHelper: PrintHelper,user: User): Unit =
+    var costOrUsage = ""
     val usage = printHelper.usageMenuPrint()
     println("1) Per visualizzare il consumo")
     println("2) Per visualizzare l'utilizzo")
