@@ -24,12 +24,7 @@ object CityManager extends CityRegionManager :
     choice match
       case 1 => costOrUsage = "cost"
       case 2 => costOrUsage = "usage"
-    println("Inserire città 1")
-    val city1 = scala.io.StdIn.readLine()
-    println("Inserire città 2")
-    val city2 = scala.io.StdIn.readLine()
-    println("Inserire l'anno di riferimento")
-    val year = scala.io.StdIn.readInt()
+      val (city1,city2,year) = printHelper.comparisonCity()
         costOrUsage match
           case "cost" =>
             print("------------------- " + city1.capitalize + " ------------------------------\n")

@@ -23,24 +23,19 @@ object RegionManager extends CityRegionManager:
     choice match
       case 1 => costOrUsage = "cost"
       case 2 => costOrUsage = "usage"
-    println("Inserire regione 1")
-    val region1 = scala.io.StdIn.readLine()
-    println("Inserire regione 2")
-    val region2 = scala.io.StdIn.readLine()
-    println("Inserire l'anno di riferimento")
-    val year = scala.io.StdIn.readInt()
-    costOrUsage match
-      case "cost" =>
-        print("------------------- " + region1.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
-        print("------------------- " + region2.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
-      case "usage" =>
-        print("------------------- " + region1.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
-        print("------------------- " + region2.capitalize + " ------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
-      case _ => println("ERROR!")
+      val (region1,region2,year) = printHelper.comparisonCity()
+        costOrUsage match
+          case "cost" =>
+            print("------------------- " + region1.capitalize + " ------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
+            print("------------------- " + region2.capitalize + " ------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
+          case "usage" =>
+            print("------------------- " + region1.capitalize + " ------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+            print("------------------- " + region2.capitalize + " ------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
+          case _ => println("ERROR!")
 
 
   def usageFormatter(usageType: String, usage: Double): String =
