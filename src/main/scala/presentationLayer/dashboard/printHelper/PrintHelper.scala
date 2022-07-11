@@ -12,7 +12,9 @@ class PrintHelper:
     println("7) Previsione individuale")
     println("8) Previsione città")
     println("9) Previsione regione")
-    println("10) Logout e torna al menu iniziale")
+    println("10) Confronto tra regione")
+    println("11) Confronto tra città" )
+    println("12) Logout e torna al menu iniziale")
 
   def printUsage() : Unit =
     println("Inserire il consumo d'interesse")

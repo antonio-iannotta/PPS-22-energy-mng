@@ -20,6 +20,7 @@ case class Dashboard(private val user: User):
     val printHelper = new PrintHelper
     val cityManager = CityManager
     val regionManager = RegionManager
+    var costOrUsage = ""
     var exit = true
 
     while (exit)
@@ -68,5 +69,7 @@ case class Dashboard(private val user: User):
               val region = scala.io.StdIn.readLine()
               regionManager.manager(user,region,printHelper.usageMenuPrint())
 
-        case "10" => exit = false
+        case "10" => regionManager.comparison(printHelper, user)
+        case "11" => cityManager.comparison(printHelper, user)
+        case "12" => exit = false
         case _ => println("Scelta non valida!")
