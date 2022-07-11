@@ -37,7 +37,21 @@ object RegionManager extends CityRegionManager:
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString + "Є"))
       case "usage" =>
         print("-------------------" + region1 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
         print("-------------------" + region2 + "------------------------------\n")
-        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+        user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + usageFormatter(usage, monthAndUsage._2)))
       case _ => println("ERROR!")
+
+
+    def usageFormatter(usageType: String, usage: Double): String =
+
+      usageType match
+
+        case "water" =>
+          usage + " Lmc"
+
+        case "heat" =>
+          usage + " Smc"
+
+        case "electricity" =>
+          usage + " Kw/h"
