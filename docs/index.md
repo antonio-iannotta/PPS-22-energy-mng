@@ -252,9 +252,6 @@ Il flusso di attività che il costruttore delle bollette esegue è quindi il seg
 - recupero dei dati contenuti all’interno del database dei consumi
 - costruzione della lista delle bollette a partire dai dati recuperati
 
-Un aspetto importante da rimarcare è che questo è un flusso di attività ciclico. In particolar modo il componente attende di aver recuperato i dati, costruisce le bollette e dopo la costruzione esegue un’altra interrogazione al database.
-Il seguente diagramma UML mostra e formalizza il costruttore delle bollette:
-
 ![billBuilder](https://user-images.githubusercontent.com/91571686/177272570-c4c3d17a-27a3-47b2-a1e3-c2eddf93ac27.png)
 
 ### Operazioni bollette
