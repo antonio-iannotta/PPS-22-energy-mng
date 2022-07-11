@@ -17,6 +17,9 @@ object Login:
   def signIN(userID: String, password: String): Option[User] =
     LoginChecker(userID, password).checkFields(userID, password) match
       case "OK" =>
-        Option.apply(retrieveDataFromCollection("users").asInstanceOf[ListBuffer[User]].filter(user => user.userID == userID && user.password == MD5.md5HashPassword(password)).head)
+        try
+          Option.apply(retrieveDataFromCollection("users").asInstanceOf[ListBuffer[User]].filter(user => user.userID == userID && user.password == MD5.md5HashPassword(password)).head)
+        catch
+          case _ : NoSuchElementException => Option.empty[User]
       case _ =>
         Option.empty[User]

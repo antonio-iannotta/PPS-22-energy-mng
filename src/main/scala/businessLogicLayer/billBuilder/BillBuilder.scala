@@ -6,7 +6,7 @@ import dataLayer.mongoDriver.MongoDB
 
 object BillBuilder:
   /**
-   * Metodo che ritorna un ListBuffer di oggetti di tipo "Bill"
+   * This method retrieves data from database and returns a ListBuffer of object type "Bill"
    * @return
    */
   def build(): ListBuffer[Bill] =

@@ -11,7 +11,7 @@ import scala.util.Random
 class UsageGenerator extends Thread:
 
   /**
-   * Metodo per generare dati in maniera randomica per ogni tipo utilizzo e per ogni utente ed effettuare il caricamento degli stessi sul DB
+   * Method to generate random data for Bills to fill the database. It generates data for each usage type and each user and uploads it to the database
    * @Return Unit
    */
   override def run(): Unit =
@@ -32,15 +32,14 @@ class UsageGenerator extends Thread:
         case _ =>
           month += 1
 
-      println("Generated data uploaded.")
       Thread.sleep(10000)
 
   /**
-   * Metodo per inizializzare mese e anno per determinare le date degli "usages" che verranno creati e caricati sul DB
-   * @param monthOrYear
-   * @return
-   * Caso in cui monthOrYear sia uguale a "month": 1 se non ci sono "usages" nel db, numero intero corrispondente al mese seguente se elementi "usages" già presenti sul DB
-   * Caso in cui monthOrYear sia uguale a "year": 1970 se non ci sono "usages" nel db, numero intero corrispondente all'anno seguente se elementi "usages" già presenti sul DB
+   * Mtheod to initialize month and year used to determine the dates of "usages" that will be generated randomically and uploaded into the database
+   * @param monthOrYear String that specifies wether it has to initialize the month or the year
+   * @return Int based on the String given in input:
+   * if monthOrYear = "month" returns 1 if there are no usages in the database; the following month as Int otherwise
+   * if monthOrYear = "year" returns 1970 if there are no usages in the database; the following year as Int otherwise
    */
   private def getActualMonthOrYear(monthOrYear: String): Int =
     val usagesCollection = MongoDB.mongoDBConnection().getCollection("usages")

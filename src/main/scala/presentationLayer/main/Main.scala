@@ -21,23 +21,24 @@ object Main extends App :
 
       case "2" =>
         val user = callLogin()
-        val generator = new UsageGenerator
+        if user.nonEmpty then
+          val generator = new UsageGenerator
+          println("Vuoi avviare la generazione dei dati automatica?")
+          println("1) Si")
+          println("2) No")
 
-        println("Vuoi avviare la generazione dei dati automatica?")
-        println("1) Si")
-        println("2) No")
+          val generatorSelection = scala.io.StdIn.readInt()
+          if generatorSelection == 1 then
+            generator.start()
+            println("Generazione dei dati avviata.")
 
-        val generatorSelection = scala.io.StdIn.readInt()
-        if generatorSelection == 1 then
-          generator.start()
+          Dashboard(user.get).view()
 
-        Dashboard(user.get).view()
-
-        if generatorSelection == 1 then
-          try
-            generator.interrupt()
-          catch
-            case _ : Exception => println("Il generatore è stato interrotto.")
+          if generatorSelection == 1 then
+            try
+              generator.interrupt()
+            catch
+              case _ : InterruptedException => println("Il generatore è stato interrotto.")
 
       case "3" =>
         exit = false
@@ -90,6 +91,6 @@ object Main extends App :
 
     user match
       case user if user.isEmpty =>
-        println("errore!")
+        println("Campo username o password errato.")
         None
       case _ => user
