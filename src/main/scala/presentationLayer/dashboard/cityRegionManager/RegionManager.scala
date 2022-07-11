@@ -33,7 +33,7 @@ object RegionManager extends CityRegionManager:
       case "cost" =>
         print("-------------------" + region1 + "------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
-        print("-------------------" + region2 + " ------------------------------\n")
+        print("-------------------" + region2 + "------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
       case "usage" =>
         print("-------------------" + region1 + "------------------------------\n")
