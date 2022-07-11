@@ -366,7 +366,7 @@ Implementazione dei seguenti componenti:
 - **object** MD5
 - **object** Main
 - **class** RegistrationChecker
-- **class** RegistrationTest
+- **class** RegistrationCheckerTest
 - **class** PasswordTest
 
 #### Registration
