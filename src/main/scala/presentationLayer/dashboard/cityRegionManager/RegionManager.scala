@@ -31,13 +31,13 @@ object RegionManager extends CityRegionManager:
     val year = scala.io.StdIn.readInt()
     costOrUsage match
       case "cost" =>
-        print("-------------------REGIONE 1 ------------------------------")
+        print("-------------------" + region1 + "------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
-        print("-------------------REGIONE 2 ------------------------------")
+        print("-------------------" + region2 + " ------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
       case "usage" =>
-        print("-------------------REGIONE 1 ------------------------------")
+        print("-------------------" + region1 + "------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region1,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
-        print("-------------------REGIONE 2 ------------------------------")
+        print("-------------------" + region2 + "------------------------------\n")
         user.getUsageOrCostByRegionOrCity(region2,usage,"region",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
       case _ => println("ERROR!")

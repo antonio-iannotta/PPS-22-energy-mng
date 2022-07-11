@@ -51,11 +51,11 @@ case class Dashboard(private val user: User):
           val choice = scala.io.StdIn.readInt()
           choice match
             case 1 =>
-              cityManager.manager(user,user.city,printHelper.usageMenuPrint())
+              println(cityManager.manager(user,user.city,printHelper.usageMenuPrint()))
             case 2 =>
               println("Inserire la città di cui si desidera visualizzare la previsione")
               val city = scala.io.StdIn.readLine()
-              cityManager.manager(user,city,printHelper.usageMenuPrint())
+              println(cityManager.manager(user,city,printHelper.usageMenuPrint()))
 
         case "9" =>
           println("1) Previsione regione corrente utente")
@@ -63,11 +63,11 @@ case class Dashboard(private val user: User):
           val choice = scala.io.StdIn.readInt()
           choice match
             case 1 =>
-              regionManager.manager(user,user.region,printHelper.usageMenuPrint())
+              println(regionManager.manager(user,user.region,printHelper.usageMenuPrint()))
             case 2 =>
               println("Inserire la regione di cui si desidera visualizzare la previsione")
               val region = scala.io.StdIn.readLine()
-              regionManager.manager(user,region,printHelper.usageMenuPrint())
+              println(regionManager.manager(user,region,printHelper.usageMenuPrint()))
 
         case "10" => regionManager.comparison(printHelper, user)
         case "11" => cityManager.comparison(printHelper, user)

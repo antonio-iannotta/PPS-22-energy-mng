@@ -16,7 +16,7 @@ object CityManager extends CityRegionManager :
   override def comparison(printHelper: PrintHelper,user: User): Unit =
     var costOrUsage = ""
     val usage = printHelper.usageMenuPrint()
-    println("1) Per visualizzare il consumo")
+    println("1) Per visualizzare il costo")
     println("2) Per visualizzare l'utilizzo")
     val choice = scala.io.StdIn.readInt()
     choice match
@@ -28,7 +28,15 @@ object CityManager extends CityRegionManager :
     val city2 = scala.io.StdIn.readLine()
     println("Inserire l'anno di riferimento")
     val year = scala.io.StdIn.readInt()
-    print("-------------------CITTA' 1 ------------------------------")
-    user.getUsageOrCostByRegionOrCity(city1,usage,"region",costOrUsage,year)
-    print("-------------------CITTA' 2 ------------------------------")
-    user.getUsageOrCostByRegionOrCity(city2,usage,"region",costOrUsage,year)
+        costOrUsage match
+          case "cost" =>
+            print("-------------------" + city1 + "------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(city1,usage,"city",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
+            print("-------------------" + city2 + " ------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(city2,usage,"city",costOrUsage,year).foreach(monthAndCost => println(printHelper.formatter(monthAndCost._1) + monthAndCost._2.toString))
+          case "usage" =>
+            print("-------------------" + city1 + "------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(city1,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+            print("-------------------" + city2 + "------------------------------\n")
+            user.getUsageOrCostByRegionOrCity(city2,usage,"city",costOrUsage,year).foreach(monthAndUsage => println(printHelper.formatter(monthAndUsage._1) + monthAndUsage._2.toString))
+          case _ => println("ERROR!")
