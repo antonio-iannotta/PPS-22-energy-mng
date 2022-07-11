@@ -3,7 +3,7 @@ package dataLayer.registration
 import dataLayer.registration.Registration
 import org.scalatest.funsuite.AnyFunSuite
 
-class RegistrationTest extends AnyFunSuite :
+class RegistrationCheckerTest extends AnyFunSuite :
 
   test("userID is ok") {
     assert(dataLayer.registration.Registration.signUP("antonioIannotta", "deme3io", 1, "Lombardia", "Milano") == "OK")
@@ -18,7 +18,7 @@ class RegistrationTest extends AnyFunSuite :
   }
 
   test("userId is more than 20") {
-    assert(dataLayer.registration.Registration.signUP("Massimiliano Maria Antonio", "pierino", 1, "Lombardia", "Milano") != "OK")
+    assert(dataLayer.registration.Registration.signUP("Massimiliano Maria Antonio", "pierino", 1, "Lombardia", "Milano") == "the field USERID inserted is longer than 20 characters")
   }
 
   test("password is ok") {
