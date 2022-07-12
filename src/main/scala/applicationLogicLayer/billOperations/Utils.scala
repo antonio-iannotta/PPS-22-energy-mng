@@ -288,7 +288,7 @@ object Utils:
         "Usage: " + usageFormatter(bill.usageType, bill.usage) + " - Usage type: " + bill.usageType +  " - Month: " + bill.month + " - Year: " + bill.year + "\n"
 
 
-  def usageFormatter(usageType: String, usage: Double): String =
+  private def usageFormatter(usageType: String, usage: Double): String =
 
     usageType match
 
