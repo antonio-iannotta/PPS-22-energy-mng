@@ -41,7 +41,7 @@ object MongoDB:
       case "usages" =>
         MongoDB.mongoDBConnection().getCollection(collection)
           .find().results()
-          .foreach(user => retrievedData += createBill(user.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
+          .foreach(bill => retrievedData += createBill(bill.foldLeft[ListBuffer[AnyRef]](ListBuffer())(_ += _._2.asInstanceOf[AnyRef])))
 
     retrievedData
 
