@@ -9,7 +9,7 @@ object CityManager extends CityRegionManager :
     val printHelper = new PrintHelper
     try
       val year = scala.io.StdIn.readInt()
-      user.makePredictionByCity(printHelper.usageMenuPrint(), year, city)
+      user.makePredictionByCity(usage, year, city)
     catch
       case _: NumberFormatException => println("Input non valido.")
 
